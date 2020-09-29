@@ -1,2 +1,2 @@
 # Homework
-Demo of Git function
+Demo of Git function 1
