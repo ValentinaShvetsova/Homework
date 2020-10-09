@@ -1,6 +1,7 @@
 #include <stdio.h>
+#include <stdbool.h>
 
-void InsertionSort(int leftCounter, int rightCounter, int array[])
+void insertionSort(int leftCounter, int rightCounter, int array[])
 {
 
 	for (int i = leftCounter; i <= rightCounter; i++)
@@ -16,10 +17,10 @@ void InsertionSort(int leftCounter, int rightCounter, int array[])
 	}
 }
 
-int borderIndexfinding(int array[], int abuttingElement, int leftBorder, int rightBorder) {
+int findBorderIndex(int array[], int borderElement, int leftBorder, int rightBorder) {
 	int borderIndex = 0;
 	for (int i = leftBorder; i < rightBorder; ++i) {
-		if (array[i] >= abuttingElement) {
+		if (array[i] >= borderElement) {
 			borderIndex = i;
 			break;
 		}
@@ -27,10 +28,10 @@ int borderIndexfinding(int array[], int abuttingElement, int leftBorder, int rig
 	return borderIndex;
 }
 
-void QuickSort(int a[], int leftCounter, int rightCounter) {
+void quickSort(int a[], int leftCounter, int rightCounter) {
 	int size = rightCounter - leftCounter + 1;
 	if (size <= 10) {
-		InsertionSort(leftCounter, rightCounter, a);
+		insertionSort(leftCounter, rightCounter, a);
 		return;
 	}
 	int leftBorder = leftCounter;
@@ -59,48 +60,73 @@ void QuickSort(int a[], int leftCounter, int rightCounter) {
 			leftCounter++;
 		}
 	}
-	abuttingElementIndex = borderIndexfinding(a, abuttingElement, leftBorder, rightBorder);
-	QuickSort(a, leftBorder, abuttingElementIndex - 1);
-	QuickSort(a, abuttingElementIndex, rightBorder);
+	abuttingElementIndex = findBorderIndex(a, abuttingElement, leftBorder, rightBorder);
+	quickSort(a, leftBorder, abuttingElementIndex - 1);
+	quickSort(a, abuttingElementIndex, rightBorder);
 }
 
-int main() {
-	
-	int size = 19;
-
-	int array[19] = { 1, 3, 6, 5, 3, 5, 10, 65, 1, 23, 5, 8765, 9, 1, 2, 3, 54, 3, 5 };
-
-	QuickSort(array, 0, size - 1);
-	for (int i = 0; i < size; i++) {
-		printf("%d ", array[i]);
-	}
-
+int findFrequentElement(int array[], int size) {
 	int previous = array[0];
 	int count = 1;
 	int memorized = previous;
-	int scount = 1;
-	for (int i = 1; i < 19; ++i)
-	{
+	int maxCount = 1;
+	for (int i = 1; i < size; ++i) {
 		if (array[i] == previous) {
 			++count;
 		}
 		else
 		{
-			if (scount < count)
+			if (maxCount < count)
 			{
-				scount = count;
+				maxCount = count;
 				memorized = previous;
 			}
 			previous = array[i];
 			count = 1;
 		}
 	}
-	if (scount < count)
+	if (maxCount < count)
 	{
-		scount = count;
+		maxCount = count;
 		memorized = previous;
 	}
+	return memorized;
+}
+bool firstTest()
+{
+	int array[5] = { 3, 7, 2, 8, 1 };
+	return findFrequentElement(array, 5) == 3;
+}
 
-	printf("\nElement %d: appears %d times\n", memorized, scount);
+bool secondTest()
+{
+	int array[4] = { 7, 7, 7, 7 };
+	return findFrequentElement(array, 4) == 7;
+}
+
+bool thirdTest()
+{
+	int array[10] = { 3, 9, 15, 7, 8, 4, 7, 3, 2, 4 };
+	return findFrequentElement(array, 10) == 3;
+}
+
+int main() {
+	
+	if (firstTest() == false || secondTest() == false || thirdTest() == false) {
+		printf("Test failed\n");
+		return 1;
+	}
+	int size = 19;
+
+	int array[19] = { 1, 3, 6, 5, 3, 5, 10, 65, 1, 23, 5, 8765, 9, 1, 2, 3, 54, 3, 5 };
+
+	quickSort(array, 0, size - 1);
+	for (int i = 0; i < size; i++) {
+		printf("%d ", array[i]);
+	}
+
+	int element = findFrequentElement(array, size);
+
+	printf("\nElement %d is the most frequent\n", element);
 	return 0;
 }
