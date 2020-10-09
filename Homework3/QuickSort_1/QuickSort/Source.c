@@ -1,13 +1,12 @@
 #include <stdio.h>
 
-void InsertionSort(int leftCounter, int rightCounter, int array[])
+void insertionSort(int leftCounter, int rightCounter, int array[])
 {
-	int newElement, location;
 
 	for (int i = leftCounter; i <= rightCounter; i++)
 	{
-		newElement = array[i];
-		location = i - 1;
+		int newElement = array[i];
+		int location = i - 1;
 		while (location >= 0 && array[location] > newElement)
 		{
 			array[location + 1] = array[location];
@@ -17,10 +16,10 @@ void InsertionSort(int leftCounter, int rightCounter, int array[])
 	}
 }
 
-int borderIndexfinding(int array[], int abuttingElement, int leftBorder, int rightBorder) {
+int findBorderIndex(int array[], int borderElement, int leftBorder, int rightBorder) {
 	int borderIndex = 0;
 	for (int i = leftBorder; i < rightBorder; ++i) {
-		if (array[i] >= abuttingElement) {
+		if (array[i] >= borderElement) {
 			borderIndex = i;
 			break;
 		}
@@ -28,10 +27,10 @@ int borderIndexfinding(int array[], int abuttingElement, int leftBorder, int rig
 	return borderIndex;
 }
 
-void QuickSort(int a[], int leftCounter, int rightCounter) {
+void quickSort(int a[], int leftCounter, int rightCounter) {
 	int size = rightCounter - leftCounter + 1;
 	if (size <= 10) {
-		InsertionSort(leftCounter, rightCounter, a);
+		insertionSort(leftCounter, rightCounter, a);
 		return;
 	}
 	int leftBorder = leftCounter;
@@ -60,9 +59,9 @@ void QuickSort(int a[], int leftCounter, int rightCounter) {
 			leftCounter++;
 		}
 	}
-	abuttingElementIndex = borderIndexfinding(a, abuttingElement, leftBorder, rightBorder);
-	QuickSort(a, leftBorder, abuttingElementIndex - 1);
-	QuickSort(a, abuttingElementIndex, rightBorder);
+	abuttingElementIndex = findBorderIndex(a, abuttingElement, leftBorder, rightBorder);
+	quickSort(a, leftBorder, abuttingElementIndex - 1);
+	quickSort(a, abuttingElementIndex, rightBorder);
 }
 
 int sortTest(int array[], int size) {
@@ -74,39 +73,38 @@ int sortTest(int array[], int size) {
 	return 1;
 }
 
-int test1() {
-	int array[] = { 1, 3, 4, 2, 6, 5, 2, 34, 8 };
-	int size = 9;
-	QuickSort(array, 0, size - 1);
+int firstTest() {
+	int array[] = { 1, 3, 4, 2, 6, 5, 2, 34, 8, 12, 14, 2, 5, 7, 8, 1, 56, 3, 78, 7 };
+	int size = 20;
+	quickSort(array, 0, size - 1);
 	return sortTest(array, size);
 }
 
-int test2() {
-	int array[] = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-	int size = 21;
-	QuickSort(array, 0, size - 1);
+int secondTest() {
+	int array[] = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+	int size = 10;
+	quickSort(array, 0, size - 1);
 	return sortTest(array, size);
 }
 
-int test3() {
+int thirdTest() {
 	int array[] = {0};
 	int size = 1;
-	QuickSort(array, 0, size - 1);
+	quickSort(array, 0, size - 1);
 	return sortTest(array, size);
 }
 
 
 int main() {
-	if (test1 == 0 || test2 == 0 || test3 == 0) {
+	if (firstTest() == 0 || secondTest() == 0 || thirdTest() == 0) {
 		printf("Test failed\n");
-		return 0;
+		return 1;
 	}
-	int size = 19;
-
+	
 	int array[19] = { 1, 3, 6, 5, 3, 5, 10, 65, 1, 23, 5, 8765, 9, 1, 2, 3, 54, 3, 5 };
 
-	QuickSort(array, 0, size - 1);
-	for (int i = 0; i < size; i++) {
+	quickSort(array, 0, 18);
+	for (int i = 0; i < 19; i++) {
 		printf("%d ", array[i]);
 	}
 	return 0;
