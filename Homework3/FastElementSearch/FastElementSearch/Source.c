@@ -1,12 +1,14 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
-int binSearch(int array[], int size, int element)
+bool binSearch(int array[], int size, int element)
 {
 	int left = 0;
 	int right = size - 1;
 	while (left <= right)
 	{
-		int middle = (left + right) / 2;
+		const int middle = (left + right) / 2;
 		if (element < array[middle])
 		{
 			right = middle - 1;
@@ -17,20 +19,19 @@ int binSearch(int array[], int size, int element)
 		}
 		else
 		{
-			return 1;
+			return true;
 		}
 	}
-	return 0;
+	return false;
 }
 
-void InsertionSort(int leftCounter, int rightCounter, int array[])
+void insertionSort(int leftCounter, int rightCounter, int array[])
 {
-	int newElement, location;
 
 	for (int i = leftCounter; i <= rightCounter; i++)
 	{
-		newElement = array[i];
-		location = i - 1;
+		int newElement = array[i];
+		int location = i - 1;
 		while (location >= 0 && array[location] > newElement)
 		{
 			array[location + 1] = array[location];
@@ -40,10 +41,10 @@ void InsertionSort(int leftCounter, int rightCounter, int array[])
 	}
 }
 
-int borderIndexfinding(int array[], int abuttingElement, int leftBorder, int rightBorder) {
+int findBorderIndex(int array[], int borderElement, int leftBorder, int rightBorder) {
 	int borderIndex = 0;
 	for (int i = leftBorder; i < rightBorder; ++i) {
-		if (array[i] >= abuttingElement) {
+		if (array[i] >= borderElement) {
 			borderIndex = i;
 			break;
 		}
@@ -51,10 +52,10 @@ int borderIndexfinding(int array[], int abuttingElement, int leftBorder, int rig
 	return borderIndex;
 }
 
-void QuickSort(int a[], int leftCounter, int rightCounter) {
+void quickSort(int a[], int leftCounter, int rightCounter) {
 	int size = rightCounter - leftCounter + 1;
 	if (size <= 10) {
-		InsertionSort(leftCounter, rightCounter, a);
+		insertionSort(leftCounter, rightCounter, a);
 		return;
 	}
 	int leftBorder = leftCounter;
@@ -83,27 +84,27 @@ void QuickSort(int a[], int leftCounter, int rightCounter) {
 			leftCounter++;
 		}
 	}
-	abuttingElementIndex = borderIndexfinding(a, abuttingElement, leftBorder, rightBorder);
-	QuickSort(a, leftBorder, abuttingElementIndex - 1);
-	QuickSort(a, abuttingElementIndex, rightBorder);
+	abuttingElementIndex = findBorderIndex(a, abuttingElement, leftBorder, rightBorder);
+	quickSort(a, leftBorder, abuttingElementIndex - 1);
+	quickSort(a, abuttingElementIndex, rightBorder);
 }
 
-int test1() {
+bool test1() {
 	int array[] = { 1, 2, 3, 3, 5, 6, 7, 8, 3, 1, 0, 8, 3, 9, 1 };
 	int size = 15;
-	QuickSort(array, 0, size - 1);
+	quickSort(array, 0, size - 1);
 	return binSearch(array, size, 5);
 }
 
-int test2() {
+bool test2() {
 	int array[] = { 1, 2, 3, 3, 5, 6, 7, 8, 3, 1, 0, 8, 3, 9, 1 };
 	int size = 15;
-	QuickSort(array, 0, size - 1);
+	quickSort(array, 0, size - 1);
 	return binSearch(array, size, 12);
 }
 
 int main() {
-	if (test1() == 0 || test2 == 1) {
+	if (test1() == false || test2() == true) {
 		printf("Test failed");
 		return 0;
 	}
@@ -115,17 +116,17 @@ int main() {
 	int k = 0;
 	scanf("%d", &k);
 
-	int* mass = (int*)malloc(n * sizeof(int));
+	int *array = (int*)malloc(n * sizeof(int));
 	printf("Final array: ");
 
 	for (int i = 0; i < n; i++) {
-		mass[i] = rand() % 100;
-		printf("%d ", mass[i]);
+		array[i] = rand() % 100;
+		printf("%d ", array[i]);
 	}
 	
-	QuickSort(mass, 0, n - 1);
+	quickSort(array, 0, n - 1);
 
-	int* numbers = (int*)malloc(k * sizeof(int));
+	int *numbers = (int*)malloc(k * sizeof(int));
 	printf("Numbers: ");
 
 	for (int i = 0; i < k; i++) {
@@ -136,12 +137,12 @@ int main() {
 	printf("\nNumbers found in array: ");
 	for (int i = 0; i < k; i++)
 	{
-		if (binSearch(mass, n, numbers[i]) == 1)
+		if (binSearch(array, n, numbers[i]) == 1)
 		{
 			printf("%d ", numbers[i]);
 		}
 	}
-	free(mass);
+	free(array);
 	free(numbers);
 	return 0;
 }
