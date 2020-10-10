@@ -2,15 +2,14 @@
 
 void insertionSort(int leftCounter, int rightCounter, int array[])
 {
-
-	for (int i = leftCounter; i <= rightCounter; i++)
+    for (int i = leftCounter; i <= rightCounter; i++)
 	{
 		int newElement = array[i];
 		int location = i - 1;
 		while (location >= 0 && array[location] > newElement)
 		{
 			array[location + 1] = array[location];
-			location = location - 1;
+			location --;
 		}
 		array[location + 1] = newElement;
 	}
@@ -28,7 +27,7 @@ int findBorderIndex(int array[], int borderElement, int leftBorder, int rightBor
 }
 
 void quickSort(int a[], int leftCounter, int rightCounter) {
-	int size = rightCounter - leftCounter + 1;
+	const int size = rightCounter - leftCounter + 1;
 	if (size <= 10) {
 		insertionSort(leftCounter, rightCounter, a);
 		return;
@@ -67,36 +66,35 @@ void quickSort(int a[], int leftCounter, int rightCounter) {
 int sortTest(int array[], int size) {
 	for (int i = 1; i < size; ++i) {
 		if (array[i - 1] > array[i]) {
-			return 0;
+			return 1;
 		}
 	}
-	return 1;
+	return 0;
 }
 
-int firstTest() {
+int testWithStandartArray() {
 	int array[] = { 1, 3, 4, 2, 6, 5, 2, 34, 8, 12, 14, 2, 5, 7, 8, 1, 56, 3, 78, 7 };
 	int size = 20;
 	quickSort(array, 0, size - 1);
 	return sortTest(array, size);
 }
 
-int secondTest() {
+int testWithArrayOfEqualElements() {
 	int array[] = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 	int size = 10;
 	quickSort(array, 0, size - 1);
 	return sortTest(array, size);
 }
 
-int thirdTest() {
+int testWithArrayOfOneElement() {
 	int array[] = {0};
 	int size = 1;
 	quickSort(array, 0, size - 1);
 	return sortTest(array, size);
 }
 
-
 int main() {
-	if (firstTest() == 0 || secondTest() == 0 || thirdTest() == 0) {
+	if (testWithStandartArray() != 0 || testWithArrayOfEqualElements() != 0 || testWithArrayOfOneElement() != 0) {
 		printf("Test failed\n");
 		return 1;
 	}
