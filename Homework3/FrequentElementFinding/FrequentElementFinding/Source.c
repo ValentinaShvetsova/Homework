@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-void insertionSort(int leftCounter, int rightCounter, int array[])
+void insertionSort(const int leftCounter, const int rightCounter, int array[])
 {
-
 	for (int i = leftCounter; i <= rightCounter; i++)
 	{
 		int newElement = array[i];
@@ -11,16 +10,19 @@ void insertionSort(int leftCounter, int rightCounter, int array[])
 		while (location >= 0 && array[location] > newElement)
 		{
 			array[location + 1] = array[location];
-			location = location - 1;
+			location--;
 		}
 		array[location + 1] = newElement;
 	}
 }
 
-int findBorderIndex(int array[], int borderElement, int leftBorder, int rightBorder) {
+int findBorderIndex(int array[], int borderElement, const int leftBorder, const int rightBorder) 
+{
 	int borderIndex = 0;
-	for (int i = leftBorder; i < rightBorder; ++i) {
-		if (array[i] >= borderElement) {
+	for (int i = leftBorder; i < rightBorder; ++i) 
+	{
+		if (array[i] >= borderElement) 
+		{
 			borderIndex = i;
 			break;
 		}
@@ -28,9 +30,11 @@ int findBorderIndex(int array[], int borderElement, int leftBorder, int rightBor
 	return borderIndex;
 }
 
-void quickSort(int a[], int leftCounter, int rightCounter) {
-	int size = rightCounter - leftCounter + 1;
-	if (size <= 10) {
+void quickSort(int a[], int leftCounter, int rightCounter) 
+{
+	const int size = rightCounter - leftCounter + 1;
+	if (size <= 10) 
+	{
 		insertionSort(leftCounter, rightCounter, a);
 		return;
 	}
@@ -52,11 +56,13 @@ void quickSort(int a[], int leftCounter, int rightCounter) {
 				leftCounter++;
 				rightCounter--;
 			}
-			else {
+			else 
+			{
 				rightCounter--;
 			}
 		}
-		else {
+		else 
+		{
 			leftCounter++;
 		}
 	}
@@ -65,13 +71,16 @@ void quickSort(int a[], int leftCounter, int rightCounter) {
 	quickSort(a, abuttingElementIndex, rightBorder);
 }
 
-int findFrequentElement(int array[], int size) {
+int findFrequentElement(int array[], const int size) 
+{
 	int previous = array[0];
 	int count = 1;
 	int memorized = previous;
 	int maxCount = 1;
-	for (int i = 1; i < size; ++i) {
-		if (array[i] == previous) {
+	for (int i = 1; i < size; ++i) 
+	{
+		if (array[i] == previous) 
+		{
 			++count;
 		}
 		else
@@ -92,36 +101,40 @@ int findFrequentElement(int array[], int size) {
 	}
 	return memorized;
 }
-bool firstTest()
+
+bool testWithStandartArray()
 {
 	int array[5] = { 3, 7, 2, 8, 1 };
 	return findFrequentElement(array, 5) == 3;
 }
 
-bool secondTest()
+bool testWithArrayOfEqualElements()
 {
 	int array[4] = { 7, 7, 7, 7 };
 	return findFrequentElement(array, 4) == 7;
 }
 
-bool thirdTest()
+bool testWithArrayWithSomeFrequentElements()
 {
 	int array[10] = { 3, 9, 15, 7, 8, 4, 7, 3, 2, 4 };
 	return findFrequentElement(array, 10) == 3;
 }
 
-int main() {
+int main() 
+{
 	
-	if (firstTest() == false || secondTest() == false || thirdTest() == false) {
+	if (!testWithStandartArray() || !testWithArrayOfEqualElements() || !testWithArrayWithSomeFrequentElements())
+	{
 		printf("Test failed\n");
 		return 1;
 	}
-	int size = 19;
+	const int size = 19;
 
 	int array[19] = { 1, 3, 6, 5, 3, 5, 10, 65, 1, 23, 5, 8765, 9, 1, 2, 3, 54, 3, 5 };
 
 	quickSort(array, 0, size - 1);
-	for (int i = 0; i < size; i++) {
+	for (int i = 0; i < size; i++) 
+	{
 		printf("%d ", array[i]);
 	}
 
