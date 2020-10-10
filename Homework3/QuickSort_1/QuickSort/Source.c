@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void insertionSort(int leftCounter, int rightCounter, int array[])
+void insertionSort(const int leftCounter, const int rightCounter, int array[])
 {
     for (int i = leftCounter; i <= rightCounter; i++)
 	{
@@ -15,7 +15,7 @@ void insertionSort(int leftCounter, int rightCounter, int array[])
 	}
 }
 
-int findBorderIndex(int array[], int borderElement, int leftBorder, int rightBorder) {
+int findBorderIndex(int array[], int borderElement, const int leftBorder, const int rightBorder) {
 	int borderIndex = 0;
 	for (int i = leftBorder; i < rightBorder; ++i) {
 		if (array[i] >= borderElement) {
@@ -63,7 +63,7 @@ void quickSort(int a[], int leftCounter, int rightCounter) {
 	quickSort(a, abuttingElementIndex, rightBorder);
 }
 
-int sortTest(int array[], int size) {
+int sortTest(int array[], const int size) {
 	for (int i = 1; i < size; ++i) {
 		if (array[i - 1] > array[i]) {
 			return 1;
