@@ -1,13 +1,11 @@
 #include <stdio.h>
+#include <stdbool.h>
 
-void insertionSort(const int leftCounter, const int rightCounter, int array[])
-{
-    for (int i = leftCounter; i <= rightCounter; i++)
-	{
+void insertionSort(const int leftCounter, const int rightCounter, int array[]){
+	for (int i = leftCounter; i <= rightCounter; i++) {
 		int newElement = array[i];
 		int location = i - 1;
-		while (location >= 0 && array[location] > newElement)
-		{
+		while (location >= 0 && array[location] > newElement) {
 			array[location + 1] = array[location];
 			location --;
 		}
@@ -38,12 +36,9 @@ void quickSort(int a[], int leftCounter, int rightCounter) {
 	int abuttingElementIndex = (size - 1) / 2;
 	int abuttingElement = a[abuttingElementIndex];
 
-	while (leftCounter < rightCounter)
-	{
-		if (a[leftCounter] >= abuttingElement)
-		{
-			if (a[rightCounter] < abuttingElement)
-			{
+	while (leftCounter < rightCounter) {
+		if (a[leftCounter] >= abuttingElement) {
+			if (a[rightCounter] < abuttingElement) {
 				int temp = a[rightCounter];
 				a[rightCounter] = a[leftCounter];
 				a[leftCounter] = temp;
@@ -58,35 +53,35 @@ void quickSort(int a[], int leftCounter, int rightCounter) {
 			leftCounter++;
 		}
 	}
-	abuttingElementIndex = findBorderIndex(a, abuttingElement, leftBorder, rightBorder);
-	quickSort(a, leftBorder, abuttingElementIndex - 1);
-	quickSort(a, abuttingElementIndex, rightBorder);
+	int border = findBorderIndex(a, abuttingElement, leftBorder, rightBorder);
+	quickSort(a, leftBorder, border - 1);
+	quickSort(a, border, rightBorder);
 }
 
-int sortTest(int array[], const int size) {
+bool sortTest(int array[], const int size) {
 	for (int i = 1; i < size; ++i) {
 		if (array[i - 1] > array[i]) {
-			return 1;
+			return false;
 		}
 	}
-	return 0;
+	return true;
 }
 
-int testWithStandartArray() {
+bool testWithStandartArray() {
 	int array[] = { 1, 3, 4, 2, 6, 5, 2, 34, 8, 12, 14, 2, 5, 7, 8, 1, 56, 3, 78, 7 };
 	int size = 20;
 	quickSort(array, 0, size - 1);
 	return sortTest(array, size);
 }
 
-int testWithArrayOfEqualElements() {
+bool testWithArrayOfEqualElements() {
 	int array[] = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 	int size = 10;
 	quickSort(array, 0, size - 1);
 	return sortTest(array, size);
 }
 
-int testWithArrayOfOneElement() {
+bool testWithArrayOfOneElement() {
 	int array[] = {0};
 	int size = 1;
 	quickSort(array, 0, size - 1);
@@ -94,7 +89,7 @@ int testWithArrayOfOneElement() {
 }
 
 int main() {
-	if (testWithStandartArray() != 0 || testWithArrayOfEqualElements() != 0 || testWithArrayOfOneElement() != 0) {
+	if (!testWithStandartArray() || !testWithArrayOfEqualElements() || !testWithArrayOfOneElement()) {
 		printf("Test failed\n");
 		return 1;
 	}
