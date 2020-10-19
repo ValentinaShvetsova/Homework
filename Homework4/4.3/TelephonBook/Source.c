@@ -22,14 +22,14 @@ void addRecord(struct Record records[], int amountOfRecords) {
 	}
 }
 
-void printRecords(struct Record records[], int amountOfRecords) {
+void printRecords(struct Record records[], const int amountOfRecords) {
 	for (int i = 0; i < amountOfRecords; ++i) {
 		printf("%s %s\n", records[i].name, records[i].phone);
 	}
 }
 
-char* findNumber(struct Record records[], int amountOfRecords, char name[]) {
-	char exit[] = "Number not found";
+char* findNumber(struct Record records[], int amountOfRecords, const char name[]) {
+	const char exit[] = "Number not found";
 	for (int i = 0; i < amountOfRecords; ++i) {
 		if (strcmp(records[i].name, name) == 0) {
 			return records[i].phone;
@@ -38,8 +38,8 @@ char* findNumber(struct Record records[], int amountOfRecords, char name[]) {
 	return exit;
 }
 
-char* findName(struct Record records[], int amountOfRecords, char number[]) {
-	char exit[] = "Name not found";
+char* findName(struct Record records[], const int amountOfRecords, const char number[]) {
+	const char exit[] = "Name not found";
 	for (int i = 0; i < amountOfRecords; ++i) {
 		if (strcmp(records[i].phone, number) == 0) {
 			return records[i].name;
@@ -48,15 +48,16 @@ char* findName(struct Record records[], int amountOfRecords, char number[]) {
 	return exit;
 }
 
-void addToFile(struct Record records[], int amountOfRecords, char name[]) {
+void addToFile(struct Record records[], const int amountOfRecords, const char name[]) {
 	FILE* file = fopen(name, "w");
 	if (file == NULL) {
 		printf("Файл не удалось открыть.\n");
 		return;
 	}
 	for (int i = 0; i < amountOfRecords; ++i) {
-		fprintf(name, "%s %s\n", records[i].name, records[i].phone);
+		fprintf(file, "%s %s\n", records[i].name, records[i].phone);
 	}
+	fclose(file);
 }
 
 int main() {
@@ -113,8 +114,7 @@ int main() {
 		}
 		else if (command == 5) {
 			fclose(file);
-			char name[13] = { "database.txt" };
-			addToFile(buffer, recordsCount, name);
+			addToFile(buffer, recordsCount, "database.txt");
 		}
 	}
 	return 0;
