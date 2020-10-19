@@ -3,35 +3,6 @@
 #include <stdbool.h>
 #include "Sort.h"
 
-void insertionSort(const int leftCounter, const int rightCounter, int array[])
-{
-	for (int i = leftCounter; i <= rightCounter; i++)
-	{
-		int newElement = array[i];
-		int location = i - 1;
-		while (location >= 0 && array[location] > newElement)
-		{
-			array[location + 1] = array[location];
-			location--;
-		}
-		array[location + 1] = newElement;
-	}
-}
-
-int findBorderIndex(int array[], int borderElement, const int leftBorder, const int rightBorder)
-{
-	int borderIndex = 0;
-	for (int i = leftBorder; i < rightBorder; ++i)
-	{
-		if (array[i] >= borderElement)
-		{
-			borderIndex = i;
-			break;
-		}
-	}
-	return borderIndex;
-}
-
 int findFrequentElement(int array[], const int size)
 {
 	int previous = array[0];
