@@ -15,7 +15,7 @@ void addRecord(struct Record records[], int amountOfRecords) {
 		scanf("%s", &records[amountOfRecords].name);
 		printf("Введите номер телефона: ");
 		scanf("%s", &records[amountOfRecords].phone);
-		amountOfRecords++;
+		(amountOfRecords)++;
 	}
 	else {
 		printf("База заполнена\n");
