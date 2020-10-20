@@ -29,7 +29,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sort.h">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
