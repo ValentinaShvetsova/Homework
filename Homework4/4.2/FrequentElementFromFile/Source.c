@@ -50,6 +50,8 @@ int main()
 	{
 		fscanf(file, "%d", &array[i]);
 	}
+	
+	fclose(file);
 
 	quickSort(array, 0, size - 1);
 	for (int i = 0; i < size; i++)
@@ -62,6 +64,5 @@ int main()
 	printf("\nElement %d is the most frequent\n", element);
 	
 	free(array);
-	fclose(file);
 	return 0;
 }
