@@ -14,27 +14,94 @@ void convertToAdditional(int number, bool binaryNumber[])
 	
 }
 
-void summOfBinary(bool firstBinaryNumber[], bool secondBinaryNumber[], bool binarySumm[]) {
+void sumOfBinary(bool firstBinaryNumber[], bool secondBinaryNumber[], bool binarySum[]) {
 	int carryover = 0;
 	for (int i = size - 1; i >= 0; --i) {
-		binarySumm[i] = firstBinaryNumber[i] ^ secondBinaryNumber[i] ^ carryover;
+		binarySum[i] = firstBinaryNumber[i] ^ secondBinaryNumber[i] ^ carryover;
 		carryover = (firstBinaryNumber[i] & secondBinaryNumber[i]) || (firstBinaryNumber[i] & carryover) || (secondBinaryNumber[i] & carryover);
 	}
 }
 
-int convertToDecimal(bool summ[])
+int convertToDecimal(bool sum[])
 {
 	int decimal = 0;
 	int powerOfTwo = 1;
 	for (int i = size - 1; i >= 0; --i) {
-		decimal |= (summ[i] * powerOfTwo);
+		decimal |= (sum[i] * powerOfTwo);
 		powerOfTwo <<= 1;
 	}
 	return decimal;
 }
 
+bool checkBinaryNumber(bool binaryNumber[], bool answer[]) {
+	for (int i = 0; i < size; i++) {
+		if (binaryNumber[i] != answer[i]) {
+			return false;
+		}
+	}
+	return true;
+}
+
+bool testConvertToBinary()
+{
+	int number = 15;
+	bool binaryNumber[32] = { 0 };
+	convertToAdditional(number, binaryNumber);
+	bool answer[32] = { 0 };
+	answer[28] = 1;
+	answer[29] = 1;
+	answer[30] = 1;
+	answer[31] = 1;
+	if (!checkBinaryNumber(binaryNumber, answer))
+	{
+		return false;
+	}
+	return true;
+}
+
+bool chekSum() {
+	int number1 = 10;
+	int number2 = 15;
+	int number3 = -7;
+	int number4 = -10;
+	
+	bool firstNumber[32] = { 0 };
+	bool secondNumber[32] = { 0 };
+	bool thirdNumber[32] = { 0 };
+	bool fourthNumber[32] = { 0 };
+
+	convertToAdditional(number1, firstNumber);
+	convertToAdditional(number2, secondNumber);
+	convertToAdditional(number3, thirdNumber);
+	convertToAdditional(number4, fourthNumber);
+
+	bool sum1[32] = { 0 };
+	bool sum2[32] = { 0 };
+	bool sum3[32] = { 0 };
+	bool sum4[32] = { 0 };
+
+	sumOfBinary(firstNumber, secondNumber, sum1);
+	sumOfBinary(firstNumber, thirdNumber, sum2);
+	sumOfBinary(thirdNumber, fourthNumber, sum3);
+	sumOfBinary(firstNumber, fourthNumber, sum4);
+
+	int result1 = convertToDecimal(sum1);
+	int result2 = convertToDecimal(sum2);
+	int result3 = convertToDecimal(sum3);
+	int result4 = convertToDecimal(sum4);
+
+	if (result1 != 25 || result2 != 3 || result3 != -17 || result4 != 0) {
+		return false;
+	}
+	return true;
+}
+
 int main() {
 	char* locale = setlocale(LC_ALL, "");
+	if (!testConvertToBinary() || !chekSum()) {
+		printf("Тесты не пройдены.\n");
+		return 1;
+	}
 	
 	printf("Введите первое целое число: ");
 	int firstNumber = 0;
@@ -50,10 +117,10 @@ int main() {
 	
 	convertToAdditional(secondNumber, secondBinaryNumber);
 
-	bool binarySumm[32] = {0};
+	bool binarySum[32] = {0};
 	
-	summOfBinary(firstBinaryNumber, secondBinaryNumber, binarySumm);
-	int result = convertToDecimal(binarySumm);
+	sumOfBinary(firstBinaryNumber, secondBinaryNumber, binarySum);
+	int result = convertToDecimal(binarySum);
 
 	printf("Результат: %d ", result);
 }
