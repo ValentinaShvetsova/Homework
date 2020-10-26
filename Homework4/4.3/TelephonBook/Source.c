@@ -60,7 +60,38 @@ void addToFile(struct Record records[], const int amountOfRecords, const char na
 	fclose(file);
 }
 
+bool testFindingName() {
+	FILE* file = fopen("database.txt", "r");
+	struct Record buffer[100];
+	int recordsCount = 0;
+
+	while (!feof(file)) {
+		fscanf(file, "%s %s", &buffer[recordsCount].name, &buffer[recordsCount].phone);
+		recordsCount++;
+	}
+	fclose(file);
+	char number[] = { 34567 };
+	return strcmp(findName(buffer, recordsCount, number), "Helga");
+}
+
+bool testFindingNumber() {
+	FILE* file = fopen("database.txt", "r");
+	struct Record buffer[100];
+	int recordsCount = 0;
+
+	while (!feof(file)) {
+		fscanf(file, "%s %s", &buffer[recordsCount].name, &buffer[recordsCount].phone);
+		recordsCount++;
+	}
+	fclose(file);
+	const char name[5] = "Helga";
+	return strcmp(findNumber(buffer, recordsCount, name), "34567");
+}
+
 int main() {
+	if (!testFindingNumber() || !testFindingName()) {
+		return 1;
+	}
 	char* locale = setlocale(LC_ALL, "");
 	FILE* file = fopen("database.txt", "r");
 	if (file == NULL) {
