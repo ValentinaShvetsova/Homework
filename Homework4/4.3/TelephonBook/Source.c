@@ -9,13 +9,13 @@ struct Record {
 	char phone[30];
 };
 
-void addRecord(struct Record records[], int amountOfRecords) {
-	if (amountOfRecords < 100) {
+void addRecord(struct Record records[], int *amountOfRecords) {
+	if (*amountOfRecords < 100) {
 		printf("Введите имя: ");
-		scanf("%s", &records[amountOfRecords].name);
+		scanf("%s", &records[*amountOfRecords].name);
 		printf("Введите номер телефона: ");
-		scanf("%s", &records[amountOfRecords].phone);
-		(amountOfRecords)++;
+		scanf("%s", &records[*amountOfRecords].phone);
+		(*amountOfRecords)++;
 	}
 	else {
 		printf("База заполнена\n");
@@ -94,7 +94,7 @@ int main() {
 			return 0;
 		}
 		else if (command == 1) {
-			addRecord(buffer, recordsCount);
+			addRecord(buffer, &recordsCount);
 		}
 		else if (command == 2) {
 			printRecords(buffer, recordsCount);
