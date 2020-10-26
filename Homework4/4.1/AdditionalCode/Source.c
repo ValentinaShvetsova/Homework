@@ -5,13 +5,11 @@
 
 const int size = sizeof(int) * 8;
 
-void convertToAdditional(int number, bool binaryNumber[])
-{
+void convertToAdditional(int number, bool binaryNumber[]) {
 	for (int i = size - 1; i >= 0; --i) {
 		binaryNumber[i] = number & 1;
 		number >>= 1;
-    }
-	
+	}
 }
 
 void sumOfBinary(bool firstBinaryNumber[], bool secondBinaryNumber[], bool binarySum[]) {
@@ -22,8 +20,7 @@ void sumOfBinary(bool firstBinaryNumber[], bool secondBinaryNumber[], bool binar
 	}
 }
 
-int convertToDecimal(bool sum[])
-{
+int convertToDecimal(bool sum[]) {
 	int decimal = 0;
 	int powerOfTwo = 1;
 	for (int i = size - 1; i >= 0; --i) {
@@ -42,8 +39,7 @@ bool checkBinaryNumber(bool binaryNumber[], bool answer[]) {
 	return true;
 }
 
-bool testConvertToBinary()
-{
+bool testConvertToBinary() {
 	int number = 15;
 	bool binaryNumber[32] = { 0 };
 	convertToAdditional(number, binaryNumber);
@@ -52,11 +48,7 @@ bool testConvertToBinary()
 	answer[29] = 1;
 	answer[30] = 1;
 	answer[31] = 1;
-	if (!checkBinaryNumber(binaryNumber, answer))
-	{
-		return false;
-	}
-	return true;
+	return checkBinaryNumber(binaryNumber, answer);
 }
 
 bool chekSum() {
@@ -90,14 +82,11 @@ bool chekSum() {
 	int result3 = convertToDecimal(sum3);
 	int result4 = convertToDecimal(sum4);
 
-	if (result1 != 25 || result2 != 3 || result3 != -17 || result4 != 0) {
-		return false;
-	}
-	return true;
+	return ((result1 == 25) & (result2 == 3) & (result3 == -17) & (result4 == 0));
 }
 
 int main() {
-	char* locale = setlocale(LC_ALL, "");
+	setlocale(LC_ALL, "");
 	if (!testConvertToBinary() || !chekSum()) {
 		printf("Тесты не пройдены.\n");
 		return 1;
@@ -109,18 +98,26 @@ int main() {
 	bool firstBinaryNumber[32] = {0};
 	
 	convertToAdditional(firstNumber, firstBinaryNumber);
+	printf("Двоичное представление первого числа в дополнительном коде: \n");
+	for (int i = 0; i < 32; ++i) {
+		printf("%d", firstBinaryNumber[i]);
+	}
 
-	printf("Введите второе целое число: ");
+	printf("\nВведите второе целое число: ");
 	int secondNumber = 0;
 	scanf("%d", &secondNumber);
 	bool secondBinaryNumber[32] = {0};
 	
 	convertToAdditional(secondNumber, secondBinaryNumber);
+	printf("Двоичное представление второго числа в дополнительном коде: \n");
+	for (int i = 0; i < 32; ++i) {
+		printf("%d", secondBinaryNumber[i]);
+	}
 
 	bool binarySum[32] = {0};
 	
 	sumOfBinary(firstBinaryNumber, secondBinaryNumber, binarySum);
 	int result = convertToDecimal(binarySum);
 
-	printf("Результат: %d ", result);
+	printf("\nРезультат: %d ", result);
 }
