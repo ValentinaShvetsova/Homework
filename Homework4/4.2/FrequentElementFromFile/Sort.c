@@ -6,7 +6,7 @@ void insertionSort(const int leftCounter, const int rightCounter, int array[])
 	{
 		int newElement = array[i];
 		int location = i - 1;
-		while (location >= 0 && array[location] > newElement)
+		while (location >= leftCounter && array[location] > newElement)
 		{
 			array[location + 1] = array[location];
 			location--;
