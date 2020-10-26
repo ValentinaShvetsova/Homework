@@ -8,7 +8,6 @@ struct Stack {
 
 struct Stack* createStack() {
 	struct Stack* newStack = calloc(1, sizeof(struct Stack));
-	newStack->head = NULL;
 	return newStack;
 }
 
@@ -38,8 +37,8 @@ int pop(struct Stack* stack) {
 	return element;
 }
 
-bool isEmpty(struct StackElement* head) {
-	return head == NULL;
+bool isEmpty(struct Stack* stack) {
+	return stack->head == NULL;
 }
 
 void deleteStack(struct Stack** stack) {
