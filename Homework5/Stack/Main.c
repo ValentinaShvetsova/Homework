@@ -29,7 +29,7 @@ bool test2() {
 bool test3() {
 	struct Stack* stack = createStack();
 	deleteStack(&stack);
-	return(isEmpty(stack));
+	return isEmpty(stack);
 }
 
 int main() {
