@@ -24,8 +24,9 @@ void performOperation(char operation, struct Stack *stack) {
 	push(stack, result);
 }
 
-void getResult(struct Stack* stack) {
-	printf("%d ", pop(stack));
+int getResult(struct Stack* stack) {
+	int result = pop(stack);
+	printf("%d ", result);
 }
 
 bool calculationPermission(char postfixExpression[]) {
@@ -66,15 +67,26 @@ bool calculationPermission(char postfixExpression[]) {
 			resultExictence = true;
 			push(stack, result);
 			getResult(stack);
+		} else {
+			deleteStack(&stack);
 		}
-	}
-	if (!isEmpty(stack)) {
-		deleteStack(stack);
 	}
 	return resultExictence;
 }
-
+bool test() {
+	char string1[] = "23+4";
+	char string2[] = "5+";
+	char string3[] = "+65";
+	if (calculationPermission(string1) || calculationPermission(string2) || calculationPermission(string3)) {
+		return false;
+	}
+	return true;
+}
 int main() {
+	if (!test()) {
+		printf("Tests ain't passed\n");
+		return 1;
+	}
 	printf("Enter postfix expression: ");
 	char string[100];
 	scanf("%s", string);
