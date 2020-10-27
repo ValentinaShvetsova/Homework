@@ -10,7 +10,7 @@ struct Stack* createStack();
 int pop(struct Stack* stack);
 
 //This function check the emptiness of stack
-bool isEmpty(struct StackElement* head);
+bool isEmpty(struct Stack* stack);
 
 //This function deletes stack
 void deleteStack(struct Stack** stack);
