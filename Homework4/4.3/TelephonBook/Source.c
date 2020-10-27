@@ -28,8 +28,8 @@ void printRecords(struct Record records[], const int amountOfRecords) {
 	}
 }
 
-char* findNumber(struct Record records[], int amountOfRecords, const char name[]) {
-	const char exit[] = "Number not found";
+const char* findNumber(struct Record records[], int amountOfRecords, const char name[]) {
+	const char *exit = "Number not found";
 	for (int i = 0; i < amountOfRecords; ++i) {
 		if (strcmp(records[i].name, name) == 0) {
 			return records[i].phone;
@@ -38,8 +38,8 @@ char* findNumber(struct Record records[], int amountOfRecords, const char name[]
 	return exit;
 }
 
-char* findName(struct Record records[], const int amountOfRecords, const char number[]) {
-	const char exit[] = "Name not found";
+const char* findName(struct Record records[], const int amountOfRecords, const char number[]) {
+	const char *exit = "Name not found";
 	for (int i = 0; i < amountOfRecords; ++i) {
 		if (strcmp(records[i].phone, number) == 0) {
 			return records[i].name;
@@ -70,7 +70,7 @@ bool testFindingName() {
 		recordsCount++;
 	}
 	fclose(file);
-	char number[] = { 34567 };
+	char number[] = "34567";
 	return strcmp(findName(buffer, recordsCount, number), "Helga");
 }
 
