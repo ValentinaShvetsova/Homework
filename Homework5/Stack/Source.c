@@ -7,7 +7,7 @@ struct Stack {
 };
 
 struct StackElement {
-	int element;
+	char element;
 	struct StackElement* next;
 };
 
@@ -16,7 +16,7 @@ struct Stack* createStack() {
 	return newStack;
 }
 
-void push(struct Stack* stack, int element) {
+void push(struct Stack* stack, char element) {
 	struct StackElement* newElement = malloc(sizeof(struct StackElement));
 	if (newElement == NULL) {
 		return;
@@ -26,11 +26,11 @@ void push(struct Stack* stack, int element) {
 	stack->head = newElement;
 }
 
-int pop(struct Stack* stack) {
+char pop(struct Stack* stack) {
 	if (stack->head == NULL) {
 		return 0;
 	}
-	int element = stack->head->element;
+	char element = stack->head->element;
 	struct StackElement* oldElement = stack->head;
 	stack->head = stack->head->next;
 	free(oldElement);
@@ -41,10 +41,8 @@ bool isEmpty(struct Stack* stack) {
 	return stack->head == NULL;
 }
 
-void deleteStack(struct Stack** stack) {
-	while ((*stack)->head != NULL) {
-		pop(*stack);
+void deleteStack(struct Stack** head) {
+	while (*head != NULL) {
+		pop(head);
 	}
-	free(*stack);
-	*stack = NULL;
 }

@@ -7,13 +7,13 @@ struct Stack;
 struct Stack* createStack();
 
 //This function get the top element from stack
-int pop(struct Stack* stack);
+char pop(struct Stack* stack);
 
 //This function check the emptiness of stack
-bool isEmpty(struct StackElement* head);
+bool isEmpty(struct Stack* head);
 
 //This function deletes stack
 void deleteStack(struct Stack** stack);
 
 //This function add the element at the top of stack
-void push(struct Stack* stack, int element);
+void push(struct Stack* stack, char element);
