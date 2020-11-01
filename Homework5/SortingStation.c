@@ -75,7 +75,35 @@ void convertToPostfix(char infixExpression[], char postfixExpression[]) {
 	}
 	deleteStack(stack);
 }
+
+bool tests() {
+	char testString1[] = "1*3-1+5*3";
+	char result1[10] = { 0 };
+	convertToPostfix(testString1, result1);
+	if (strcmp(result1, "13*1-53*+") != 0) {
+		return false;
+	}
+
+	char testString2[] = "(1+1)*2";
+	char result2[10] = { 0 };
+	convertToPostfix(testString2, result2);
+	if (strcmp(result2, "11+2*") != 0) {
+		return false;
+	}
+
+	char testString3[] = "(1+2)*3-1";
+	char result3[10] = { 0 };
+	convertToPostfix(testString3, result3);
+	if (strcmp(result3, "12+3*1-") != 0) {
+		return false;
+	}
+	return true;
+}
 int main() {
+	if (!tests) {
+		printf("Tests failed\n");
+		return 1;
+	}
 	printf("Enter an infix expression: ");
 	char inputString[100] = {0};
 	scanf("%s", inputString);
