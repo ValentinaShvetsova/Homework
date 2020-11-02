@@ -3,7 +3,6 @@
 #include "CircleList.h"
 #include <string.h>
 
-
 int survivorPosition(int numberOfWarriors, int killingPeriodicity) {
 	struct List* list = createList();
 	for (int i = 1; i <= numberOfWarriors; ++i)
@@ -14,7 +13,7 @@ int survivorPosition(int numberOfWarriors, int killingPeriodicity) {
 		deleteValue(list, killingPeriodicity);
 	}
 	const int survivedWarrior = headValue(list);
-	deleteList(list);
+	deleteValue(list, 1);
 	return survivedWarrior;
 }
 

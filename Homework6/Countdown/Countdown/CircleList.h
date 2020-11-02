@@ -14,9 +14,6 @@ void addValue(struct List* list, int value);
 //This function delete value from list
 void deleteValue(struct List* list, int positionNumber);
 
-//This function delete the whole list
-void deleteList(struct List* list);
-
 //This function check whether the stack consist of 1 element or not
 bool headIsTail(struct List* list);
 

@@ -10,8 +10,8 @@ struct Node
 
 struct List
 {
-	struct Node *head;
-	struct Node *tail;
+	struct Node* head;
+	struct Node* tail;
 };
 
 struct List* createList() {
@@ -56,12 +56,6 @@ void deleteValue(struct List* list, int positionNumber)
 	list->tail = previous;
 	previous->next = current->next;
 	free(oldElement);
-}
-
-void deleteList(struct List* list) {
-	while (list->head != NULL) {
-		deleteValue(list, 1);
-	}
 }
 
 bool headIsTail(struct List* list) {
