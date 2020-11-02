@@ -5,8 +5,7 @@
 
 int survivorPosition(int numberOfWarriors, int killingPeriodicity) {
 	struct List* list = createList();
-	for (int i = 1; i <= numberOfWarriors; ++i)
-	{
+	for (int i = 1; i <= numberOfWarriors; ++i) {
 		addValue(list, i);
 	}
 	while (!(headIsTail(list))) {

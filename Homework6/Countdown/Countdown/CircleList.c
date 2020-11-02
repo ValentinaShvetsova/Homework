@@ -19,8 +19,7 @@ struct List* createList() {
 	return newList;
 }
 
-bool isEmpty(struct List* list)
-{
+bool isEmpty(struct List* list) {
 	return list->head == NULL;
 }
 
@@ -46,8 +45,7 @@ void deleteValue(struct List* list, int positionNumber)
 {
 	struct Node* current = list->head;
 	struct Node* previous = list->tail;
-	for (int i = 1; i < positionNumber; ++i)
-	{
+	for (int i = 1; i < positionNumber; ++i) {
 		previous = current;
 		current = current->next;
 	}
