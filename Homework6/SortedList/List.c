@@ -80,18 +80,3 @@ void printList(struct List* list)
 		current = current->next;
 	}
 }
-
-char* returnNameFromHead(struct List* list)
-{
-	return list->head->name;
-}
-
-char* returnPhoneFromHead(struct List* list)
-{
-	return list->head->phone;
-}
-
-int listLength(struct List* list)
-{
-	return list->length;
-}
