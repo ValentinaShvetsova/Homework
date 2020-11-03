@@ -4,10 +4,9 @@
 #include <stdbool.h>
 #include "List.h"
 
-struct Entry
-{
-	char name[20];
-	char phone[20];
+struct Entry {
+	char *name;
+	char *phone;
 	struct Entry* next;
 };
 
@@ -22,8 +21,7 @@ struct List* createList() {
 	return newList;
 }
 
-bool isEmpty(struct List* list)
-{
+bool isEmpty(struct List* list) {
 	return list->head == NULL;
 }
 
@@ -33,8 +31,7 @@ void addEntry(struct List* list, char name[], char phone[]) {
 	if (newEntry == NULL) {
 		return;
 	}
-	if (isEmpty(list))
-	{
+	if (isEmpty(list)) {
 		list->head = newEntry;
 		list->tail = list->head;
 		return;
@@ -43,15 +40,12 @@ void addEntry(struct List* list, char name[], char phone[]) {
 	list->tail = list->tail->next;
 }
 
-void printList(struct List* list)
-{
-	if (isEmpty(list))
-	{
+void printList(struct List* list) {
+	if (isEmpty(list)) {
 		return;
 	}
 	struct Entry* current = list->head;
-	while (current != NULL)
-	{
+	while (current != NULL) {
 		printf("%s - %s\n", current->name, current->phone);
 		current = current->next;
 	}
@@ -67,10 +61,8 @@ void deleteList(struct List* list) {
 	}
 }
 
-void deleteHead(struct List* list)
-{
-	if (isEmpty(list))
-	{
+void deleteHead(struct List* list) {
+	if (isEmpty(list)) {
 		return;
 	}
 	list->length--;
@@ -81,17 +73,14 @@ void deleteHead(struct List* list)
 	list->head = temp;
 }
 
-char* returnNameFromHead(struct List* list)
-{
+char* returnNameFromHead(struct List* list) {
 	return list->head->name;
 }
 
-char* returnPhoneFromHead(struct List* list)
-{
+char* returnPhoneFromHead(struct List* list) {
 	return list->head->phone;
 }
 
-int listLength(struct List* list)
-{
+int listLength(struct List* list) {
 	return list->length;
 }

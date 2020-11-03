@@ -5,11 +5,9 @@
 #include "List.h"
 #include "MergeSort.h"
 
-struct List* mergeSort(struct List* list, int sortType)
-{
+struct List* mergeSort(struct List* list, int sortType) {
 	const int length = listLength(list);
-	if (length <= 1)
-	{
+	if (length <= 1) {
 		return list;
 	}
 
@@ -24,10 +22,8 @@ struct List* mergeSort(struct List* list, int sortType)
 	return merge(leftList, rightList, sortType);
 }
 
-void transferElements(struct List* list1, struct List* list2, int length)
-{
-	for (int i = 0; i < length; ++i)
-	{
+void transferElements(struct List* list1, struct List* list2, int length) {
+	for (int i = 0; i < length; ++i) {
 		addEntry(list2, returnNameFromHead(list1), returnPhoneFromHead(list1));
 		deleteHead(list1);
 	}
@@ -37,12 +33,10 @@ struct List* merge(struct List* list1, struct List* list2, int sortType) {
 	struct List* newList = createList();
 	while (listLength(list1) != 0 && listLength(list2) != 0) {
 		int comparison = 0;
-		if (sortType == 1)
-		{
+		if (sortType == 1) {
 			comparison = strcmp(returnNameFromHead(list1), returnNameFromHead(list2));
 		}
-		else
-		{
+		else {
 			comparison = strcmp(returnPhoneFromHead(list1), returnPhoneFromHead(list2));
 		}
 		
@@ -54,12 +48,10 @@ struct List* merge(struct List* list1, struct List* list2, int sortType) {
 		}
 	}
 
-	if (listLength(list2) == 0)
-	{
+	if (listLength(list2) == 0) {
 		transferElements(list1, newList, listLength(list1));
 	}
-	else
-	{
+	else {
 		transferElements(list2, newList, listLength(list2));
 	}
 	deleteList(list1);
