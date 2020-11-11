@@ -39,9 +39,8 @@ int main() {
 				printf("Value for this key wasn't find\n");
 			}
 			else {
-				printf("%s", result);
+				printf("%s\n", result);
 			}
-			free(result);
 			break;
 		}
 		case 3: {

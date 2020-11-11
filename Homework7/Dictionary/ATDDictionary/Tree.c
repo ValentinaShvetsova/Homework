@@ -56,13 +56,16 @@ void insert(int key, char* value, struct Node* node) {
 }
 
 void addValue(int key, char* value, struct Tree* tree) {
+	char* newValue = calloc(101, (sizeof(char*)));
+	strcpy(newValue, value);
 	if (isEmpty(tree)) {
 		struct Node* newNode = calloc(1, sizeof(struct Node));
+		tree->root = newNode;
 		newNode->key = key;
-		newNode->value = value;
+		newNode->value = newValue;
 		return;
 	}
-	insert(key, value, tree->root);
+	insert(key, newValue, tree->root);
 }
 
 char* get(struct Node* node, int key) {
