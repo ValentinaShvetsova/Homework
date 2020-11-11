@@ -5,6 +5,7 @@
 #include "Tree.h"
 
 int main() {
+	
 	int command = 0;
 	bool shouldGoOut = false;
 	struct Tree* tree = createTree();
