@@ -48,10 +48,10 @@ int main() {
 			scanf("%d", &key);
 
 			if (contains(tree, key)) {
-				printf("The key is in the dictionary");
+				printf("The key is in the dictionary\n");
 			}
 			else {
-				printf("The key is not in the dictionary");
+				printf("The key is not in the dictionary\n");
 			}
 			break;
 		}
