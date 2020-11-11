@@ -4,8 +4,36 @@
 #include <stdbool.h>
 #include "Tree.h"
 
-int main() {
+bool tests() {
+	struct Tree* tree = createTree();
+	char value[5] = "abcd";
+
+	addValue(10, value, tree);
+	addValue(7, value, tree);
+	addValue(12, value, tree);
+
+	if (!contains(tree, 10) || !contains(tree, 7) || !contains(tree, 12)) {
+		return false;
+	}
 	
+	char* result = calloc(1, sizeof(char*));
+	if (strcmp(getValue(tree, 7), value) != 0) {
+		return false;
+	}
+
+	deleteValue(tree, 12);
+	if (contains(tree, 12)) {
+		return false;
+	}
+	deleteTree(tree);
+	return true;
+}
+int main() {
+	if (!tests) {
+		printf("Tests didn't pass\n");
+		return 1;
+	}
+
 	int command = 0;
 	bool shouldGoOut = false;
 	struct Tree* tree = createTree();
