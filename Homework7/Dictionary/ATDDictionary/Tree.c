@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+#include <malloc.h>
 #include "Tree.h"
 
 struct Node {
@@ -57,7 +58,11 @@ void insert(int key, char* value, struct Node* node) {
 
 void addValue(int key, char* value, struct Tree* tree) {
 	char* newValue = calloc(101, (sizeof(char*)));
+	if (newValue == NULL) {
+		return;
+	}
 	strcpy(newValue, value);
+	
 	if (isEmpty(tree)) {
 		struct Node* newNode = calloc(1, sizeof(struct Node));
 		tree->root = newNode;
