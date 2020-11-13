@@ -33,30 +33,33 @@ bool isOperation(struct Node* node) {
 	return node->operation == '+' || node->operation == '-' || node->operation == '*' || node->operation == '/';
 }
 
-int numberBuilding(char *string, int *position) {
+int numberBuilding(char *string, int **position) {
 	int number = 0;
-	while (string[*position] >= '0' && string[*position] <= '9')
+	while (string[**position] >= '0' && string[**position] <= '9')
 	{
-		number = number * 10 + (string[*position] - '0');
-		*position += 1;
+		number = number * 10 + (string[**position] - '0');
+		**position += 1;
 	}
 	return number;
 }
 
-struct Node* newNode(char* string, int **position) {
-	position += 1;
-	while (string[(*position)] == ' ' || string[*position] == '(' || string[*position] == ')') {
-		position += 1;
+struct Node* newNode(char* string, int *position) {
+	(*position) += 1;
+	while (string[*position] == ' ' || string[*position] == '(' || string[*position] == ')') {
+		(*position) += 1;
 	}
 	struct Node *node = calloc(1, sizeof(struct Node));
+	if (node == NULL) {
+		return NULL;
+	}
 
-	if (isOperation(node)) {
+	if (string[*position] == '+' || string[*position] == '-' || string[*position] == '*' || string[*position] == '/') {
 		node->operation = string[*position];
 		node->leftChild = newNode(string, position);
 		node->rightChild = newNode(string, position);
 	}
 	else {
-		node->operand = numberBuilding(string, *position);
+		node->operand = numberBuilding(string, &position);
 	}
 	return node;
 }
@@ -104,8 +107,7 @@ void deleteChildren(struct Node* node) {
 	}
 	deleteChildren(node->leftChild);
 	deleteChildren(node->rightChild);
-	free(node->operation);
-	free(node->operand);
+
 	free(node);
 }
 
