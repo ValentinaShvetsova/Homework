@@ -43,20 +43,20 @@ int numberBuilding(char *string, int *position) {
 	return number;
 }
 
-struct Node* newNode(char* string, int &position) {
+struct Node* newNode(char* string, int **position) {
 	position += 1;
-	while (string[position] == ' ' || string[position] == '(' || string[position] == ')') {
+	while (string[(*position)] == ' ' || string[*position] == '(' || string[*position] == ')') {
 		position += 1;
 	}
 	struct Node *node = calloc(1, sizeof(struct Node));
 
 	if (isOperation(node)) {
-		node->operation = string[position];
+		node->operation = string[*position];
 		node->leftChild = newNode(string, position);
 		node->rightChild = newNode(string, position);
 	}
 	else {
-		node->operand = numberBuilding(string, position);
+		node->operand = numberBuilding(string, *position);
 	}
 	return node;
 }
@@ -64,7 +64,7 @@ struct Node* newNode(char* string, int &position) {
 struct Tree* buildTree(char *string) {
 	int position = -1;
 	struct Tree* tree = createTree();
-	tree->root = newNode(string, position);
+	tree->root = newNode(string, &position);
 	return tree;
 }
 
