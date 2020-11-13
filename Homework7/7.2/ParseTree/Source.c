@@ -5,7 +5,7 @@
 #include "Tree.h"
 
 int main() {
-	FILE* file = fopen("input.txt", "r");
+	FILE* file = fopen("data.txt", "r");
 	if (!file)
 	{
 		printf("File not found");
@@ -15,7 +15,7 @@ int main() {
 	fgets(prefix, 1000, file);
 	fclose(file);
 
-	struct Tree* tree = build(prefix);
+	struct Tree* tree = buildTree(prefix);
 	printf("Result: %d\n", calculate(tree));
 
 	deleteTree(tree);
