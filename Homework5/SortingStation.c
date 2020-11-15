@@ -4,11 +4,9 @@
 #include <stdbool.h>
 #include "Stack/Stack.h"
 
-int priority(char operation)
-{
+int priority(char operation) {
 	int priority = 0;
-	switch (operation)
-	{
+	switch (operation) {
 	case '*':
 	case '/':
 		priority = 3;
@@ -26,6 +24,9 @@ int priority(char operation)
 
 void convertToPostfix(char infixExpression[], char postfixExpression[]) {
 	struct Stack* stack = createStack();
+	if (!stack) {
+		return;
+	}
 	int infixExpressionLength = strlen(infixExpression);
 	int postfixPosition = 0;
 	for (int i = 0; i < infixExpressionLength; i++) {
@@ -37,8 +38,7 @@ void convertToPostfix(char infixExpression[], char postfixExpression[]) {
 		case '+':
 		case '-':
 		case '*':
-		case '/':
-		{
+		case '/': {
 			bool shouldCheckPriority = true;
 			while (shouldCheckPriority && !isEmpty(stack)) {
 				char topOperation = pop(stack);
@@ -99,6 +99,7 @@ bool tests() {
 	}
 	return true;
 }
+
 int main() {
 	if (!tests) {
 		printf("Tests failed\n");
