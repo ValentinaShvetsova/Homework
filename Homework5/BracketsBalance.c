@@ -8,7 +8,6 @@ bool chekBalance(char string[]) {
 	struct Stack* stack = createStack();
 	const int length = strlen(string);
 	for (int i = 0; i < length; i++) {
-
 		switch (string[i]) {
 		case '(':
 		case '{':
@@ -17,38 +16,14 @@ bool chekBalance(char string[]) {
 			break;
 
 		case ')':
-			if (isEmpty(stack))
-			{
-				deleteStack(&stack);
-				return false;
-			}
-			else if (pop(stack) != '(')
-			{
-				deleteStack(&stack);
-				return false;
-			}
-			break;
-
 		case '}':
-			if (isEmpty(stack))
-			{
-				deleteStack(&stack);
-				return false;
-			}
-			else if (pop(stack) != '{')
-			{
-				deleteStack(&stack);
-				return false;
-			}
-			break;
-
 		case ']':
 			if (isEmpty(stack))
 			{
 				deleteStack(&stack);
 				return false;
 			}
-			else if (pop(stack) != '[')
+			else if ((string[i] == ')' && pop(stack) != '(') || (string[i] == '}' && pop(stack) != '{') || (string[i] == ']' && pop(stack) != '['))
 			{
 				deleteStack(&stack);
 				return false;

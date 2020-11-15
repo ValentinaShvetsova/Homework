@@ -2,7 +2,7 @@
 #include "Stack.h"
 #include <stdbool.h>
 
-bool test1() {
+bool arePushAndPopWorking() {
 	struct Stack* stack = createStack();
 	push(stack, 3);
 	if (pop(stack) != 3) {
@@ -13,12 +13,12 @@ bool test1() {
 	return true;
 }
 
-bool test2() {
+bool ifStack() {
 	struct Stack* stack = createStack();
 	push(stack, 3);
 	push(stack, 5);
 	push(stack, 7);
-	if (pop(stack) != 7) {
+	if (pop(stack) != 7 || pop(stack) != 5 || pop(stack) != 3) {
 		deleteStack(&stack);
 		return false;
 	}
@@ -26,10 +26,10 @@ bool test2() {
 	return true;
 }
 
-bool test3() {
+bool isDeleteFunctionWorking() {
 	struct Stack* stack = createStack();
 	deleteStack(&stack);
-	return(isEmpty(stack));
+	return isEmpty(stack);
 }
 
 int main() {
