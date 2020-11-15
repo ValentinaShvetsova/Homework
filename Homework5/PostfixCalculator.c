@@ -24,17 +24,17 @@ void performOperation(char operation, struct Stack *stack) {
 	push(stack, result);
 }
 
-int getResult(struct Stack* stack) {
-	int result = pop(stack);
-	printf("%d ", result);
+void getResult(struct Stack* stack, int* result) {
+	*result = pop(stack);
+	return;
 }
 
-bool calculationPermission(char postfixExpression[]) {
+bool calculationSolution(char postfixExpression[], int *result) {
 	struct Stack* stack = createStack();
 	const int length = strlen(postfixExpression);
 	for (int i = 0; i < length; ++i) {
 
-		if (postfixExpression[i] - '0' >= 0 && postfixExpression[i] - '0' < 10)
+		if (postfixExpression[i] >= '0' && postfixExpression[i] < '10')
 		{
 			push(stack, postfixExpression[i] - '0');
 		}
@@ -51,33 +51,49 @@ bool calculationPermission(char postfixExpression[]) {
 					performOperation(postfixExpression[i], stack);
 				}
 				else {
+					deleteStack(stack);
 					return false;
 				}
 			}
 			else {
+				deleteStack(stack);
 				return false;
 			}
 			break;
 		}
 	}
-	bool resultExictence = false;
+	bool resultExist = false;
 	if (!isEmpty(stack)){
-		int result = pop(stack);
+		int resulting = pop(stack);
 		if (isEmpty(stack)){
-			resultExictence = true;
-			push(stack, result);
-			getResult(stack);
+			resultExist = true;
+			push(stack, resulting);
+			getResult(stack, result);
 		} else {
-			deleteStack(&stack);
+			deleteStack(stack);
+			resultExist = false;
 		}
 	}
-	return resultExictence;
+	return resultExist;
 }
+
 bool test() {
 	char string1[] = "23+4";
+	int result1 = 0;
+
 	char string2[] = "5+";
+	int result2 = 0;
+
 	char string3[] = "+65";
-	if (calculationPermission(string1) || calculationPermission(string2) || calculationPermission(string3)) {
+	int result3 = 0;
+
+	char string4[] = "23+4-";
+	int result4 = 0;
+
+	if (calculationSolution(string1, &result1) || calculationSolution(string2, &result2) || calculationSolution(string3, &result3)) {
+		return false;
+	}
+	if (!calculationSolution(string4, &result4) || (result4 != 1)) {
 		return false;
 	}
 	return true;
@@ -90,8 +106,12 @@ int main() {
 	printf("Enter postfix expression: ");
 	char string[100];
 	scanf("%s", string);
-	if (!calculationPermission(string)) {
+	int result = 0;
+	if (!calculationSolution(string, &result)) {
 		printf("The expression can not be resolved\n");
+	}
+	else {
+		printf("Answer: %d\n", result);
 	}
 	return 0;
 }

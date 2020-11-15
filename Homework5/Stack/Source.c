@@ -41,10 +41,8 @@ bool isEmpty(struct Stack* stack) {
 	return stack->head == NULL;
 }
 
-void deleteStack(struct Stack** stack) {
-	while ((*stack)->head != NULL) {
-		pop(*stack);
+void deleteStack(struct StackElement**head) {
+	while ((*head) != NULL) {
+		pop(head);
 	}
-	free(*stack);
-	*stack = NULL;
 }
