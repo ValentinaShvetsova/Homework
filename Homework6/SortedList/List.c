@@ -25,8 +25,7 @@ void addValue(int value, struct List *list) {
 	newNode->value = value;
 	struct Node* current = list->head;
 	struct Node* previous = NULL;
-	while (current != NULL && current->value < value)
-	{
+	while (current != NULL && current->value < value) {
 		previous = current;
 		current = current->next;
 	}
@@ -44,9 +43,12 @@ void addValue(int value, struct List *list) {
 void deleteValue(struct List* list, int value) {
 	struct Node* current = list->head;
 	struct Node* previous = NULL;
-	while (current != NULL && current->value != value) {
+	while (current != NULL && current->value < value) {
 		previous = current;
 		current = current->next;
+	}
+	if (current->value != value) {
+		return;
 	}
 	struct Node* temp = current->next;
 	free(current);
@@ -58,8 +60,7 @@ void deleteValue(struct List* list, int value) {
 	}
 }
 
-bool isEmpty(struct List* list)
-{
+bool isEmpty(struct List* list) {
 	return list->head == NULL;
 }
 
@@ -71,11 +72,9 @@ void deleteList(struct List* list) {
 	}
 }
 
-void printList(struct List* list)
-{
+void printList(struct List* list) {
 	struct Node* current = list->head;
-	while (current != NULL)
-	{
+	while (current != NULL) {
 		printf("%d ", current->value);
 		current = current->next;
 	}

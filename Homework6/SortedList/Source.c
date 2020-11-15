@@ -3,11 +3,36 @@
 #include <stdbool.h>
 #include "List.h"
 
+void commandVariation() {
+	printf("Choose the command:\n");
+	printf("0)Exit\n");
+	printf("1)Add value in list\n");
+	printf("2)Delete value from list\n");
+	printf(" 3)Print list:\n");
+}
+
+bool tests() {
+	struct List* list = createList();
+	addValue(10, list);
+	if (isEmpty(list)) {
+		return false;
+	}
+	deleteValue(list, 10);
+	if (!isEmpty(list)) {
+		return false;
+	}
+	deleteList(list);
+	return true;
+}
+
 int main() {
+	if (!tests()) {
+		return 1;
+	}
 	struct List* list = createList();
 	bool shouldGoOut = false;
 	while (!shouldGoOut) {
-		printf("Choose the command:\n 0)Exit\n 1)Add value in list\n 2)Delete value from list\n 3)Print list\n");
+		commandVariation();
 		int command = 0;
 		scanf("%d", &command);
 		switch (command) {
