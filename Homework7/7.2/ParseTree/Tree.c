@@ -35,8 +35,7 @@ bool isOperation(struct Node* node) {
 
 int numberBuilding(char *string, int **position) {
 	int number = 0;
-	while (string[**position] >= '0' && string[**position] <= '9')
-	{
+	while (string[**position] >= '0' && string[**position] <= '9') {
 		number = number * 10 + (string[**position] - '0');
 		**position += 1;
 	}
@@ -73,23 +72,19 @@ struct Tree* buildTree(char *string) {
 
 int calculateSubtree(struct Node* node)
 {
-	if (isLeaf(node))
-	{
+	if (isLeaf(node)) {
 		return node->operand;
 	}
 	const int operand1 = calculateSubtree(node->leftChild);
 	const int operand2 = calculateSubtree(node->rightChild);
 	const char operation = node->operation;
-	if (operation == '+')
-	{
+	if (operation == '+') {
 		return operand1 + operand2;
 	}
-	if (operation == '-')
-	{
+	if (operation == '-') {
 		return operand1 - operand2;
 	}
-	if (operation == '*')
-	{
+	if (operation == '*') {
 		return operand1 * operand2;
 	}
 	else {

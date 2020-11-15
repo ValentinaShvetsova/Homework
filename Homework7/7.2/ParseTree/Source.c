@@ -28,8 +28,7 @@ int main() {
 		return 1;
 	}
 	FILE* file = fopen("data.txt", "r");
-	if (!file)
-	{
+	if (!file) {
 		printf("File not found");
 		return 1;
 	}
