@@ -33,7 +33,7 @@ bool isDeleteWorking() {
 }
 
 int main() {
-	if (!test1() || !test2() || !test3()) {
+	if (!areAllFunctionWorking() || !arePushAndPopWorking() || !isDeleteWorking()) {
 		printf("Tests failed.\n");
 		return 1;
 	}
