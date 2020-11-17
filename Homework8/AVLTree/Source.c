@@ -55,6 +55,13 @@ int main() {
 			}
 			break;
 		}
+		case 4: {
+			printf("Enter the key: ");
+			scanf("%d", &key);
+
+			deleteValue(tree, key);
+			break;
+		}
 		default:
 			printf("Invalid input, try again\n");
 			break;

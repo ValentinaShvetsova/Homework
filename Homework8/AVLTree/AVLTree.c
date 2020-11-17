@@ -191,3 +191,138 @@ bool find(struct Node* node, int key) {
 bool contain(struct Tree* tree, int key) {
 	return find(tree->root, key);
 }
+
+struct Node* closestToMiddle(struct Node* node) {
+	struct Node* mostRightOnTheLeft = callloc(1, sizeof(struct Node*));
+	mostRightOnTheLeft = node->leftChild;
+	int leftPath = 1;
+	while (mostRightOnTheLeft->rightChild != NULL) {
+		mostRightOnTheLeft = mostRightOnTheLeft->rightChild;
+		leftPath++;
+	}
+	struct Node* mostLeftOnTheRight = callloc(1, sizeof(struct Node*));
+	mostLeftOnTheRight = node->rightChild;
+	int rightPath = 1;
+	while (mostLeftOnTheRight->leftChild != NULL) {
+		mostLeftOnTheRight = mostLeftOnTheRight->leftChild;
+		rightPath++;
+	}
+	if (leftPath >= rightPath) {
+		return mostRightOnTheLeft;
+	}
+	else {
+		return mostLeftOnTheRight;
+	}
+}
+
+void copyData(struct Node* to, struct Node* from) {
+	char* newValue = calloc(1, sizeof(char*));
+	strcpy(newValue, from->value);
+	free(to->value);
+	to->value = newValue;
+	to->key = from->key;
+}
+
+void deleteNode(struct Node* node, int key) {
+	if (node == NULL) {
+		return;
+	}
+	if (node->key = key) {
+		if (node->leftChild != NULL && node->rightChild != NULL) {
+			struct Node* helpingNode = closestToMiddle(node);
+			copyData(node, helpingNode);
+			deleteNode(helpingNode, helpingNode->key);
+			return;
+		} 
+		if (node->leftChild == NULL) {
+			if (node->rightChild != NULL) {
+				node->rightChild->parent = node->parent;
+			}
+			node->parent->rightChild = node->rightChild;
+		}
+		else if (node->rightChild == NULL) {
+			if (node->leftChild != NULL) {
+				node->leftChild->parent = node->parent;
+			}
+			node->parent->leftChild = node->leftChild;
+		}
+		struct Node* help = node->parent;
+		free(node->value);
+		free(node->key);
+		free(node->height);
+		free(node);
+		help = balance(help);
+
+		return;
+	}
+	else if (key < node->key) {
+		deleteNode(node->leftChild, key);
+	}
+	else {
+		deleteNode(node->rightChild, key);
+	}
+
+	if (node->parent != NULL) {
+		if (node->key < node->parent->key) {
+			node->parent->leftChild = balance(node);
+		}
+		else { 
+			node->parent->rightChild = balance(node); 
+		}
+	}
+}
+
+void deleteRoot(struct Tree* tree) {
+	if (tree->root->leftChild != NULL && tree->root->rightChild != NULL) {
+		struct Node* helpingNode = closestToMiddle(tree->root);
+		copyData(tree->root, helpingNode);
+		deleteNode(helpingNode, helpingNode->key);
+		tree->root = balance(tree->root);
+		return;
+	}
+	struct Node* newRoot = calloc(1, sizeof(struct Node*));
+	if (tree->root->leftChild == NULL) {
+		newRoot = tree->root->rightChild;
+	}
+	else {
+		newRoot = tree->root->leftChild;
+	}
+	if (newRoot != NULL) {
+		newRoot->parent = NULL;
+	}
+	free(tree->root->height);
+	free(tree->root->key);
+	free(tree->root->value);
+	free(tree->root);
+	tree->root = balance(newRoot);
+	return;
+}
+
+void deleteValue(struct Tree* tree, int key) {
+	if (isEmpty(tree)) {
+		return;
+	}
+	if (tree->root->key = key) {
+		deleteRoot(tree);
+		return;
+	} 
+	deleteNode(tree->root, key);
+	tree->root = balance(tree->root);
+}
+
+void deleteChildren(struct Node* node) {
+	if (node == NULL) {
+		return;
+	}
+	deleteChildren(node->leftChild);
+	deleteChildren(node->rightChild);
+	free(node->key);
+	free(node->value);
+	free(node->height);
+	free(node);
+}
+
+void deleteTree(struct Tree* tree)
+{
+	deleteChildren(tree->root);
+}
