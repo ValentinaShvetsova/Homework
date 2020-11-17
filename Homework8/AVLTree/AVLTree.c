@@ -146,6 +146,7 @@ void addValue(struct Tree* tree, int key, char* value) {
 		root->value = newValue;
 		root->height = 0;
 		tree->root = root;
+		return;
 	}
 	insert(tree->root, key, newValue);
 	tree->root = balance(tree->root);
