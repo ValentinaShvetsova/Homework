@@ -27,7 +27,7 @@ bool isLeaf(struct Node* node) {
 }
 
 struct Tree* createTree() {
-	struct Tree* newTree = callloc(1, sizeof(struct Tree*));
+	struct Tree* newTree = calloc(1, sizeof(struct Tree*));
 	return newTree;
 }
 
@@ -103,23 +103,6 @@ struct Node* balance(struct Node* node) {
 	return node;
 }
 
-void addValue(struct Tree* tree, int key, char* value) {
-	char* newValue = calloc(1, sizeof(char*));
-	if (newValue == NULL) {
-		return;
-	}
-	strcpy(newValue, value);
-	if (isEmpty(tree)) {
-		struct Node* root = calloc(1, sizeof(struct Node*));
-		root->key = key;
-		root->value = newValue;
-		root->height = 0;
-		tree->root = root;
-	}
-	insert(tree->root, key, newValue);
-	tree->root = balance(tree->root);
-}
-
 void insert(struct Node* node, int key, char* value) {
 	if (key == node->key) {
 		node->value = value;
@@ -149,6 +132,23 @@ void insert(struct Node* node, int key, char* value) {
 		insert(node->rightChild, key, value);
 		node->rightChild = balance(node->rightChild);
 	}
+}
+
+void addValue(struct Tree* tree, int key, char* value) {
+	char* newValue = calloc(1, sizeof(char*));
+	if (newValue == NULL) {
+		return;
+	}
+	strcpy(newValue, value);
+	if (isEmpty(tree)) {
+		struct Node* root = calloc(1, sizeof(struct Node*));
+		root->key = key;
+		root->value = newValue;
+		root->height = 0;
+		tree->root = root;
+	}
+	insert(tree->root, key, newValue);
+	tree->root = balance(tree->root);
 }
 
 char* get(struct Node* node, int key) {
@@ -193,14 +193,14 @@ bool contain(struct Tree* tree, int key) {
 }
 
 struct Node* closestToMiddle(struct Node* node) {
-	struct Node* mostRightOnTheLeft = callloc(1, sizeof(struct Node*));
+	struct Node* mostRightOnTheLeft = calloc(1, sizeof(struct Node*));
 	mostRightOnTheLeft = node->leftChild;
 	int leftPath = 1;
 	while (mostRightOnTheLeft->rightChild != NULL) {
 		mostRightOnTheLeft = mostRightOnTheLeft->rightChild;
 		leftPath++;
 	}
-	struct Node* mostLeftOnTheRight = callloc(1, sizeof(struct Node*));
+	struct Node* mostLeftOnTheRight = calloc(1, sizeof(struct Node*));
 	mostLeftOnTheRight = node->rightChild;
 	int rightPath = 1;
 	while (mostLeftOnTheRight->leftChild != NULL) {
