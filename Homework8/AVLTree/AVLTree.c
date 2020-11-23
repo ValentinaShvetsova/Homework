@@ -45,8 +45,16 @@ int heightDifference(struct Node* node) {
 }
 
 void heightUpdate(struct Node* node) {
-	int leftHeight = node->leftChild->height;
-	int rightHeight = node->rightChild->height;
+	int leftHeight = 0;
+	int rightHeight = 0;
+	if (node->leftChild != NULL) {
+		leftHeight = node->leftChild->height;
+	}
+	
+	if (node->rightChild != NULL) {
+		rightHeight = node->rightChild->height;
+	}
+	
 	if (leftHeight > rightHeight) {
 		node->height = leftHeight + 1;
 	}
@@ -113,7 +121,7 @@ void insert(struct Node* node, int key, char* value) {
 			struct Node* newNode = calloc(1, sizeof(struct Node*));
 			newNode->key = key;
 			newNode->value = value;
-			newNode->height = 0;
+			newNode->height = 1;
 			node->leftChild = newNode;
 			return;
 		}
@@ -144,7 +152,10 @@ void addValue(struct Tree* tree, int key, char* value) {
 		struct Node* root = calloc(1, sizeof(struct Node*));
 		root->key = key;
 		root->value = newValue;
-		root->height = 0;
+		root->height = 1;
+		root->leftChild = NULL;
+		root->rightChild = NULL;
+		root->parent = NULL;
 		tree->root = root;
 		return;
 	}
