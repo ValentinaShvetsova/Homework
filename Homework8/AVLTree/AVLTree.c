@@ -118,7 +118,7 @@ void insert(struct Node* node, int key, char* value) {
 	}
 	if (key < node->key) {
 		if (node->leftChild == NULL) {
-			struct Node* newNode = calloc(1, sizeof(struct Node*));
+			struct Node* newNode = calloc(1, sizeof(struct Node));
 			newNode->key = key;
 			newNode->value = value;
 			newNode->height = 1;
@@ -149,7 +149,7 @@ void addValue(struct Tree* tree, int key, char* value) {
 	}
 	strcpy(newValue, value);
 	if (isEmpty(tree)) {
-		struct Node* root = calloc(1, sizeof(struct Node*));
+		struct Node* root = calloc(1, sizeof(struct Node));
 		root->key = key;
 		root->value = newValue;
 		root->height = 1;
