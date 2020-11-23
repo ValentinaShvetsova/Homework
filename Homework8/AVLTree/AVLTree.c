@@ -72,6 +72,7 @@ struct Node* leftRotation(struct Node* root) {
 	}
 	baseOfRotation->leftChild = root;
 	root->parent = baseOfRotation;
+	root->rightChild = NULL;
 	heightUpdate(root);
 	heightUpdate(baseOfRotation);
 	return baseOfRotation;
@@ -86,6 +87,7 @@ struct Node* rightRotation(struct Node* root) {
 	}
 	baseOfRotation->rightChild = root;
 	root->parent = baseOfRotation;
+	root->leftChild = NULL;
 	heightUpdate(root);
 	heightUpdate(baseOfRotation);
 	return baseOfRotation;
@@ -123,6 +125,7 @@ void insert(struct Node* node, int key, char* value) {
 			newNode->value = value;
 			newNode->height = 1;
 			node->leftChild = newNode;
+			newNode->parent = node;
 			return;
 		}
 		insert(node->leftChild, key, value);
@@ -135,6 +138,7 @@ void insert(struct Node* node, int key, char* value) {
 			newNode->value = value;
 			newNode->height = 1;
 			node->rightChild = newNode;
+			newNode->parent = node;
 			return;
 		}
 		insert(node->rightChild, key, value);
