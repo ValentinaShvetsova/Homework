@@ -33,7 +33,7 @@ struct Tree* createTree() {
 
 int getHeight(struct Node* node) {
 	if (node == NULL) {
-		return -1;
+		return 0;
 	}
 	else {
 		return node->height;
@@ -64,7 +64,7 @@ void heightUpdate(struct Node* node) {
 }
 
 struct Node* leftRotation(struct Node* root) {
-	struct Node* baseOfRotation = calloc(1, sizeof(struct Node*));
+	struct Node* baseOfRotation = calloc(1, sizeof(struct Node));
 	baseOfRotation = root->rightChild;
 	baseOfRotation->parent = root->parent;
 	if (baseOfRotation->leftChild != NULL) {
@@ -78,7 +78,7 @@ struct Node* leftRotation(struct Node* root) {
 }
 
 struct Node* rightRotation(struct Node* root) {
-	struct Node* baseOfRotation = calloc(1, sizeof(struct Node*));
+	struct Node* baseOfRotation = calloc(1, sizeof(struct Node));
 	baseOfRotation = root->leftChild;
 	baseOfRotation->parent = root->parent;
 	if (baseOfRotation->rightChild != NULL) {
@@ -130,10 +130,10 @@ void insert(struct Node* node, int key, char* value) {
 	}
 	if (key > node->key) {
 		if (node->rightChild == NULL) {
-			struct Node* newNode = calloc(1, sizeof(struct Node*));
+			struct Node* newNode = calloc(1, sizeof(struct Node));
 			newNode->key = key;
 			newNode->value = value;
-			newNode->height = 0;
+			newNode->height = 1;
 			node->rightChild = newNode;
 			return;
 		}
@@ -205,14 +205,14 @@ bool contain(struct Tree* tree, int key) {
 }
 
 struct Node* closestToMiddle(struct Node* node) {
-	struct Node* mostRightOnTheLeft = calloc(1, sizeof(struct Node*));
+	struct Node* mostRightOnTheLeft = calloc(1, sizeof(struct Node));
 	mostRightOnTheLeft = node->leftChild;
 	int leftPath = 1;
 	while (mostRightOnTheLeft->rightChild != NULL) {
 		mostRightOnTheLeft = mostRightOnTheLeft->rightChild;
 		leftPath++;
 	}
-	struct Node* mostLeftOnTheRight = calloc(1, sizeof(struct Node*));
+	struct Node* mostLeftOnTheRight = calloc(1, sizeof(struct Node));
 	mostLeftOnTheRight = node->rightChild;
 	int rightPath = 1;
 	while (mostLeftOnTheRight->leftChild != NULL) {
@@ -292,7 +292,7 @@ void deleteRoot(struct Tree* tree) {
 		tree->root = balance(tree->root);
 		return;
 	}
-	struct Node* newRoot = calloc(1, sizeof(struct Node*));
+	struct Node* newRoot = calloc(1, sizeof(struct Node));
 	if (tree->root->leftChild == NULL) {
 		newRoot = tree->root->rightChild;
 	}
