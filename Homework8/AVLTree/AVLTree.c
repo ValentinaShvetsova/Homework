@@ -234,16 +234,16 @@ struct Node* closestToMiddle(struct Node* node) {
 void copyData(struct Node* to, struct Node* from) {
 	char* newValue = calloc(1, sizeof(char*));
 	strcpy(newValue, from->value);
-	free(to->value);
 	to->value = newValue;
 	to->key = from->key;
+	
 }
 
 void deleteNode(struct Node* node, int key) {
 	if (node == NULL) {
 		return;
 	}
-	if (node->key = key) {
+	if (node->key == key) {
 		if (node->leftChild != NULL && node->rightChild != NULL) {
 			struct Node* helpingNode = closestToMiddle(node);
 			copyData(node, helpingNode);
@@ -253,14 +253,14 @@ void deleteNode(struct Node* node, int key) {
 		if (node->leftChild == NULL) {
 			if (node->rightChild != NULL) {
 				node->rightChild->parent = node->parent;
+				node->parent->leftChild = node->rightChild;
 			}
-			node->parent->rightChild = node->rightChild;
 		}
 		else if (node->rightChild == NULL) {
 			if (node->leftChild != NULL) {
 				node->leftChild->parent = node->parent;
+				node->parent->rightChild = node->leftChild;
 			}
-			node->parent->leftChild = node->leftChild;
 		}
 		struct Node* help = node->parent;
 		free(node->value);
@@ -318,7 +318,7 @@ void deleteValue(struct Tree* tree, int key) {
 	if (isEmpty(tree)) {
 		return;
 	}
-	if (tree->root->key = key) {
+	if (tree->root->key == key) {
 		deleteRoot(tree);
 		return;
 	} 
