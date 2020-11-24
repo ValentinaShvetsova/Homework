@@ -1,4 +1,5 @@
 #pragma once
+#include <stdbool.h>
 
 // This structure consist pointers to next and previous element, its own element
 struct List;
@@ -21,10 +22,14 @@ void printList(struct List* list);
 // This function return value
 char* returnValueFromHead(struct List* list);
 
+// This function check whether value is in the list or not
 bool contains(struct List* list, char* value);
 
+// This function gets value from head
 int quantityOfValuesFromHead(struct List* list);
 
+// This function returns
 char* returnValueFromHead(struct List* list);
 
+//This function deletes head value
 void deleteValueFromHead(struct List* list, int value);

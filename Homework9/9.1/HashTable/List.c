@@ -21,17 +21,14 @@ struct List* createList() {
 	return newList;
 }
 
-bool addNewValueToList(struct List* list, char* value, int amount)
-{
+bool addNewValueToList(struct List* list, char* value, int amount) {
 	struct Node* current = list->head;
 	struct Node* previous = NULL;
-	while (current != NULL && strcmp(current->word, value) != 0)
-	{
+	while (current != NULL && strcmp(current->word, value) != 0) {
 		previous = current;
 		current = current->next;
 	}
-	if (current == NULL)
-	{
+	if (current == NULL) {
 		list->length++;
 		char* newValue = calloc(1, sizeof(char*));
 		struct Node* newNode = malloc(sizeof(struct Node));
@@ -51,13 +48,10 @@ bool isEmpty(struct List* list) {
 	return list->head == NULL;
 }
 
-bool contains(struct List* list, char* value)
-{
+bool contains(struct List* list, char* value) {
 	struct Node* current = list->head;
-	while (current != NULL)
-	{
-		if (strcmp(current->word, value) == 0)
-		{
+	while (current != NULL) {
+		if (strcmp(current->word, value) == 0) {
 			return true;
 		}
 		current = current->next;
@@ -65,17 +59,14 @@ bool contains(struct List* list, char* value)
 	return false;
 }
 
-char* returnValueFromHead(struct List* list)
-{
-	if (isEmpty(list))
-	{
+char* returnValueFromHead(struct List* list) {
+	if (isEmpty(list)) {
 		return NULL;
 	}
 	return list->head->word;
 }
 
-int quantityOfValuesFromHead(struct List* list)
-{
+int quantityOfValuesFromHead(struct List* list) {
 	return list->head->counter;
 }
 
@@ -92,18 +83,15 @@ void deleteValueFromHead(struct List* list, int value) {
 }
 
 void deleteList(struct List* list) {
-	while (!isEmpty(list))
-	{
+	while (!isEmpty(list)) {
 		deleteValueFromHead(list);
 	}
 	free(list);
 }
 
-void printList(struct List* list)
-{
+void printList(struct List* list) {
 	struct Node* current = list->head;
-	while (current != NULL)
-	{
+	while (current != NULL) {
 		printf("%s(%d) ", current->word, current->counter);
 		current = current->next;
 	}
