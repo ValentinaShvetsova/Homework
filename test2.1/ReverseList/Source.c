@@ -28,15 +28,12 @@ int main() {
 	}
 
 	struct List* list = createList();
-	while (true)
-	{
+	while (true) {
 		int number = 0;
-		if (fscanf(file, "%d", &number) != EOF)
-		{
+		if (fscanf(file, "%d", &number) != EOF) {
 			addValue(number, list);
 		}
-		else
-		{
+		else {
 			break;
 		}
 	}
