@@ -25,8 +25,7 @@ void addValue(int value, struct List* list) {
 		return;
 	}
 	newNode->value = value;
-	if (!isEmpty(list))
-	{
+	if (!isEmpty(list)) {
 		list->tail->next = newNode;
 		list->tail = list->tail->next;
 		return;
@@ -93,8 +92,7 @@ void reverse(struct List* list) {
 int returnValue(struct List* list, int positionNumber)
 {
 	struct Node* current = list->head;
-	for (int i = 1; i < positionNumber; ++i)
-	{
+	for (int i = 1; i < positionNumber; ++i) {
 		current = current->next;
 	}
 	return current->value;
