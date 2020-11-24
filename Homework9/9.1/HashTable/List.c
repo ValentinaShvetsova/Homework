@@ -84,12 +84,13 @@ void deleteValueFromHead(struct List* list, int value) {
 
 void deleteList(struct List* list) {
 	while (!isEmpty(list)) {
-		deleteValueFromHead(list);
+		deleteValueFromHead(list, returnValueFromHead(list));
 	}
 	free(list);
 }
 
 void printList(struct List* list) {
+
 	struct Node* current = list->head;
 	while (current != NULL) {
 		printf("%s(%d) ", current->word, current->counter);

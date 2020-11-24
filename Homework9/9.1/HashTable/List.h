@@ -31,5 +31,5 @@ int quantityOfValuesFromHead(struct List* list);
 // This function returns
 char* returnValueFromHead(struct List* list);
 
-//This function deletes head value
+// This function deletes head value
 void deleteValueFromHead(struct List* list, int value);

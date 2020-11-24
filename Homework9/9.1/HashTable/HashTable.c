@@ -123,6 +123,7 @@ float averageListLength(struct HashTable* table)
 }
 
 void deleteTable(struct HashTable* table) {
+
 	for (int i = 0; i < table->size; ++i) {
 		deleteList(table->lists[i]);
 	}
