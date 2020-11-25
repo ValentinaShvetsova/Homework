@@ -4,8 +4,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-struct HashTable
-{
+struct HashTable {
 	int size;
 	int amountOfElements;
 	float loadFactor;
@@ -26,8 +25,7 @@ struct HashTable* createHashTable() {
 	return newHashTable;
 }
 
-int hashFunction(char* value, int size)
-{
+int hashFunction(char* value, int size) {
 	int result = 0;
 	for (int i = 0; value[i] != '\0'; ++i) {
 		result = (result + value[i]) % size;
@@ -104,8 +102,7 @@ int maximumListLength(struct HashTable* table) {
 	return maxLength;
 }
 
-float averageListLength(struct HashTable* table)
-{
+float averageListLength(struct HashTable* table) {
 	int sumOfAllLengths = 0;
 	int numberOfLists = 0;
 	for (int i = 0; i < table->size; ++i) {

@@ -2,6 +2,8 @@
 #include <stdbool.h>
 #include "List.h"
 #include <stdlib.h>
+#include <string.h>
+#include <malloc.h>
 
 struct Node {
 	char* word;
@@ -24,6 +26,17 @@ struct List* createList() {
 bool addNewValueToList(struct List* list, char* value, int amount) {
 	struct Node* current = list->head;
 	struct Node* previous = NULL;
+	if (current == NULL) {
+		list->length++;
+		char* newValue = calloc(1, sizeof(char*));
+		struct Node* newNode = calloc(1, sizeof(struct Node));
+		newNode->counter = 1;
+		strcpy(newValue, value);
+		newNode->word = newValue;
+		list->head = newNode;
+		list->head->next = NULL;
+		return true;
+	}
 	while (current != NULL && strcmp(current->word, value) != 0) {
 		previous = current;
 		current = current->next;
@@ -31,13 +44,12 @@ bool addNewValueToList(struct List* list, char* value, int amount) {
 	if (current == NULL) {
 		list->length++;
 		char* newValue = calloc(1, sizeof(char*));
-		struct Node* newNode = malloc(sizeof(struct Node));
+		struct Node* newNode = malloc(1, sizeof(struct Node));
+		newNode->counter = 1;
 		strcpy(newValue, value);
-		if (previous == NULL) {
-			list->head = newNode;
-		} else {
-			previous->next = newNode;
-		}
+		newNode->word = newValue;
+		previous->next = newNode;
+		newNode->next = NULL;
 		return true;
 	}
 	current->counter += amount;
