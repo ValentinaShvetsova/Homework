@@ -44,11 +44,12 @@ bool addNewValueToList(struct List* list, char* value, int amount) {
 	if (current == NULL) {
 		list->length++;
 		char* newValue = calloc(1, sizeof(char*));
-		struct Node* newNode = malloc(1, sizeof(struct Node));
+		struct Node* newNode = calloc(1, sizeof(struct Node));
 		newNode->counter = 1;
 		strcpy(newValue, value);
 		newNode->word = newValue;
 		previous->next = newNode;
+		free(current);
 		newNode->next = NULL;
 		return true;
 	}
