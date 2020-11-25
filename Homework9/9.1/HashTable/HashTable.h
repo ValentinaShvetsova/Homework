@@ -20,3 +20,6 @@ int maximumListLength(struct HashTable* table);
 
 // This function counts average list length
 float averageListLength(struct HashTable* table);
+
+// This function gets load factor of table
+float loadFactor(struct HashTable* table);
