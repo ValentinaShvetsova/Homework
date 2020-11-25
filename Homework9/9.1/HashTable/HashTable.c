@@ -63,7 +63,7 @@ struct List* helpList(struct HashTable* table) {
 		while (!isEmpty(table->lists[i])) {
 			char* value = returnValueFromHead(table->lists[i]);
 			addNewValueToList(helpList, value, quantityOfValuesFromHead(table->lists[i]));
-			deleteValueFromHead(table->lists[i], returnValueFromHead(table->lists[i]));
+			deleteValueFromHead(table->lists[i]);
 		}
 		deleteList(table->lists[i]);
 	}
@@ -80,7 +80,7 @@ void rehashing(struct HashTable* table) {
 	while (!isEmpty(tempList)) {
 		char* value = returnValueFromHead(tempList);
 		addToTable(table, value, quantityOfValuesFromHead(tempList));
-		deleteValueFromHead(tempList, returnValueFromHead(tempList));
+		deleteValueFromHead(tempList);
 	}
 	deleteList(tempList);
 }

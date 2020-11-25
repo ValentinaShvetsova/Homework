@@ -32,4 +32,7 @@ int quantityOfValuesFromHead(struct List* list);
 char* returnValueFromHead(struct List* list);
 
 // This function deletes head value
-void deleteValueFromHead(struct List* list, int value);
+void deleteValueFromHead(struct List* list);
+
+// This function gets list length
+int listLength(struct List* list);

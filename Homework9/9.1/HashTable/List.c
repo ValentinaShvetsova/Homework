@@ -71,7 +71,7 @@ int quantityOfValuesFromHead(struct List* list) {
 }
 
 
-void deleteValueFromHead(struct List* list, int value) {
+void deleteValueFromHead(struct List* list) {
 	if (isEmpty(list)) {
 		return;
 	}
@@ -84,7 +84,7 @@ void deleteValueFromHead(struct List* list, int value) {
 
 void deleteList(struct List* list) {
 	while (!isEmpty(list)) {
-		deleteValueFromHead(list, returnValueFromHead(list));
+		deleteValueFromHead(list);
 	}
 	free(list);
 }
@@ -96,4 +96,9 @@ void printList(struct List* list) {
 		printf("%s(%d) ", current->word, current->counter);
 		current = current->next;
 	}
+}
+
+int listLength(struct List* list)
+{
+	return list->length;
 }

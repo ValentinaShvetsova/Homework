@@ -15,7 +15,7 @@ int main() {
 	struct HashTable* table = createHashTable();
 	while (!feof(file)) {
 		char word[50] = { 0 };
-		fscanf(file, "%s", word);
+		fscanf(file, "%s", &word);
 		addValueToTable(table, word);
 	}
 	fclose(file);
