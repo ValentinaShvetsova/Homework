@@ -69,6 +69,7 @@ void deleteList(struct List* list) {
 
 void printList(struct List* list) {
 	struct Node* current = list->head;
+	list->tail->next = NULL;
 	while (current != NULL) {
 		printf("%d ", current->value);
 		current = current->next;
