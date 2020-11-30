@@ -25,8 +25,7 @@ void addValue(int value, struct List* list) {
 		return;
 	}
 	newNode->value = value;
-	if (!isEmpty(list))
-	{
+	if (!isEmpty(list)) {
 		list->tail->next = newNode;
 		list->tail = list->tail->next;
 		return;
@@ -76,12 +75,23 @@ void printList(struct List* list) {
 	}
 }
 
-int returnValue(struct List* list, int positionNumber)
-{
+int returnValue(struct List* list, int positionNumber) {
 	struct Node* current = list->head;
-	for (int i = 1; i < positionNumber; ++i)
-	{
+	for (int i = 1; i < positionNumber; ++i) {
 		current = current->next;
 	}
 	return current->value;
+}
+
+bool compareLists(struct List* list1, struct List* list2) {
+	struct Node* current1 = list1->head;
+	struct Node* current2 = list2->head;
+	while (current1 != NULL && current2 != NULL) {
+		if (current1->value != current2->value) {
+			return false;
+		}
+		current1 = current1->next;
+		current2 = current2->next;
+	}
+	return current1 == NULL && current2 == NULL;
 }

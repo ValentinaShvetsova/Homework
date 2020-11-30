@@ -26,3 +26,6 @@ void printList(struct List* list);
 
 // This function return value
 int returnValue(struct List* list, int positionNumber);
+
+// This function compares Lists
+bool compareLists(struct List* list1, struct List* list2);
