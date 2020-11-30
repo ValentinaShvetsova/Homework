@@ -5,7 +5,10 @@
 #include <string.h>
 #include <limits.h>
 
-void useCity(int** graph, int size, int capitalNumber, int* distance, bool* used, struct List* towns, int* numberOfRemainingCities) {
+void useCity(int** graph, int size, int capitalNumber, int* distance, bool* used, struct List* towns, int* numberOfLeftoverCities) {
+	if (*numberOfLeftoverCities == 0) {
+		return;
+	}
 	int minimumDistance = INT_MAX;
 	int currentVertex = -1;
 	for (int i = 0; i < size; ++i)
@@ -29,10 +32,10 @@ void useCity(int** graph, int size, int capitalNumber, int* distance, bool* used
 	}
 	used[currentVertex] = true;
 	addValue(currentVertex, towns);
-	(*numberOfRemainingCities) -= 1;
+	(*numberOfLeftoverCities) -= 1;
 
 }
-void distributeCities(int** graph, int size, int* capitals, int numberOfCapitals, struct List** states) {
+void distributeCities(int** graph, int size, int* capitals, int numberOfCapitals, struct List** towns) {
 	bool* used = calloc(size, sizeof(bool));
 	int **distance = (int*)malloc(size * size * sizeof(int));
 	for (int i = 0; i < numberOfCapitals; ++i)
@@ -52,7 +55,7 @@ void distributeCities(int** graph, int size, int* capitals, int numberOfCapitals
 	{
 		for (int i = 0; i < numberOfCapitals; ++i)
 		{
-			useCity(graph, size, capitals[i], distance[i], used, states[i], pnumberOfLeftoverCities);
+			useCity(graph, size, capitals[i], distance[i], used, towns[i], pnumberOfLeftoverCities);
 		}
 	}
 	free(pnumberOfLeftoverCities);
