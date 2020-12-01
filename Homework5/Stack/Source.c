@@ -2,6 +2,11 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+struct StackElement {
+	int element;
+	struct StackElement* next;
+};
+
 struct Stack {
 	struct StackElement* head;
 };
@@ -10,11 +15,6 @@ struct Stack* createStack() {
 	struct Stack* newStack = calloc(1, sizeof(struct Stack));
 	return newStack;
 }
-
-struct StackElement {
-	int element;
-	struct StackElement* next;
-};
 
 void push(struct Stack* stack, int element) {
 	struct StackElement* newElement = malloc(sizeof(struct StackElement));

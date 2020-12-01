@@ -23,7 +23,8 @@ bool chekBalance(char string[]) {
 				deleteStack(&stack);
 				return false;
 			}
-			else if ((string[i] == ')' && pop(stack) != '(') || (string[i] == '}' && pop(stack) != '{') || (string[i] == ']' && pop(stack) != '['))
+			char string1 = pop(stack);
+			if ((string[i] == ')' && string1 != '(') || (string[i] == '}' && string1 != '{') || (string[i] == ']' && string1 != '['))
 			{
 				deleteStack(&stack);
 				return false;

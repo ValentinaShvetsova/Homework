@@ -1,6 +1,7 @@
 #pragma once
 #include <stdbool.h>
 
+// This structure puts element on head and take it from head
 struct Stack;
 
 //This function create stack
