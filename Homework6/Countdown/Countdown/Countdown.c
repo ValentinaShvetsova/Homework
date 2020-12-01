@@ -22,7 +22,6 @@ bool tests() {
 }
 
 int main() {
-
 	if (!tests()) {
 		printf("Tests failed\n");
 		return 1;
