@@ -24,22 +24,18 @@ void performOperation(char operation, struct Stack *stack) {
 	push(stack, result);
 }
 
-void getResult(struct Stack* stack, int* result) {
+void getResult(struct Stack* stack, int *result) {
 	*result = pop(stack);
-	return;
 }
 
-bool calculationSolution(char postfixExpression[], int *result) {
+bool calculateSolution(char postfixExpression[], int *result) {
 	struct Stack* stack = createStack();
 	const int length = strlen(postfixExpression);
 	for (int i = 0; i < length; ++i) {
-
-		if (postfixExpression[i] >= '0' && postfixExpression[i] < '10')
-		{
+		if (postfixExpression[i] >= '0' && postfixExpression[i] < '9') {
 			push(stack, postfixExpression[i] - '0');
 		}
-		else switch (postfixExpression[i])
-		{
+		else switch (postfixExpression[i]) {
 		case '+':
 		case '-':
 		case '*':
