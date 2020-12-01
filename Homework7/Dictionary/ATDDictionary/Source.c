@@ -3,7 +3,16 @@
 #include <string.h>
 #include <stdbool.h>
 #include "Tree.h"
+#define SIZE 101
 
+void printOptions() {
+	printf("Choose the command:\n");
+	printf("0) Exit\n");
+	printf("1)Add value by key\n");
+	printf("2)Get value by key\n");
+	printf("3)Check whether the key is in the dictionary or not\n");
+	printf("4)Delete key and value\n");
+}
 bool tests() {
 	struct Tree* tree = createTree();
 	char value[5] = "abcd";
@@ -13,23 +22,26 @@ bool tests() {
 	addValue(12, value, tree);
 
 	if (!contains(tree, 10) || !contains(tree, 7) || !contains(tree, 12)) {
+		deleteTree(tree);
 		return false;
 	}
 	
-	char* result = calloc(1, sizeof(char*));
 	if (strcmp(getValue(tree, 7), value) != 0) {
+		deleteTree(tree);
 		return false;
 	}
 
 	deleteValue(tree, 12);
 	if (contains(tree, 12)) {
+		deleteTree(tree);
 		return false;
 	}
 	deleteTree(tree);
 	return true;
 }
+
 int main() {
-	if (!tests) {
+	if (!tests()) {
 		printf("Tests didn't pass\n");
 		return 1;
 	}
@@ -39,8 +51,7 @@ int main() {
 	struct Tree* tree = createTree();
 
 	while (!shouldGoOut) {
-		printf("Choose the command:\n0) Exit\n1)Add value by key\n2)Get value by key\n");
-		printf("3)Check whether the key is in the dictionary or not\n4)Delete key and value\n");
+		printOptions();
 		scanf("%d", &command);
 		int key = 0;
 		switch (command) {
@@ -65,7 +76,7 @@ int main() {
 
 			char* result = getValue(tree, key);
 			if (result == NULL) {
-				printf("Value for this key wasn't find\n");
+				printf("Value for this key wasn't found\n");
 			}
 			else {
 				printf("%s\n", result);

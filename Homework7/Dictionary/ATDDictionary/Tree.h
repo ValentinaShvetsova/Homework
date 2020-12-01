@@ -1,45 +1,28 @@
 #pragma once
+#define SIZE 101
 
 struct Tree;
 
-//This function create Tree
+// This function creates Tree
 struct Tree* createTree();
 
-//This function check whether the tree is empty
+// This function checks whether the tree is empty
 bool isEmpty(struct Tree* tree);
 
-//This function insert value
-void insert(int key, char* value, struct Node* node);
-
-//This function add value
+// This function adds value
 void addValue(int key, char* value, struct Tree* tree);
 
-//This function gets value
-char* get(struct Node* node, int key);
-
-//This function gets value
+// This function gets value
 char* getValue(struct Tree* tree, int key);
 
-//This function check whether the key is in the tree or not
-bool findKey(struct Node* node, int key);
-
-//This function check whether the element is in the tree or not
+// This function checks whether the element is in the tree or not
 bool contains(struct Tree* tree, int key);
 
-//This function find the largest node in the left subtree
-struct Node* findTheNearestLesserElement(struct Node* node);
-
-//This function delete node
-void deleteNode(struct Node* node, int key);
-
-//This function delete root
+// This function deletes root
 void deleteRoot(struct Tree* tree);
 
-//This function delete value
+// This function deletes value
 void deleteValue(struct Tree* tree, int key);
 
-//This function delete all children
-void deleteChildren(struct Node* node);
-
-//This function delete tree
+// This function deletes tree
 void deleteTree(struct Tree* tree);
