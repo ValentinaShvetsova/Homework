@@ -5,6 +5,13 @@
 #include "List.h"
 #include "MergeSort.h"
 
+void transferElements(struct List* list1, struct List* list2, int length) {
+	for (int i = 0; i < length; ++i) {
+		addEntry(list2, returnNameFromHead(list1), returnPhoneFromHead(list1));
+		deleteHead(list1);
+	}
+}
+
 struct List* mergeSort(struct List* list, int sortType) {
 	const int length = listLength(list);
 	if (length <= 1) {
@@ -20,13 +27,6 @@ struct List* mergeSort(struct List* list, int sortType) {
 	leftList = mergeSort(leftList, sortType);
 	rightList = mergeSort(rightList, sortType);
 	return merge(leftList, rightList, sortType);
-}
-
-void transferElements(struct List* list1, struct List* list2, int length) {
-	for (int i = 0; i < length; ++i) {
-		addEntry(list2, returnNameFromHead(list1), returnPhoneFromHead(list1));
-		deleteHead(list1);
-	}
 }
 
 struct List* merge(struct List* list1, struct List* list2, int sortType) {
