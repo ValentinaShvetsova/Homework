@@ -1,6 +1,6 @@
 #pragma once
 
-// This structure consist pointers to next and previous element, its own element
+// This structure points on next and previous element, has value of its own element
 struct List;
 
 // This function create list

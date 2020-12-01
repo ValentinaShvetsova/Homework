@@ -30,9 +30,8 @@ void addValue(int value, struct List *list) {
 		current = current->next;
 	}
 	if (previous == NULL) {
-		struct Node* temp = list->head;
+		newNode->next = list->head;
 		list->head = newNode;
-		newNode->next = temp;
 	}
 	else {
 		previous->next = newNode;
@@ -46,6 +45,9 @@ void deleteValue(struct List* list, int value) {
 	while (current != NULL && current->value < value) {
 		previous = current;
 		current = current->next;
+	}
+	if (current == NULL) {
+		return;
 	}
 	if (current->value != value) {
 		return;

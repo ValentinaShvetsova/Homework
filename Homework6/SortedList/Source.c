@@ -3,18 +3,19 @@
 #include <stdbool.h>
 #include "List.h"
 
-void commandVariation() {
+void printCommands() {
 	printf("Choose the command:\n");
 	printf("0)Exit\n");
 	printf("1)Add value in list\n");
 	printf("2)Delete value from list\n");
-	printf(" 3)Print list:\n");
+	printf("3)Print list:\n");
 }
 
 bool tests() {
 	struct List* list = createList();
 	addValue(10, list);
 	if (isEmpty(list)) {
+		deleteList(list);
 		return false;
 	}
 	deleteValue(list, 10);
@@ -32,7 +33,7 @@ int main() {
 	struct List* list = createList();
 	bool shouldGoOut = false;
 	while (!shouldGoOut) {
-		commandVariation();
+		printCommands();
 		int command = 0;
 		scanf("%d", &command);
 		switch (command) {
