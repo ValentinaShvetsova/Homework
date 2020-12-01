@@ -69,7 +69,7 @@ void convertToPostfix(char infixExpression[], char postfixExpression[]) {
 		}
 	}
 	while (!isEmpty(stack)) {
-		char operation = pop(stack);
+		const char operation = pop(stack);
 		postfixExpression[postfixPosition] = operation;
 		postfixPosition++;
 	}
@@ -101,7 +101,7 @@ bool tests() {
 }
 
 int main() {
-	if (!tests) {
+	if (!tests()) {
 		printf("Tests failed\n");
 		return 1;
 	}
