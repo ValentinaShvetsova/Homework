@@ -17,8 +17,7 @@ struct Tree {
 };
 
 struct Tree* createTree() {
-	struct Tree* newTree = calloc(1, sizeof(struct Tree));
-	return newTree;
+	return calloc(1, sizeof(struct Tree));
 }
 
 bool isEmpty(struct Tree* tree) {
@@ -33,11 +32,11 @@ bool isOperation(struct Node* node) {
 	return node->operation == '+' || node->operation == '-' || node->operation == '*' || node->operation == '/';
 }
 
-int numberBuilding(char *string, int **position) {
+int numberBuilding(char *string, int *position) {
 	int number = 0;
-	while (string[**position] >= '0' && string[**position] <= '9') {
-		number = number * 10 + (string[**position] - '0');
-		**position += 1;
+	while (string[*position] >= '0' && string[*position] <= '9') {
+		number = number * 10 + (string[*position] - '0');
+		*position += 1;
 	}
 	return number;
 }
@@ -58,7 +57,7 @@ struct Node* newNode(char* string, int *position) {
 		node->rightChild = newNode(string, position);
 	}
 	else {
-		node->operand = numberBuilding(string, &position);
+		node->operand = numberBuilding(string, position);
 	}
 	return node;
 }
@@ -70,8 +69,7 @@ struct Tree* buildTree(char *string) {
 	return tree;
 }
 
-int calculateSubtree(struct Node* node)
-{
+int calculateSubtree(struct Node* node) {
 	if (isLeaf(node)) {
 		return node->operand;
 	}
@@ -106,7 +104,6 @@ void deleteChildren(struct Node* node) {
 	free(node);
 }
 
-void deleteTree(struct Tree* tree)
-{
+void deleteTree(struct Tree* tree) {
 	deleteChildren(tree->root);
 }
