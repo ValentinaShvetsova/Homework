@@ -31,8 +31,16 @@ int searchingSubstring(char* string, char* substring) {
 	return -1;
 }
 int main() {
-	char string[] = "Hellofriends";
-	char substring[] = "end";
+	char string[] = {0};
+	char substring[] = {0};
+	FILE* file = fopen("input.txt", "r");
+	if (!file) {
+		printf("File reading error\n");
+		return 1;
+	}
+	fscanf(file, "%s", &string);
+	fscanf(file, "%s", &substring);
+	fclose(file);
 	int result = searchingSubstring(string, substring);
 	if (result == -1) {
 		printf("String do not consist such substring\n");
