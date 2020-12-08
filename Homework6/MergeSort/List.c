@@ -28,6 +28,8 @@ bool isEmpty(struct List* list) {
 void addEntry(struct List* list, const char name[], const char phone[]) {
 	list->length++;
 	struct Entry* newEntry = malloc(sizeof(struct Entry));
+	newEntry->name = malloc(strlen(name) + 1);
+	newEntry->phone = malloc(strlen(phone) + 1);
 	if (newEntry == NULL) {
 		return;
 	}
@@ -53,17 +55,6 @@ void printList(struct List* list) {
 	}
 }
 
-void deleteList(struct List* list) {
-	while (!isEmpty(list)) {
-		struct Entry* temp = list->head->next;
-		free(list->head->name);
-		free(list->head->phone);
-		free(list->head);
-		list->head = temp;
-	}
-	free(list);
-}
-
 void deleteHead(struct List* list) {
 	if (isEmpty(list)) {
 		return;
@@ -74,6 +65,13 @@ void deleteHead(struct List* list) {
 	free(list->head->phone);
 	free(list->head);
 	list->head = temp;
+}
+
+void deleteList(struct List* list) {
+	while (!isEmpty(list)) {
+		deleteHead(list);
+	}
+	free(list);
 }
 
 char* returnNameFromHead(struct List* list) {

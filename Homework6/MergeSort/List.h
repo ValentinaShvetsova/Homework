@@ -1,16 +1,16 @@
 #pragma once
 
-// This structure points on next and previous elements, has its own value
+// This structure represents linked list with constant complexity operations of adding element and removing element
 struct List;
 
-// This structure creates List
+// This function creates List
 struct List* createList();
 
 // This function checks whether the list empty or not
 bool isEmpty(struct List* list);
 
 // This function adds entry in list
-void addEntry(struct List* list, char name[], char phone[]);
+void addEntry(struct List* list, const char name[], const char phone[]);
 
 // This function prints list
 void printList(struct List* list);
@@ -21,10 +21,10 @@ void deleteList(struct List* list);
 // This function deletes head of list
 void deleteHead(struct List* list);
 
-// This function gets the name from head of list
+// This function gets the name from head of list, no need to free memory after
 char* returnNameFromHead(struct List* list);
 
-//This function gets the phone from head of list
+// This function gets the phone from head of list, no need to free memory after
 char* returnPhoneFromHead(struct List* list);
 
 // This function gets the length of list

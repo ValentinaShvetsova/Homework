@@ -12,23 +12,6 @@ void transferElements(struct List* list1, struct List* list2, int length) {
 	}
 }
 
-struct List* mergeSort(struct List* list, int sortType) {
-	const int length = listLength(list);
-	if (length <= 1) {
-		return list;
-	}
-
-	struct List* leftList = createList();
-	transferElements(list, leftList, length / 2);
-	struct List* rightList = createList();
-	transferElements(list, rightList, length - length / 2);
-	deleteList(list);
-
-	leftList = mergeSort(leftList, sortType);
-	rightList = mergeSort(rightList, sortType);
-	return merge(leftList, rightList, sortType);
-}
-
 struct List* merge(struct List* list1, struct List* list2, int sortType) {
 	struct List* newList = createList();
 	while (listLength(list1) != 0 && listLength(list2) != 0) {
@@ -39,7 +22,7 @@ struct List* merge(struct List* list1, struct List* list2, int sortType) {
 		else {
 			comparison = strcmp(returnPhoneFromHead(list1), returnPhoneFromHead(list2));
 		}
-		
+
 		if (comparison < 0) {
 			transferElements(list1, newList, 1);
 		}
@@ -58,3 +41,21 @@ struct List* merge(struct List* list1, struct List* list2, int sortType) {
 	deleteList(list2);
 	return newList;
 }
+
+struct List* mergeSort(struct List* list, int sortType) {
+	const int length = listLength(list);
+	if (length <= 1) {
+		return list;
+	}
+
+	struct List* leftList = createList();
+	transferElements(list, leftList, length / 2);
+	struct List* rightList = createList();
+	transferElements(list, rightList, length - length / 2);
+	deleteList(list);
+
+	leftList = mergeSort(leftList, sortType);
+	rightList = mergeSort(rightList, sortType);
+	return merge(leftList, rightList, sortType);
+}
+
