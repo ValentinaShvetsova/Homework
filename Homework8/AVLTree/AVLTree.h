@@ -1,28 +1,22 @@
 #pragma once
 
-// This structure consists of key, value and height of node
-struct Node;
-
 // This structure consists of nodes
 struct Tree;
-
-// This function check emptiness of tree
-bool isEmpty(struct Tree* tree);
 
 // This function ctreates tree
 struct Tree* createTree();
 
 // This function add value in the tree
-void addValue(struct Tree* tree, int key, char* value);
+void addValue(struct Tree* tree, char* key, char* value);
 
 // This function gets value by key 
-char* getValue(struct Tree* tree, int key);
+char* getValue(struct Tree* tree, char* key);
 
 //This function check whether tree contains value by key
-bool contain(struct Tree* tree, int key);
+bool contain(struct Tree* tree, char* key);
 
 // This function deletes value from tree
-void deleteValue(struct Tree* tree, int key);
+void deleteValue(struct Tree* tree, char* key);
 
-//This funtion deletes Tree
+//This function deletes Tree
 void deleteTree(struct Tree* tree);
