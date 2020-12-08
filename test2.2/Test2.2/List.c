@@ -108,8 +108,6 @@ struct List* deleteRepeatingValues(struct List* list) {
 		}
 		previous = current;
 		current = current->next;
-		free(current1);
-		free(previous1);
 	}
 	return listWithoutRepeats;
 }
