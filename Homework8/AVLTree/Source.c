@@ -12,7 +12,7 @@ int main() {
 		printf("Choose the command:\n0) Exit\n1)Add value by key\n2)Get value by key\n");
 		printf("3)Check whether the key is in the dictionary or not\n4)Delete key and value\n");
 		scanf("%d", &command);
-		char key[100] = { 0 };
+		char key[50] = { 0 };
 		switch (command) {
 		case 0:
 			shouldGoOut = true;
@@ -44,7 +44,7 @@ int main() {
 		}
 		case 3: {
 			printf("Enter the key: ");
-			scanf("%d", &key);
+			scanf("%s", &key);
 
 			if (contain(tree, key)) {
 				printf("The key is in the dictionary");

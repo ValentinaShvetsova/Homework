@@ -237,8 +237,14 @@ struct Node* closestToMiddle(struct Node* node) {
 
 void copyData(struct Node* to, struct Node* from) {
 	char* newValue = calloc(1, sizeof(char));
+	if (newValue == NULL) {
+		return;
+	}
 	strcpy(newValue, from->value);
 	char* newKey = calloc(1, sizeof(char));
+	if (newKey == NULL) {
+		return;
+	}
 	strcpy(newKey, from->key);
 	to->value = newValue;
 	to->key = newKey;
@@ -268,8 +274,8 @@ void deleteNode(struct Node* node, char* key) {
 			}
 		}
 		struct Node* help = node->parent;
-		free(node->value);
 		free(node->key);
+		free(node->value);
 		free(node);
 		help = balance(help);
 
