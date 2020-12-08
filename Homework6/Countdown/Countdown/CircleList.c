@@ -49,11 +49,6 @@ void deleteValue(struct List* list, int positionNumber)
 		previous = current;
 		current = current->next;
 	}
-	if (current->next == NULL) {
-		free(current->value);
-		free(current);
-		return;
-	}
 	struct Node* oldElement = current;
 	list->head = current->next;
 	list->tail = previous;
@@ -71,4 +66,14 @@ int headValue(struct List* list) {
 		return list->head->value;
 	}
 	return NULL;
+}
+
+void deleteList(struct List* list) {
+	while (!headIsTail(list)) {
+		deleteValue(list, 1);
+	}
+	free(list->head->value);
+	free(list->head->next);
+	free(list->head);
+	free(list);
 }

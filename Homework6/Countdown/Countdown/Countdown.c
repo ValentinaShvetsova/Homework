@@ -12,8 +12,7 @@ int survivorPosition(int numberOfWarriors, int killingPeriodicity) {
 		deleteValue(list, killingPeriodicity);
 	}
 	const int survivedWarrior = headValue(list);
-	deleteValue(list, 1);
-	free(list);
+	deleteList(list);
 	return survivedWarrior;
 }
 
