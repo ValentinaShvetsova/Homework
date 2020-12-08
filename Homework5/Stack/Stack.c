@@ -2,13 +2,13 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-struct Stack {
-	struct StackElement* head;
+struct StackElement {
+	int element;
+	struct StackElement* next;
 };
 
-struct StackElement {
-	char element;
-	struct StackElement* next;
+struct Stack {
+	struct StackElement* head;
 };
 
 struct Stack* createStack() {
@@ -16,7 +16,7 @@ struct Stack* createStack() {
 	return newStack;
 }
 
-void push(struct Stack* stack, char element) {
+void push(struct Stack* stack, int element) {
 	struct StackElement* newElement = malloc(sizeof(struct StackElement));
 	if (newElement == NULL) {
 		return;
@@ -26,11 +26,11 @@ void push(struct Stack* stack, char element) {
 	stack->head = newElement;
 }
 
-char pop(struct Stack* stack) {
+int pop(struct Stack* stack) {
 	if (stack->head == NULL) {
 		return 0;
 	}
-	char element = stack->head->element;
+	int element = stack->head->element;
 	struct StackElement* oldElement = stack->head;
 	stack->head = stack->head->next;
 	free(oldElement);
@@ -42,7 +42,9 @@ bool isEmpty(struct Stack* stack) {
 }
 
 void deleteStack(struct Stack** stack) {
-	while (*stack != NULL) {
-		pop(stack);
+	while ((*stack)->head != NULL) {
+		pop(*stack);
 	}
+	free(*stack);
+	*stack = NULL;
 }
