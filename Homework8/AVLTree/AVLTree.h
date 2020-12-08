@@ -20,3 +20,6 @@ void deleteValue(struct Tree* tree, char* key);
 
 //This function deletes Tree
 void deleteTree(struct Tree* tree);
+
+// This function gets root value
+char* getRootValue(struct Tree* tree);

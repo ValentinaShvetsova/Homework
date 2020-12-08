@@ -351,3 +351,7 @@ void deleteTree(struct Tree* tree)
 {
 	deleteChildren(tree->root);
 }
+
+char* getRootValue(struct Tree* tree) {
+	return tree->root->value;
+}

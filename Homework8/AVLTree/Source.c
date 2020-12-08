@@ -1,9 +1,42 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #include "AVLTree.h"
 
+bool functionsWorking() {
+	struct Tree* tree = createTree();
+	char key1[] = "11";
+	char key2[] = "12";
+	char key3[] = "13";
+	char value1[] = "right";
+	char value2[] = "root";
+	char value3[] = "left";
+
+	addValue(tree, key1, value1);
+	addValue(tree, key2, value2);
+	addValue(tree, key3, value3);
+
+	if (strcmp(getValue(tree, 12), value2) != 0) {
+		return false;
+	}
+	if (!contain(tree, key3) || !contain(tree, key2) || !contain(tree, key1)) {
+		return false;
+	}
+	if (strcmp(getRootValue, value2) != 0) {
+		return false;
+	}
+	deleteValue(tree, key3);
+	if (contain(tree, key3)) {
+		return false;
+	}
+	deleteTree(tree);
+	return true;
+}
 int main() {
+	if (!functionsWorking()) {
+		return 1;
+	}
 	int command = 0;
 	bool shouldGoOut = false;
 	struct Tree* tree = createTree();
