@@ -22,8 +22,11 @@ int main() {
 			break;
 		}
 	}
+	fclose(file);
 	struct List* newList = deleteRepeatingValues(list);
 	printf("New list: ");
 	printList(newList);
+	deleteList(list);
+	deleteList(newList);
 	return 0;
 }
