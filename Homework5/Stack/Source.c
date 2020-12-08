@@ -2,13 +2,13 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-struct Stack {
-	struct StackElement* head;
-};
-
 struct StackElement {
 	int element;
 	struct StackElement* next;
+};
+
+struct Stack {
+	struct StackElement* head;
 };
 
 struct Stack* createStack() {
