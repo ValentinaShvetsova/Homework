@@ -23,3 +23,6 @@ float averageListLength(struct HashTable* table);
 
 // This function gets load factor of table
 float loadFactor(struct HashTable* table);
+
+// This function deletes tree
+void deleteTable(struct HashTable* table);

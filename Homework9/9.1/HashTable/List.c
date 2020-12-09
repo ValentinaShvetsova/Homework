@@ -23,16 +23,21 @@ struct List* createList() {
 	return newList;
 }
 
+struct Node* initializeNode(char* value, int amount) {
+	char* newValue = calloc(strlen(value) + 1, sizeof(char*));
+	struct Node* newNode = calloc(1, sizeof(struct Node));
+	newNode->counter = 1;
+	strcpy(newValue, value);
+	newNode->word = newValue;
+	return newNode;
+}
+
 bool addNewValueToList(struct List* list, char* value, int amount) {
 	struct Node* current = list->head;
 	struct Node* previous = NULL;
 	if (current == NULL) {
 		list->length++;
-		char* newValue = calloc(1, sizeof(char*));
-		struct Node* newNode = calloc(1, sizeof(struct Node));
-		newNode->counter = 1;
-		strcpy(newValue, value);
-		newNode->word = newValue;
+		struct Node* newNode = initializeNode(value, amount);
 		list->head = newNode;
 		list->head->next = NULL;
 		return true;
@@ -43,12 +48,7 @@ bool addNewValueToList(struct List* list, char* value, int amount) {
 	}
 	if (current == NULL) {
 		list->length++;
-		char* newValue = calloc(1, sizeof(char*));
-		struct Node* newNode = calloc(1, sizeof(struct Node));
-		newNode->counter = 1;
-		strcpy(newValue, value);
-		newNode->word = newValue;
-		previous->next = newNode;
+		struct Node* newNode = initializeNode(value, amount);
 		free(current);
 		newNode->next = NULL;
 		return true;
@@ -83,7 +83,6 @@ int quantityOfValuesFromHead(struct List* list) {
 	return list->head->counter;
 }
 
-
 void deleteValueFromHead(struct List* list) {
 	if (isEmpty(list)) {
 		return;
@@ -111,7 +110,6 @@ void printList(struct List* list) {
 	}
 }
 
-int listLength(struct List* list)
-{
+int listLength(struct List* list) {
 	return list->length;
 }
