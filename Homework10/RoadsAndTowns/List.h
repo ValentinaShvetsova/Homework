@@ -1,7 +1,5 @@
 #pragma once
 #include <stdbool.h>
-#include <stdlib.h>
-#include <stdio.h>
 
 // This structure consist pointers to next and previous element, its own element
 struct List;
@@ -29,3 +27,6 @@ int returnValue(struct List* list, int positionNumber);
 
 // This function compares Lists
 bool compareLists(struct List* list1, struct List* list2);
+
+// This function fills graph with values
+int** readGraph(char* filename);
