@@ -64,6 +64,14 @@ void deleteList(struct List* list) {
 	}
 }
 
+void deleteGraph(int** graph, int size) {
+	for (int i = 0; i < size; ++i)
+	{
+		free(graph[i]);
+	}
+	free(graph);
+}
+
 void printList(struct List* list) {
 	struct Node* current = list->head;
 	if (isEmpty(list)) {

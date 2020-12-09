@@ -112,11 +112,7 @@ bool tests() {
 	}
 	fclose(file);
 	distributeCities(graph, size, capitals, numberOfCapitals, towns);
-	for (int i = 0; i < size; ++i)
-	{
-		free(graph[i]);
-	}
-	free(graph);
+	deleteGraph(graph, size);
 
 	free(capitals);
 
@@ -189,11 +185,7 @@ int main() {
 	}
 	fclose(file);
 	distributeCities(graph, size, capitals, numberOfCapitals, towns);
-	for (int i = 0; i < size; ++i)
-	{
-		free(graph[i]);
-	}
-	free(graph);
+	deleteGraph(graph, size);
 
 	free(capitals);
 
