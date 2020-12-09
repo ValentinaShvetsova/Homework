@@ -5,7 +5,29 @@
 #include "HashTable.h"
 #include "List.h"
 
+bool tests() {
+	FILE* file = fopen("Test.txt", "r");
+	if (!file) {
+		printf("File not found");
+		return false;
+	}
+
+	struct HashTable* table = createHashTable();
+	while (!feof(file)) {
+		char word[50] = { 0 };
+		fscanf(file, "%s", &word);
+		addValueToTable(table, word);
+	}
+	fclose(file);
+	if (maximumListLength(table) != 2) {
+		return false;
+	}
+}
+
 int main() {
+	if (!tests()) {
+		return 1;
+	}
 	FILE* file = fopen("input.txt", "r");
 	if (!file) {
 		printf("File not found");
