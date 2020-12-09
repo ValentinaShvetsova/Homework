@@ -79,7 +79,7 @@ bool tests() {
 	int numberOfRoads = 0;
 	fscanf(file, "%d %d", &size, &numberOfRoads);
 
-	int** graph = (int*)malloc(size * size * sizeof(int));
+	int** graph = (int**)malloc(size * size * sizeof(int));
 	for (int i = 0; i < size; ++i)
 	{
 		graph[i] = calloc(size, sizeof(int));
