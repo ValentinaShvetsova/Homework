@@ -6,10 +6,6 @@
 #include <limits.h>
 
 int main() {
-	if (!tests()) {
-		return 1;
-	}
-
 	FILE* file = fopen("input.txt", "r");
 	if (!file)
 	{
@@ -41,7 +37,7 @@ int main() {
 	addValue(0, list);
 	while (!isEmpty(list)) {
 		int vertex = returnValue(list, 1);
-		deleteValue(list, vertex);
+		deleteHead(list);
 		used[vertex] = 2;
 		for (int j = 0; j < size; j++) {
 			if (graph[vertex][j] == 1 && used[j] == 0) {
@@ -55,4 +51,5 @@ int main() {
 	free(used);
 	deleteList(list);
 	fclose(file);
+	return 0;
 }

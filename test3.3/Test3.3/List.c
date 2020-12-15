@@ -26,9 +26,11 @@ void addValue(int value, struct List* list) {
 	if (!isEmpty(list)) {
 		list->tail->next = newNode;
 		list->tail = list->tail->next;
+		list->tail->next = NULL;
 		return;
 	}
 	list->head = newNode;
+	list->head->next = NULL;
 	list->tail = list->head;
 }
 
@@ -58,9 +60,15 @@ void deleteValue(struct List* list, int value) {
 
 void deleteHead(struct List* list) {
 	struct Node* current = list->head;
-	struct Node* temp = current->next;
-	free(current);
-	list->head = temp;
+	if (current->next == NULL) {
+		free(current);
+		list->head = NULL;
+	}
+	else {
+		struct Node* temp = current->next;
+		free(current);
+		list->head = temp;
+	}
 }
 
 void deleteList(struct List* list) {
