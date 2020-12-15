@@ -30,14 +30,14 @@ void addValue(int value, struct List* list) {
 		previous = current;
 		current = current->next;
 	}
-	if (previous == NULL) {
+	if (current != NULL && current->value == value) {
+		current->count += 1;
+		free(newNode);
+	}
+	else if (previous == NULL) {
 		newNode->next = list->head;
 		newNode->count = 1;
 		list->head = newNode;
-	}
-	else if (current->value == value) {
-		current->count += 1;
-		free(newNode);
 	}
 	else {
 		current->next = newNode;
