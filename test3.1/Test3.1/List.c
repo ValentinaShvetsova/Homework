@@ -40,7 +40,7 @@ void addValue(int value, struct List* list) {
 		list->head = newNode;
 	}
 	else {
-		current->next = newNode;
+		current = newNode;
 		newNode->count = 1;
 		newNode->next = NULL;
 	}
