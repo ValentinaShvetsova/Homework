@@ -11,6 +11,7 @@ struct Node {
 
 struct List {
 	struct Node* head;
+	struct Node* tail;
 };
 
 struct List* createList() {
@@ -38,11 +39,14 @@ void addValue(int value, struct List* list) {
 		newNode->next = list->head;
 		newNode->count = 1;
 		list->head = newNode;
+		list->tail = list->head;
+		list->tail->next = NULL;
 	}
 	else {
 		current = newNode;
 		newNode->count = 1;
 		newNode->next = NULL;
+		list->tail = newNode;
 	}
 }
 
