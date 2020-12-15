@@ -14,7 +14,7 @@ int main() {
 	struct List* list = createList();
 	int number = -1;
 	while (number != 0) {
-		scanf("%d\n", number);
+		scanf("%d\n", &number);
 		if (number != 0) {
 			addValue(number, list);
 		}
