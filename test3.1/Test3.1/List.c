@@ -39,11 +39,11 @@ void addValue(int value, struct List* list) {
 		newNode->next = list->head;
 		newNode->count = 1;
 		list->head = newNode;
-		list->tail = list->head;
-		list->tail->next = NULL;
+		list->head->next = list->tail;
+		list->tail = NULL;
 	}
 	else {
-		current = newNode;
+		previous->next = newNode;
 		newNode->count = 1;
 		newNode->next = NULL;
 		list->tail = newNode;
