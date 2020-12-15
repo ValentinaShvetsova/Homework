@@ -25,9 +25,8 @@ int main() {
 	for (int i = 0; i < edges; ++i)
 	{
 		int firstVertex = 0;
-		fscanf(file, "%d", &firstVertex);
 		int secondVertex = 0;
-		fscanf(file, "%d", &secondVertex);
+		fscanf(file, "%d %d", &firstVertex, &secondVertex);
 		
 		graph[firstVertex][secondVertex] = 1;
 		graph[secondVertex][firstVertex] = 1;
