@@ -13,7 +13,10 @@ int pop(struct Stack* stack);
 bool isEmpty(struct Stack* stack);
 
 //This function deletes stack
-void deleteStack(struct Stack** stack);
+void deleteStack(struct StackElement** head);
 
 //This function add the element at the top of stack
 void push(struct Stack* stack, int element);
+
+// This function gets top element
+char top(struct Stack* stack);

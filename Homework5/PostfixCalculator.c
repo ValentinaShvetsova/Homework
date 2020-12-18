@@ -41,9 +41,8 @@ bool calculateSolution(char postfixExpression[], int *result) {
 		case '*':
 		case '/':
 			if (!isEmpty(stack)) {
-				int firstElement = pop(stack);
+				int firstElement = top(stack);
 				if (!isEmpty(stack) && !(postfixExpression[i] == '/' && firstElement == 0)) {
-					push(stack, firstElement);
 					performOperation(postfixExpression[i], stack);
 				}
 				else {
@@ -60,10 +59,9 @@ bool calculateSolution(char postfixExpression[], int *result) {
 	}
 	bool resultExist = false;
 	if (!isEmpty(stack)){
-		int resulting = pop(stack);
-		if (isEmpty(stack)){
+		int resulting = top(stack);
+		if (isEmpty(stack)) {
 			resultExist = true;
-			push(stack, resulting);
 			getResult(stack, result);
 		} else {
 			deleteStack(stack);
@@ -86,10 +84,10 @@ bool test() {
 	char string4[] = "23+4-";
 	int result4 = 0;
 
-	if (calculationSolution(string1, &result1) || calculationSolution(string2, &result2) || calculationSolution(string3, &result3)) {
+	if (calculateSolution(string1, &result1) || calculateSolution(string2, &result2) || calculateSolution(string3, &result3)) {
 		return false;
 	}
-	if (!calculationSolution(string4, &result4) || (result4 != 1)) {
+	if (!calculateSolution(string4, &result4) || (result4 != 1)) {
 		return false;
 	}
 	return true;
@@ -103,7 +101,7 @@ int main() {
 	char string[100];
 	scanf("%s", string);
 	int result = 0;
-	if (!calculationSolution(string, &result)) {
+	if (!calculateSolution(string, &result)) {
 		printf("The expression can not be resolved\n");
 	}
 	else {
