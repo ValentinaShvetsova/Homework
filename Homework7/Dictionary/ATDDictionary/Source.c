@@ -13,6 +13,7 @@ void printOptions() {
 	printf("3)Check whether the key is in the dictionary or not\n");
 	printf("4)Delete key and value\n");
 }
+
 bool tests() {
 	struct Tree* tree = createTree();
 	char value[5] = "abcd";

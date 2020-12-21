@@ -30,7 +30,7 @@ bool isEmpty(struct Tree* tree) {
 
 void insert(int key, char* value, struct Node* node) {
 	if (key == node->key) {
-		free(node->key);
+		free(node->value);
 		node->value = value;
 		return;
 	}
@@ -75,12 +75,12 @@ void addValue(int key, char* value, struct Tree* tree) {
 	insert(key, newValue, tree->root);
 }
 
-char* get(struct Node* node, int key) {
+struct Node* get(struct Node* node, int key) {
 	if (node == NULL) {
 		return NULL;
 	}
 	if (node->key == key) {
-		return node->value;
+		return node;
 	} else if (node->key > key) {
 		return get(node->leftChild, key);
 	}
@@ -90,29 +90,12 @@ char* get(struct Node* node, int key) {
 }
 
 char* getValue(struct Tree* tree, int key) {
-	return get(tree->root, key);
-}
-
-bool findKey(struct Node* node, int key) {
-	if (node == NULL) {
-		return false;
-	}
-	if (node->key == key) {
-		return true;
-	}
-	else if (key < node->key) {
-		return findKey(node->leftChild, key);
-	}
-	else {
-		return findKey(node->rightChild, key);
-	}
+	struct Node* newNode = get(tree->root, key);
+	return newNode->value;
 }
 
 bool contains(struct Tree* tree, int key) {
-	if (get(tree->root, key) != NULL) {
-		return true;
-	}
-	return false;
+	return get(tree->root, key) != NULL;
 }
 
 struct Node* findTheNearestLesserElement(struct Node* node) {
@@ -128,7 +111,6 @@ void deleteNode(struct Tree* tree, struct Node* node, int key) {
 		return;
 	}
 	if (key == node->key) {
-		
 		if (node->leftChild != NULL && node->rightChild != NULL) {
 			struct Node* helpingNode = findTheNearestLesserElement(node);
 			free(node->key);
@@ -149,15 +131,15 @@ void deleteNode(struct Tree* tree, struct Node* node, int key) {
 				else {
 					node->parent->rightChild = node->leftChild;
 				}
+				free(node->value);
+				free(node);
 			}
 			else {
-				struct Node* newRoot = NULL;
-				newRoot = tree->root->leftChild;
+				struct Node* newRoot = tree->root->leftChild;
 				if (newRoot != NULL) {
 					newRoot->parent = NULL;
 				}
 				free(tree->root->value);
-				free(tree->root->key);
 				free(tree->root);
 				tree->root = newRoot;
 			}
@@ -181,7 +163,6 @@ void deleteNode(struct Tree* tree, struct Node* node, int key) {
 					newRoot->parent = NULL;
 				}
 				free(tree->root->value);
-				free(tree->root->key);
 				free(tree->root);
 				tree->root = newRoot;
 			}
@@ -215,7 +196,6 @@ void deleteRoot(struct Tree* tree) {
 		newRoot->parent = NULL;
 	}
 	free(tree->root->value);
-	free(tree->root->key);
 	free(tree->root);
 	tree->root = newRoot;
 }
@@ -238,7 +218,6 @@ void deleteChildren(struct Node* node) {
 	}
 	deleteChildren(node->leftChild);
 	deleteChildren(node->rightChild);
-	free(node->key);
 	free(node->value);
 	free(node);
 }
