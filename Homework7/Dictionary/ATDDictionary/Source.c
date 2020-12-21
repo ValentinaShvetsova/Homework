@@ -37,6 +37,25 @@ bool tests() {
 		deleteTree(tree);
 		return false;
 	}
+
+	addValue(12, value, tree);
+	addValue(13, value, tree);
+	addValue(11, value, tree);
+	addValue(8, value, tree);
+	addValue(2, value, tree);
+
+	deleteValue(tree, 12);
+	if (contains(tree, 12)) {
+		deleteTree(tree);
+		return false;
+	}
+	
+	deleteRoot(tree);
+	if (contains(tree, 10)) {
+		deleteTree(tree);
+		return false;
+	}
+
 	deleteTree(tree);
 	return true;
 }

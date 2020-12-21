@@ -111,13 +111,27 @@ void deleteNode(struct Tree* tree, struct Node* node, int key) {
 		return;
 	}
 	if (key == node->key) {
+		if (node->leftChild == NULL && node->rightChild == NULL) {
+			if (node->key < node->parent->key) {
+				node->parent->leftChild = NULL;
+			}
+			else {
+				node->parent->rightChild = NULL;
+			}
+			free(node->value);
+			free(node);
+			return;
+		}
 		if (node->leftChild != NULL && node->rightChild != NULL) {
 			struct Node* helpingNode = findTheNearestLesserElement(node);
-			free(node->key);
-			free(node->value);
-			node->key = helpingNode->key;
-			node->value = helpingNode->value;
+			struct Node* newNode = calloc(1, sizeof(struct Node));
+			strcpy(newNode->value, helpingNode->value);
+			newNode->key = helpingNode->key;
+			
 			deleteNode(tree, helpingNode, helpingNode->key);
+			node->key = newNode->key;
+			free(node->value);
+			node->value = newNode->value;
 			return;
 		}
 		else if (node->rightChild == NULL) {
@@ -180,6 +194,7 @@ void deleteRoot(struct Tree* tree) {
 	if (tree->root->rightChild != NULL && tree->root->leftChild != NULL) {
 		struct Node* helpNode = findTheNearestLesserElement(tree->root);
 		tree->root->key = helpNode->key;
+		free(tree->root->value);
 		tree->root->value = helpNode->value;
 		deleteNode(tree, helpNode, helpNode->key);
 		return;
