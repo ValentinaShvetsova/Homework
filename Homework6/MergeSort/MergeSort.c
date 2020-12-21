@@ -37,8 +37,8 @@ struct List* merge(struct List* list1, struct List* list2, int sortType) {
 	else {
 		transferElements(list2, newList, listLength(list2));
 	}
-	deleteList(list1);
-	deleteList(list2);
+	free(list1);
+	free(list2);
 	return newList;
 }
 

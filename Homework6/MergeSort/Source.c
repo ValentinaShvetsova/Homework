@@ -28,6 +28,5 @@ int main() {
 	printList(sortedList);
 
 	deleteList(sortedList);
-	deleteList(list);
 	return 0;
 }

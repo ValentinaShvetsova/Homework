@@ -28,11 +28,12 @@ bool isEmpty(struct List* list) {
 void addEntry(struct List* list, const char name[], const char phone[]) {
 	list->length++;
 	struct Entry* newEntry = malloc(sizeof(struct Entry));
-	newEntry->name = malloc(strlen(name) + 1);
-	newEntry->phone = malloc(strlen(phone) + 1);
 	if (newEntry == NULL) {
 		return;
 	}
+	newEntry->name = malloc(strlen(name) + 1);
+	newEntry->phone = malloc(strlen(phone) + 1);
+	
 	strcpy(newEntry->name, name);
 	strcpy(newEntry->phone, phone);
 	if (isEmpty(list)) {
@@ -42,6 +43,7 @@ void addEntry(struct List* list, const char name[], const char phone[]) {
 	}
 	list->tail->next = newEntry;
 	list->tail = list->tail->next;
+	list->tail->next = NULL;
 }
 
 void printList(struct List* list) {
