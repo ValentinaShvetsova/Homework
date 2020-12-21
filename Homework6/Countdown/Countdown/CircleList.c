@@ -43,6 +43,10 @@ void addValue(struct List* list, int value) {
 
 void deleteValue(struct List* list, int positionNumber)
 {
+	if (headIsTail(list)) {
+		deleteList(list);
+		return;
+	}
 	struct Node* current = list->head;
 	struct Node* previous = list->tail;
 	for (int i = 1; i < positionNumber; ++i) {
