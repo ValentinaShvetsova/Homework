@@ -17,13 +17,13 @@ bool functionsWorking() {
 	addValue(tree, key2, value2);
 	addValue(tree, key3, value3);
 
-	if (strcmp(getValue(tree, 12), value2) != 0) {
+	if (strcmp(getValue(tree, key2), value2) != 0) {
 		return false;
 	}
 	if (!contains(tree, key3) || !contains(tree, key2) || !contains(tree, key1)) {
 		return false;
 	}
-	if (strcmp(getRootValue, value2) != 0) {
+	if (strcmp(getRootValue(tree), value2) != 0) {
 		return false;
 	}
 	deleteValue(tree, key3);
