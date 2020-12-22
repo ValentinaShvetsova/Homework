@@ -24,12 +24,23 @@ void addValue(char* value, struct List* list) {
 		return;
 	}
 	newNode->value = calloc(1, sizeof(char));
-	newNode->value = value;
+	char* newValue = calloc(1, sizeof(char*));
+	strcpy(newValue, value);
+	newNode->value = newValue;
 	struct Node* current = list->head;
 	struct Node* previous = NULL;
 	while (current != NULL && strcmp(current->value, value) < 0) {
 		previous = current;
 		current = current->next;
+	}
+	if (current == NULL && previous == NULL) {
+		list->head = newNode;
+		newNode->next = NULL;
+		return;
+	} else if (current == NULL) {
+		previous->next = newNode;
+		newNode->next = current;
+		return;
 	}
 	if (strcmp(current->value, value) == 0) {
 		free(newNode->value);
