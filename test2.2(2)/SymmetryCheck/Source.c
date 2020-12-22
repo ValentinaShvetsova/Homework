@@ -3,8 +3,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-bool test1()
-{
+bool test1() {
 	struct List* list = createList();
 	addValue(list, 15);
 	addValue(list, 78);
@@ -15,8 +14,7 @@ bool test1()
 	return testPassed;
 }
 
-bool test2()
-{
+bool test2() {
 	struct List* list = createList();
 	addValue(list, 6);
 	addValue(list, 7);
@@ -28,8 +26,7 @@ bool test2()
 	return testPassed;
 }
 
-bool test3()
-{
+bool test3() {
 	struct List* list = createList();
 	addValue(list, 1);
 	addValue(list, 2);
@@ -42,8 +39,7 @@ bool test3()
 	return testPassed;
 }
 
-bool tests()
-{
+bool tests() {
 	return test1() && test2() && test3();
 }
 
@@ -53,29 +49,24 @@ int main() {
 	}
 
 	FILE* file = fopen("input.txt", "r");
-	if (!file)
-	{
+	if (!file) {
 		printf("File not found\n");
 		return 1;
 	}
 
 	struct List* list = createList();
-	while (true)
-	{
+	while (true) {
 		int number = 0;
-		if (fscanf(file, "%d", &number) != EOF)
-		{
+		if (fscanf(file, "%d", &number) != EOF) {
 			addValue(list, number);
 		}
-		else
-		{
+		else {
 			break;
 		}
 	}
 	fclose(file);
 
-	if (listLength(list) == 0)
-	{
+	if (listLength(list) == 0) {
 		printf("Zero list length\n");
 		deleteList(list);
 		return 1;
