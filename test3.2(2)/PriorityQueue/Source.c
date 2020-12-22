@@ -39,8 +39,7 @@ bool tests() {
 	return true;
 }
 int main() {
-	if (!tests())
-	{
+	if (!tests()) {
 		printf("Testing error\n");
 		return 1;
 	}

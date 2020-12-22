@@ -15,23 +15,19 @@ struct PriorityQueue
 	struct QueueElement* front;
 };
 
-struct PriorityQueue* createQueue()
-{
+struct PriorityQueue* createQueue() {
 	struct PriorityQueue* newQueue = calloc(1, sizeof(struct PriorityQueue));
 	return newQueue;
 }
 
-bool isEmpty(struct PriorityQueue* queue)
-{
+bool isEmpty(struct PriorityQueue* queue) {
 	return queue->front == NULL;
 }
 
-void enqueue(struct PriorityQueue* queue, int value, int priority)
-{
+void enqueue(struct PriorityQueue* queue, int value, int priority) {
 	struct QueueElement* current = queue->front;
 	struct QueueElement* previous = NULL;
-	while (current != NULL && current->priority >= priority)
-	{
+	while (current != NULL && current->priority >= priority) {
 		previous = current;
 		current = current->next;
 	}
@@ -48,10 +44,8 @@ void enqueue(struct PriorityQueue* queue, int value, int priority)
 	}
 }
 
-int dequeue(struct PriorityQueue* queue)
-{
-	if (isEmpty(queue))
-	{
+int dequeue(struct PriorityQueue* queue) {
+	if (isEmpty(queue)) {
 		return -1;
 	}
 	struct QueueElement* first = queue->front;
@@ -61,10 +55,8 @@ int dequeue(struct PriorityQueue* queue)
 	return firstValue;
 }
 
-void deleteQueue(struct PriorityQueue* queue)
-{
-	while (!isEmpty(queue))
-	{
+void deleteQueue(struct PriorityQueue* queue) {
+	while (!isEmpty(queue)) {
 		struct QueueElement* temp = queue->front->next;
 		free(queue->front);
 		queue->front = temp;
