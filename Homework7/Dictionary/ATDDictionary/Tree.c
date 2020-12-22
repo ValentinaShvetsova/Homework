@@ -125,6 +125,7 @@ void deleteNode(struct Tree* tree, struct Node* node, int key) {
 		if (node->leftChild != NULL && node->rightChild != NULL) {
 			struct Node* helpingNode = findTheNearestLesserElement(node);
 			struct Node* newNode = calloc(1, sizeof(struct Node));
+			newNode->value = calloc(1, sizeof(char));
 			strcpy(newNode->value, helpingNode->value);
 			newNode->key = helpingNode->key;
 			
