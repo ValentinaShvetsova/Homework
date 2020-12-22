@@ -20,19 +20,20 @@ bool functionsWorking() {
 	if (strcmp(getValue(tree, 12), value2) != 0) {
 		return false;
 	}
-	if (!contain(tree, key3) || !contain(tree, key2) || !contain(tree, key1)) {
+	if (!contains(tree, key3) || !contains(tree, key2) || !contains(tree, key1)) {
 		return false;
 	}
 	if (strcmp(getRootValue, value2) != 0) {
 		return false;
 	}
 	deleteValue(tree, key3);
-	if (contain(tree, key3)) {
+	if (contains(tree, key3)) {
 		return false;
 	}
 	deleteTree(tree);
 	return true;
 }
+
 int main() {
 	if (!functionsWorking()) {
 		return 1;
@@ -79,7 +80,7 @@ int main() {
 			printf("Enter the key: ");
 			scanf("%s", &key);
 
-			if (contain(tree, key)) {
+			if (contains(tree, key)) {
 				printf("The key is in the dictionary");
 			}
 			else {

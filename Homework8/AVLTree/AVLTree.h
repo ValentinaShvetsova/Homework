@@ -13,7 +13,7 @@ void addValue(struct Tree* tree, char* key, char* value);
 char* getValue(struct Tree* tree, char* key);
 
 //This function check whether tree contains value by key
-bool contain(struct Tree* tree, char* key);
+bool contains(struct Tree* tree, char* key);
 
 // This function deletes value from tree
 void deleteValue(struct Tree* tree, char* key);

@@ -26,6 +26,17 @@ bool isLeaf(struct Node* node) {
 	return node->leftChild == NULL && node->rightChild == NULL;
 }
 
+struct Node* createNode(char* key, char* value) {
+	struct Node* newNode = calloc(1, sizeof(struct Node));
+	char* newKey = calloc(1, sizeof(char));
+	strcpy(newKey, key);
+	char* newValue = calloc(1, sizeof(char));
+	strcpy(newValue, value);
+	newNode->key = newKey;
+	newNode->value = newValue;
+	return newNode;
+}
+
 struct Tree* createTree() {
 	struct Tree* newTree = calloc(1, sizeof(struct Tree));
 	return newTree;
@@ -55,12 +66,7 @@ void heightUpdate(struct Node* node) {
 		rightHeight = node->rightChild->height;
 	}
 	
-	if (leftHeight > rightHeight) {
-		node->height = leftHeight + 1;
-	}
-	else {
-		node->height = rightHeight + 1;
-	}
+	node->height = (leftHeight > rightHeight ? leftHeight : rightHeight) + 1;
 }
 
 struct Node* leftRotation(struct Node* root) {
@@ -114,14 +120,13 @@ struct Node* balance(struct Node* node) {
 
 void insert(struct Node* node, char* key, char* value) {
 	if (strcmp(key, node->key) == 0) {
+		free(node->value);
 		node->value = value;
 		return;
 	}
 	if (strcmp(key, node->key) < 0) {
 		if (node->leftChild == NULL) {
-			struct Node* newNode = calloc(1, sizeof(struct Node));
-			newNode->key = key;
-			newNode->value = value;
+			struct Node* newNode = createNode(key, value);
 			newNode->height = 1;
 			node->leftChild = newNode;
 			newNode->parent = node;
@@ -132,9 +137,7 @@ void insert(struct Node* node, char* key, char* value) {
 	}
 	if (strcmp(key, node->key) > 0) {
 		if (node->rightChild == NULL) {
-			struct Node* newNode = calloc(1, sizeof(struct Node));
-			newNode->key = key;
-			newNode->value = value;
+			struct Node* newNode = createNode(key, value);
 			newNode->height = 1;
 			node->rightChild = newNode;
 			newNode->parent = node;
@@ -157,9 +160,7 @@ void addValue(struct Tree* tree, char* key, char* value) {
 	}
 	strcpy(newKey, key);
 	if (isEmpty(tree)) {
-		struct Node* root = calloc(1, sizeof(struct Node));
-		root->key = newKey;
-		root->value = newValue;
+		struct Node* root = createNode(key, value);
 		root->height = 1;
 		root->leftChild = NULL;
 		root->rightChild = NULL;
@@ -177,9 +178,7 @@ char* get(struct Node* node, char* key) {
 	}
 
 	if (strcmp(node->key, key) == 0) {
-		char* value = calloc(1, sizeof(char));
-		strcpy(value, node->value);
-		return value;
+		return node->value;
 	}
 	if (strcmp(key, node->key) < 0) {
 		return get(node->leftChild, key);
@@ -208,20 +207,18 @@ bool find(struct Node* node, char* key) {
 	}
 }
 
-bool contain(struct Tree* tree, char* key) {
+bool contains(struct Tree* tree, char* key) {
 	return find(tree->root, key);
 }
 
 struct Node* closestToMiddle(struct Node* node) {
-	struct Node* mostRightOnTheLeft = calloc(1, sizeof(struct Node));
-	mostRightOnTheLeft = node->leftChild;
+	struct Node* mostRightOnTheLeft = node->leftChild;
 	int leftPath = 1;
 	while (mostRightOnTheLeft->rightChild != NULL) {
 		mostRightOnTheLeft = mostRightOnTheLeft->rightChild;
 		leftPath++;
 	}
-	struct Node* mostLeftOnTheRight = calloc(1, sizeof(struct Node));
-	mostLeftOnTheRight = node->rightChild;
+	struct Node* mostLeftOnTheRight = node->rightChild;
 	int rightPath = 1;
 	while (mostLeftOnTheRight->leftChild != NULL) {
 		mostLeftOnTheRight = mostLeftOnTheRight->leftChild;
