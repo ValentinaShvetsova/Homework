@@ -59,7 +59,7 @@ void insert(int key, char* value, struct Node* node) {
 }
 
 void addValue(int key, char* value, struct Tree* tree) {
-	char* newValue = calloc(SIZE, (sizeof(char*)));
+	char* newValue = calloc(SIZE, (sizeof(char)));
 	if (newValue == NULL) {
 		return;
 	}
@@ -125,7 +125,7 @@ void deleteNode(struct Tree* tree, struct Node* node, int key) {
 		if (node->leftChild != NULL && node->rightChild != NULL) {
 			struct Node* helpingNode = findTheNearestLesserElement(node);
 			struct Node* newNode = calloc(1, sizeof(struct Node));
-			newNode->value = calloc(1, sizeof(char));
+			newNode->value = calloc(SIZE, sizeof(char));
 			strcpy(newNode->value, helpingNode->value);
 			newNode->key = helpingNode->key;
 			
@@ -194,7 +194,7 @@ void deleteNode(struct Tree* tree, struct Node* node, int key) {
 void deleteRoot(struct Tree* tree) {
 	if (tree->root->rightChild != NULL && tree->root->leftChild != NULL) {
 		struct Node* helpNode = findTheNearestLesserElement(tree->root);
-		char* newValue = calloc(1, sizeof(char*));
+		char* newValue = calloc(SIZE, sizeof(char));
 		strcpy(newValue, helpNode->value);
 		tree->root->key = helpNode->key;
 		free(tree->root->value);
@@ -242,4 +242,5 @@ void deleteChildren(struct Node* node) {
 
 void deleteTree(struct Tree* tree) {
 	deleteChildren(tree->root);
+	free(tree);
 }
