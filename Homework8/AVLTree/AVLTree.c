@@ -4,6 +4,7 @@
 #include <malloc.h>
 #include <string.h>
 #include "AVLTree.h"
+#define SIZE 100
 
 struct Node {
 	char* key;
@@ -28,9 +29,9 @@ bool isLeaf(struct Node* node) {
 
 struct Node* createNode(char* key, char* value) {
 	struct Node* newNode = calloc(1, sizeof(struct Node));
-	char* newKey = calloc(1, sizeof(char));
+	char* newKey = calloc(SIZE, sizeof(char));
 	strcpy(newKey, key);
-	char* newValue = calloc(1, sizeof(char));
+	char* newValue = calloc(SIZE, sizeof(char));
 	strcpy(newValue, value);
 	newNode->key = newKey;
 	newNode->value = newValue;
@@ -149,12 +150,12 @@ void insert(struct Node* node, char* key, char* value) {
 }
 
 void addValue(struct Tree* tree, char* key, char* value) {
-	char* newValue = calloc(1, sizeof(char));
+	char* newValue = calloc(SIZE, sizeof(char));
 	if (newValue == NULL) {
 		return;
 	}
 	strcpy(newValue, value);
-	char* newKey = calloc(1, sizeof(char));
+	char* newKey = calloc(SIZE, sizeof(char));
 	if (newKey == NULL) {
 		return;
 	}
@@ -233,12 +234,12 @@ struct Node* closestToMiddle(struct Node* node) {
 }
 
 void copyData(struct Node* to, struct Node* from) {
-	char* newValue = calloc(1, sizeof(char));
+	char* newValue = calloc(SIZE, sizeof(char));
 	if (newValue == NULL) {
 		return;
 	}
 	strcpy(newValue, from->value);
-	char* newKey = calloc(1, sizeof(char));
+	char* newKey = calloc(SIZE, sizeof(char));
 	if (newKey == NULL) {
 		return;
 	}
@@ -271,9 +272,18 @@ void deleteNode(struct Node* node, char* key) {
 			}
 		}
 		struct Node* help = node->parent;
-		free(node->key);
-		free(node->value);
-		free(node);
+		if (strcmp(node->key, help->key) < 0) {
+			free(node->value);
+			free(node->key);
+			free(node);
+			help->leftChild = NULL;
+		}
+		else {
+			free(node->value);
+			free(node->key);
+			free(node);
+			help->rightChild = NULL;
+		}
 		help = balance(help);
 
 		return;
@@ -340,7 +350,6 @@ void deleteChildren(struct Node* node) {
 	deleteChildren(node->rightChild);
 	free(node->key);
 	free(node->value);
-	free(node->height);
 	free(node);
 }
 
