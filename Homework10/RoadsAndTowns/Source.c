@@ -126,7 +126,7 @@ bool tests() {
 	addValue(1, answer2);
 	addValue(2, answer2);
 
-	bool testPassed = compareLists(answer1, towns[0]) & compareLists(answer1, towns[1]);
+	bool testPassed = (compareLists(answer1, towns[0]) && compareLists(answer2, towns[1]));
 	for (int i = 0; i < numberOfCapitals; ++i)
 	{
 		deleteList(towns[i]);
