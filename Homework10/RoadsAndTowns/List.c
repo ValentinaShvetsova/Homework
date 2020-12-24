@@ -53,6 +53,9 @@ void deleteValue(struct List* list, int value) {
 		list->head = temp;
 	}
 	else {
+		if (current == NULL) {
+			list->tail = previous;
+		}
 		previous->next = temp;
 	}
 }
