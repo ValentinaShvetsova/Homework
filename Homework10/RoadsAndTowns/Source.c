@@ -38,7 +38,7 @@ void useCity(int** graph, int size, int capitalNumber, int* distance, bool* used
 
 void distributeCities(int** graph, int size, int* capitals, int numberOfCapitals, struct List** towns) {
 	bool* used = calloc(size, sizeof(bool));
-	int** distance = (int*)malloc(size * size * sizeof(int));
+	int** distance = (int*)malloc(size * sizeof(int));
 	for (int i = 0; i < numberOfCapitals; ++i)
 	{
 		distance[i] = calloc(size, sizeof(int));
@@ -118,15 +118,15 @@ bool tests() {
 	free(capitals);
 
 	struct List* answer1 = createList();
-	addValue(answer1, 0);
-	addValue(answer1, 4);
-	addValue(answer1, 3);
+	addValue(0, answer1);
+	addValue(4, answer1);
+	addValue(3, answer1);
 
 	struct List* answer2 = createList();
-	addValue(answer2, 1);
-	addValue(answer2, 2);
+	addValue(1, answer2);
+	addValue(2, answer2);
 
-	bool testPassed = compareLists(answer1, answer2);
+	bool testPassed = compareLists(answer1, towns[0]) & compareLists(answer1, towns[1]);
 	for (int i = 0; i < numberOfCapitals; ++i)
 	{
 		deleteList(towns[i]);

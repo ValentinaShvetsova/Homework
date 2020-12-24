@@ -57,13 +57,12 @@ void deleteValue(struct List* list, int value) {
 	}
 }
 
-void deleteList(struct List** list) {
+void deleteList(struct List* list) {
 	while (!isEmpty(list)) {
-		struct Node* temp = (*list)->head->next;
-		deleteValue(list, (*list)->head->value);
-		(*list)->head = temp;
+		struct Node* temp = (list)->head->next;
+		deleteValue(list, (list)->head->value);
+		(list)->head = temp;
 	}
-	free(*list);
 	free(list);
 }
 
