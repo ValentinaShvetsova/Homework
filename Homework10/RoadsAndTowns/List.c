@@ -23,6 +23,7 @@ void addValue(int value, struct List* list) {
 		return;
 	}
 	newNode->value = value;
+	newNode->next = NULL;
 	if (!isEmpty(list)) {
 		list->tail->next = newNode;
 		list->tail = list->tail->next;
@@ -56,20 +57,14 @@ void deleteValue(struct List* list, int value) {
 	}
 }
 
-void deleteList(struct List* list) {
+void deleteList(struct List** list) {
 	while (!isEmpty(list)) {
-		struct Node* temp = list->head->next;
-		deleteValue(list, list->head->value);
-		list->head = temp;
+		struct Node* temp = (*list)->head->next;
+		deleteValue(list, (*list)->head->value);
+		(*list)->head = temp;
 	}
-}
-
-void deleteGraph(int** graph, int size) {
-	for (int i = 0; i < size; ++i)
-	{
-		free(graph[i]);
-	}
-	free(graph);
+	free(*list);
+	free(list);
 }
 
 void printList(struct List* list) {
@@ -77,7 +72,6 @@ void printList(struct List* list) {
 	if (isEmpty(list)) {
 		return;
 	}
-	list->tail->next = NULL;
 	while (current != NULL) {
 		printf("%d ", current->value);
 		current = current->next;
@@ -85,9 +79,14 @@ void printList(struct List* list) {
 }
 
 int returnValue(struct List* list, int positionNumber) {
+	if (isEmpty(list)) {
+		return NULL;
+	}
 	struct Node* current = list->head;
 	for (int i = 1; i < positionNumber; ++i) {
-		current = current->next;
+		if (current->next != NULL) {
+			current = current->next;
+		}
 	}
 	return current->value;
 }

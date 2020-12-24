@@ -35,9 +35,10 @@ void useCity(int** graph, int size, int capitalNumber, int* distance, bool* used
 	(*numberOfLeftoverCities) -= 1;
 
 }
+
 void distributeCities(int** graph, int size, int* capitals, int numberOfCapitals, struct List** towns) {
 	bool* used = calloc(size, sizeof(bool));
-	int **distance = (int*)malloc(size * size * sizeof(int));
+	int** distance = (int*)malloc(size * size * sizeof(int));
 	for (int i = 0; i < numberOfCapitals; ++i)
 	{
 		distance[i] = calloc(size, sizeof(int));
@@ -47,8 +48,8 @@ void distributeCities(int** graph, int size, int* capitals, int numberOfCapitals
 		}
 		distance[i][capitals[i]] = 0;
 	}
-	
-	int *pnumberOfLeftoverCities = malloc(sizeof(int));
+
+	int* pnumberOfLeftoverCities = malloc(sizeof(int));
 	*pnumberOfLeftoverCities = size;
 	int numberOfLeftoverCities = *pnumberOfLeftoverCities;
 	while ((*pnumberOfLeftoverCities) > 0)
@@ -152,7 +153,7 @@ int main() {
 	int numberOfRoads = 0;
 	fscanf(file, "%d %d", &size, &numberOfRoads);
 
-	int **graph = (int*)malloc(size * size * sizeof(int));
+	int** graph = (int*)malloc(size * size * sizeof(int));
 	for (int i = 0; i < size; ++i)
 	{
 		graph[i] = calloc(size, sizeof(int));
@@ -173,9 +174,9 @@ int main() {
 	int numberOfCapitals = 0;
 	fscanf(file, "%d", &numberOfCapitals);
 
-	int *capitals = (int*)malloc(numberOfCapitals * sizeof(int));
+	int* capitals = (int*)malloc(numberOfCapitals * sizeof(int));
 
-	struct List **towns = (int*)malloc(numberOfCapitals * sizeof(struct List*));
+	struct List** towns = (int*)malloc(numberOfCapitals * sizeof(struct List*));
 	for (int i = 0; i < numberOfCapitals; ++i)
 	{
 		int capitalNumber = 0;
