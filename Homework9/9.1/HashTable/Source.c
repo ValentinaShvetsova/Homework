@@ -23,6 +23,15 @@ bool tests() {
 		deleteTable(table);
 		return false;
 	}
+	char value[] = "horse";
+	if (!tableContainsValue(table, value)) {
+		return false;
+	}
+	float realloadFactor = 0.128571436;
+	float tableLoadFactor = loadFactor(table);
+	if (realloadFactor != tableLoadFactor) {
+		return false;
+	}
 	deleteTable(table);
 	return true;
 }
