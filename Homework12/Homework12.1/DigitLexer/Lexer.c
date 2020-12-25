@@ -3,75 +3,85 @@
 #include "lexer.h"
 #include <stdbool.h>
 
+enum Condition {
+	start,
+	digitPointOrE,
+	digit,
+	digitEOrEnd,
+	digitOrSign,
+	digitAfterSign,
+	digitWithoutChoice,
+};
+
 bool lexer(char* string) {
 	const int length = strlen(string);
-	int state = 0;
+	enum Condution state = 0;
 	for (int i = 0; i < length + 1; ++i) {
 		switch (state) {
-		case 0:
+		case start:
 			if (isdigit(string[i])) {
-				state = 1;
+				state = digitPointOrE;
 				break;
 			}
 			return false;
-		case 1:
+		case digitPointOrE:
 			if (isdigit(string[i])) {
-				state = 1;
+				state = digitPointOrE;
 				break;
 			}
 			if (string[i] == '.')
 			{
-				state = 2;
+				state = digit;
 				break;
 			}
 			if (string[i] == 'E')
 			{
-				state = 4;
+				state = digitOrSign;
 				break;
 			}
 			return string[i] == '\0';
-		case 2:
+		case digit:
 			if (isdigit(string[i]))
 			{
-				state = 3;
+				state = digitEOrEnd;
 				break;
 			}
 			return false;
-		case 3:
+		case digitEOrEnd:
 			if (isdigit(string[i]))
 			{
-				state = 3;
+				state = digitEOrEnd;
 				break;
 			}
 			if (string[i] == 'E')
 			{
-				state = 4;
+				state = digitOrSign;
 				break;
 			}
 			return string[i] == '\0';
-		case 4:
+		case digitOrSign:
 			if (isdigit(string[i]))
 			{
-				state = 6;
+				state = digitWithoutChoice;
 				break;
 			}
 			if (string[i] == '+' || string[i] == '-')
 			{
-				state = 5;
+				state = digitAfterSign;
 				break;
 			}
 			return false;
-		case 5:
+		case digitAfterSign:
 			if (isdigit(string[i]))
 			{
-				state = 6;
+				state = digitWithoutChoice;
 				break;
 			}
 			return false;
-		case 6:
+		case digitWithoutChoice:
 			if (isdigit(string[i]))
 			{
-				state = 6;
+				state = digitWithoutChoice;
 				break;
 			}
 			return string[i] == '\0';

@@ -24,8 +24,7 @@ int main() {
 		return 1;
 	}
 	FILE* file = fopen("input.txt", "r");
-	if (!file)
-	{
+	if (!file) {
 		printf("File not found\n");
 		return 1;
 	}
