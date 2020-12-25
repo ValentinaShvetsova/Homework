@@ -20,8 +20,11 @@ bool tests() {
 	}
 	fclose(file);
 	if (maximumListLength(table) != 2) {
+		deleteTable(table);
 		return false;
 	}
+	deleteTable(table);
+	return true;
 }
 
 int main() {

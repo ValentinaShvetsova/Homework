@@ -19,7 +19,6 @@ struct List {
 
 struct List* createList() {
 	struct List* newList = calloc(1, sizeof(struct List));
-	newList->head = NULL;
 	return newList;
 }
 
@@ -49,7 +48,6 @@ bool addNewValueToList(struct List* list, char* value, int amount) {
 	if (current == NULL) {
 		list->length++;
 		struct Node* newNode = initializeNode(value, amount);
-		free(current);
 		newNode->next = NULL;
 		return true;
 	}
@@ -102,7 +100,6 @@ void deleteList(struct List* list) {
 }
 
 void printList(struct List* list) {
-
 	struct Node* current = list->head;
 	while (current != NULL) {
 		printf("%s(%d) ", current->word, current->counter);
