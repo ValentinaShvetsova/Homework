@@ -42,7 +42,7 @@ bool calculateSolution(char postfixExpression[], int *result) {
 		case '/':
 			if (!isEmpty(stack)) {
 				int firstElement = top(stack);
-				if (!isEmpty(stack) && !(postfixExpression[i] == '/' && firstElement == 0)) {
+				if (!(postfixExpression[i] == '/' && firstElement == 0)) {
 					performOperation(postfixExpression[i], stack);
 				}
 				else {
@@ -59,10 +59,9 @@ bool calculateSolution(char postfixExpression[], int *result) {
 	}
 	bool resultExist = false;
 	if (!isEmpty(stack)){
-		int resulting = top(stack);
+		*result = pop(stack);
 		if (isEmpty(stack)) {
 			resultExist = true;
-			getResult(stack, result);
 		} else {
 			deleteStack(stack);
 			resultExist = false;
@@ -75,7 +74,7 @@ bool test() {
 	char string1[] = "23+4";
 	int result1 = 0;
 
-	char string2[] = "5+";
+	char string2[] = "5+1";
 	int result2 = 0;
 
 	char string3[] = "+65";
@@ -92,6 +91,7 @@ bool test() {
 	}
 	return true;
 }
+
 int main() {
 	if (!test()) {
 		printf("Tests ain't passed\n");
