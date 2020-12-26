@@ -38,6 +38,7 @@ void addEntry(struct List* list, const char name[], const char phone[]) {
 	strcpy(newEntry->phone, phone);
 	if (isEmpty(list)) {
 		list->head = newEntry;
+		newEntry->next = NULL;
 		list->tail = list->head;
 		return;
 	}
