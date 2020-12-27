@@ -12,7 +12,7 @@ int searchingSubstring(char* string, char* substring) {
 	}
 	for (int i = substringLength - 2; i >= 0; i--) {
 		if (offsetTable[substring[i]] == substringLength) {
-			offsetTable[substring[i]] =substringLength - i - 1;
+			offsetTable[substring[i]] = substringLength - i - 1;
 		}
 	}
 	for (int stringPosition = 0; stringPosition <= stringLength - substringLength; ++stringPosition) {
@@ -33,7 +33,25 @@ int searchingSubstring(char* string, char* substring) {
 	return -1;
 }
 
+bool tests() {
+	char* string1 = "to the moon and back";
+	char* string2 = "reality really real";
+	char* string3 = "happy new year";
+
+	char* substring1 = "moon";
+	char* substring2 = "real";
+	char* substring3 = "happyd";
+
+	if (searchingSubstring(string1, substring1) != 7 || searchingSubstring(string2, substring2) != 0 || searchingSubstring(string3, substring3) != -1) {
+		return false;
+	}
+	return true;
+}
+
 int main() {
+	if (!tests()) {
+		return 1;
+	}
 	char string[] = {0};
 	char substring[] = {0};
 	FILE* file = fopen("input.txt", "r");
