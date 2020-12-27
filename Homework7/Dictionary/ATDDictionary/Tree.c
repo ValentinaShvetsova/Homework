@@ -1,10 +1,8 @@
-#include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
 #include <malloc.h>
 #include "Tree.h"
-#define SIZE 101
 
 struct Node {
 	int key;
@@ -14,8 +12,7 @@ struct Node {
 	struct Node* rightChild;
 };
 
-struct Tree
-{
+struct Tree {
 	struct Node* root;
 };
 
@@ -132,7 +129,9 @@ void deleteNode(struct Tree* tree, struct Node* node, int key) {
 			deleteNode(tree, helpingNode, helpingNode->key);
 			node->key = newNode->key;
 			free(node->value);
-			node->value = newNode->value;
+			strcpy(node->value, newNode->value);
+			free(newNode->value);
+			free(newNode);
 			return;
 		}
 		else if (node->rightChild == NULL) {
