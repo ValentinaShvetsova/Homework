@@ -44,6 +44,9 @@ void deleteValue(struct List* list, int value) {
 		previous = current;
 		current = current->next;
 	}
+	if (current == NULL) {
+		return;
+	}
 	if (current->value != value) {
 		return;
 	}
@@ -53,18 +56,15 @@ void deleteValue(struct List* list, int value) {
 		list->head = temp;
 	}
 	else {
-		if (current == NULL) {
-			list->tail = previous;
-		}
 		previous->next = temp;
 	}
 }
 
 void deleteList(struct List* list) {
 	while (!isEmpty(list)) {
-		struct Node* temp = (list)->head->next;
-		deleteValue(list, (list)->head->value);
-		(list)->head = temp;
+		struct Node* temp = list->head->next;
+		deleteValue(list, list->head->value);
+		list->head = temp;
 	}
 	free(list);
 }
@@ -82,13 +82,14 @@ void printList(struct List* list) {
 
 int returnValue(struct List* list, int positionNumber) {
 	if (isEmpty(list)) {
-		return NULL;
+		return 0;
 	}
 	struct Node* current = list->head;
 	for (int i = 1; i < positionNumber; ++i) {
-		if (current->next != NULL) {
-			current = current->next;
+		if (current == NULL) {
+			return 0;
 		}
+		current = current->next;
 	}
 	return current->value;
 }

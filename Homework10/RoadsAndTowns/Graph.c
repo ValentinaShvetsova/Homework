@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdbool.h>
-#include "List.h"
 #include "Graph.h"
 #include <stdlib.h>
 

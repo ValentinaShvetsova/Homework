@@ -33,7 +33,6 @@ void useCity(int** graph, int size, int capitalNumber, int* distance, bool* used
 	used[currentVertex] = true;
 	addValue(currentVertex, towns);
 	(*numberOfLeftoverCities) -= 1;
-
 }
 
 void distributeCities(int** graph, int size, int* capitals, int numberOfCapitals, struct List** towns) {
