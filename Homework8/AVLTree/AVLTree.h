@@ -3,16 +3,16 @@
 // This structure consists of nodes
 struct Tree;
 
-// This function ctreates tree
+// This function creates tree
 struct Tree* createTree();
 
-// This function add value in the tree
+// This function adds value in the tree
 void addValue(struct Tree* tree, char* key, char* value);
 
 // This function gets value by key 
 char* getValue(struct Tree* tree, char* key);
 
-//This function check whether tree contains value by key
+// This function checks whether tree contains value by key
 bool contains(struct Tree* tree, char* key);
 
 // This function deletes value from tree

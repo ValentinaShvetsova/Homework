@@ -6,28 +6,32 @@
 
 bool functionsWorking() {
 	struct Tree* tree = createTree();
-	char key1[] = "11";
-	char key2[] = "12";
-	char key3[] = "13";
-	char value1[] = "right";
-	char value2[] = "root";
-	char value3[] = "left";
+	char *key1 = "11";
+	char *key2 = "12";
+	char *key3 = "13";
+	char *value1 = "right";
+	char *value2 = "root";
+	char *value3 = "left";
 
 	addValue(tree, key1, value1);
 	addValue(tree, key2, value2);
 	addValue(tree, key3, value3);
 
 	if (strcmp(getValue(tree, key2), value2) != 0) {
+		deleteTree(tree);
 		return false;
 	}
 	if (!contains(tree, key3) || !contains(tree, key2) || !contains(tree, key1)) {
+		deleteTree(tree);
 		return false;
 	}
 	if (strcmp(getRootValue(tree), value2) != 0) {
+		deleteTree(tree);
 		return false;
 	}
 	deleteValue(tree, key3);
 	if (contains(tree, key3)) {
+		deleteTree(tree);
 		return false;
 	}
 	deleteTree(tree);

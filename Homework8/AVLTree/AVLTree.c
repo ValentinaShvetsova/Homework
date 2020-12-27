@@ -29,7 +29,7 @@ bool isLeaf(struct Node* node) {
 
 struct Node* createNode(char* key, char* value) {
 	struct Node* newNode = calloc(1, sizeof(struct Node));
-	char* newKey = calloc(SIZE, sizeof(char));
+	char* newKey = calloc(strlen(key) + 1, sizeof(char));
 	strcpy(newKey, key);
 	char* newValue = calloc(SIZE, sizeof(char));
 	strcpy(newValue, value);
@@ -44,12 +44,7 @@ struct Tree* createTree() {
 }
 
 int getHeight(struct Node* node) {
-	if (node == NULL) {
-		return 0;
-	}
-	else {
-		return node->height;
-	}
+	return node == NULL ? 0 : node->height;
 }
 
 int heightDifference(struct Node* node) {
@@ -155,7 +150,7 @@ void addValue(struct Tree* tree, char* key, char* value) {
 		return;
 	}
 	strcpy(newValue, value);
-	char* newKey = calloc(SIZE, sizeof(char));
+	char* newKey = calloc(strlen(key) + 1, sizeof(char));
 	if (newKey == NULL) {
 		return;
 	}
@@ -163,9 +158,6 @@ void addValue(struct Tree* tree, char* key, char* value) {
 	if (isEmpty(tree)) {
 		struct Node* root = createNode(key, value);
 		root->height = 1;
-		root->leftChild = NULL;
-		root->rightChild = NULL;
-		root->parent = NULL;
 		tree->root = root;
 		return;
 	}
@@ -209,7 +201,7 @@ bool find(struct Node* node, char* key) {
 }
 
 bool contains(struct Tree* tree, char* key) {
-	return find(tree->root, key);
+	return get(tree->root, key) != NULL;
 }
 
 struct Node* closestToMiddle(struct Node* node) {
@@ -244,7 +236,9 @@ void copyData(struct Node* to, struct Node* from) {
 		return;
 	}
 	strcpy(newKey, from->key);
+	free(to->value);
 	to->value = newValue;
+	free(to->key);
 	to->key = newKey;
 }
 
@@ -263,12 +257,20 @@ void deleteNode(struct Node* node, char* key) {
 			if (node->rightChild != NULL) {
 				node->rightChild->parent = node->parent;
 				node->parent->leftChild = node->rightChild;
+				free(node->value);
+				free(node->key);
+				free(node);
+				return;
 			}
 		}
 		else if (node->rightChild == NULL) {
 			if (node->leftChild != NULL) {
 				node->leftChild->parent = node->parent;
 				node->parent->rightChild = node->leftChild;
+				free(node->value);
+				free(node->key);
+				free(node);
+				return;
 			}
 		}
 		struct Node* help = node->parent;
