@@ -128,7 +128,6 @@ void deleteNode(struct Tree* tree, struct Node* node, int key) {
 			
 			deleteNode(tree, helpingNode, helpingNode->key);
 			node->key = newNode->key;
-			free(node->value);
 			strcpy(node->value, newNode->value);
 			free(newNode->value);
 			free(newNode);
