@@ -6,12 +6,6 @@
 
 bool functionsWorking() {
 	struct Tree* tree = createTree();
-	const char *key1 = "11";
-	const char *key2 = "12";
-	const char *key3 = "13";
-	const char *value1 = "right";
-	const char *value2 = "root";
-	const char *value3 = "left";
 
 	addValue(tree, "11", "right");
 	addValue(tree, "12", "root");

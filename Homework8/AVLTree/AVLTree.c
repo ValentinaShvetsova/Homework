@@ -33,11 +33,14 @@ struct Node* createNode(char* key, char* value) {
 	}
 	char* newKey = calloc(strlen(key) + 1, sizeof(char));
 	if (!newKey) {
+		free(newNode);
 		return NULL;
 	}
 	strcpy(newKey, key);
 	char* newValue = calloc(strlen(value) + 1, sizeof(char));
 	if (!newValue) {
+		free(newNode);
+		free(newKey);
 		return NULL;
 	}
 	strcpy(newValue, value);
@@ -62,13 +65,8 @@ int heightDifference(struct Node* node) {
 void heightUpdate(struct Node* node) {
 	int leftHeight = 0;
 	int rightHeight = 0;
-	if (node->leftChild != NULL) {
-		leftHeight = getHeight(node->leftChild);
-	}
-	
-	if (node->rightChild != NULL) {
-		rightHeight = getHeight(node->rightChild);
-	}
+	int leftHeight = getHeight(node->leftChild);
+	int rightHeight = getHeight(node->rightChild);
 	
 	node->height = (leftHeight > rightHeight ? leftHeight : rightHeight) + 1;
 }
