@@ -6,16 +6,16 @@
 
 bool functionsWorking() {
 	struct Tree* tree = createTree();
-	char *key1 = "11";
-	char *key2 = "12";
-	char *key3 = "13";
-	char *value1 = "right";
-	char *value2 = "root";
-	char *value3 = "left";
+	const char *key1 = "11";
+	const char *key2 = "12";
+	const char *key3 = "13";
+	const char *value1 = "right";
+	const char *value2 = "root";
+	const char *value3 = "left";
 
-	addValue(tree, key1, value1);
-	addValue(tree, key2, value2);
-	addValue(tree, key3, value3);
+	addValue(tree, "11", "right");
+	addValue(tree, "12", "root");
+	addValue(tree, "13", "left");
 
 	if (strcmp(getValue(tree, key2), value2) != 0) {
 		deleteTree(tree);

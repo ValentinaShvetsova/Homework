@@ -4,7 +4,6 @@
 #include <malloc.h>
 #include <string.h>
 #include "AVLTree.h"
-#define SIZE 100
 
 struct Node {
 	char* key;
@@ -31,7 +30,7 @@ struct Node* createNode(char* key, char* value) {
 	struct Node* newNode = calloc(1, sizeof(struct Node));
 	char* newKey = calloc(strlen(key) + 1, sizeof(char));
 	strcpy(newKey, key);
-	char* newValue = calloc(SIZE, sizeof(char));
+	char* newValue = calloc(strlen(value) + 1, sizeof(char));
 	strcpy(newValue, value);
 	newNode->key = newKey;
 	newNode->value = newValue;
@@ -145,44 +144,36 @@ void insert(struct Node* node, char* key, char* value) {
 }
 
 void addValue(struct Tree* tree, char* key, char* value) {
-	char* newValue = calloc(SIZE, sizeof(char));
-	if (newValue == NULL) {
-		return;
-	}
-	strcpy(newValue, value);
-	char* newKey = calloc(strlen(key) + 1, sizeof(char));
-	if (newKey == NULL) {
-		return;
-	}
-	strcpy(newKey, key);
 	if (isEmpty(tree)) {
 		struct Node* root = createNode(key, value);
 		root->height = 1;
 		tree->root = root;
+		
 		return;
 	}
-	insert(tree->root, newKey, newValue);
+	insert(tree->root, key, value);
 	tree->root = balance(tree->root);
 }
 
-char* get(struct Node* node, char* key) {
+struct Node* getNode(struct Node* node, char* key) {
 	if (node == NULL) {
 		return NULL;
 	}
 
 	if (strcmp(node->key, key) == 0) {
-		return node->value;
+		return node;
 	}
 	if (strcmp(key, node->key) < 0) {
-		return get(node->leftChild, key);
+		return getNode(node->leftChild, key);
 	}
 	else {
-		return get(node->rightChild, key);
+		return getNode(node->rightChild, key);
 	}
 }
 
 char* getValue(struct Tree* tree, char* key) {
-	return get(tree->root, key);
+	struct Node* node = getNode(tree->root, key);
+	return node->value;
 }
 
 bool find(struct Node* node, char* key) {
@@ -201,7 +192,7 @@ bool find(struct Node* node, char* key) {
 }
 
 bool contains(struct Tree* tree, char* key) {
-	return get(tree->root, key) != NULL;
+	return getNode(tree->root, key) != NULL;
 }
 
 struct Node* closestToMiddle(struct Node* node) {
@@ -226,13 +217,14 @@ struct Node* closestToMiddle(struct Node* node) {
 }
 
 void copyData(struct Node* to, struct Node* from) {
-	char* newValue = calloc(SIZE, sizeof(char));
+	char* newValue = calloc(100, sizeof(char));
 	if (newValue == NULL) {
 		return;
 	}
 	strcpy(newValue, from->value);
-	char* newKey = calloc(SIZE, sizeof(char));
+	char* newKey = calloc(100, sizeof(char));
 	if (newKey == NULL) {
+		free(newValue);
 		return;
 	}
 	strcpy(newKey, from->key);
@@ -240,6 +232,12 @@ void copyData(struct Node* to, struct Node* from) {
 	to->value = newValue;
 	free(to->key);
 	to->key = newKey;
+}
+
+void freeNode(struct Node* node) {
+	free(node->value);
+	free(node->key);
+	free(node);
 }
 
 void deleteNode(struct Node* node, char* key) {
@@ -257,9 +255,7 @@ void deleteNode(struct Node* node, char* key) {
 			if (node->rightChild != NULL) {
 				node->rightChild->parent = node->parent;
 				node->parent->leftChild = node->rightChild;
-				free(node->value);
-				free(node->key);
-				free(node);
+				freeNode(node);
 				return;
 			}
 		}
@@ -267,23 +263,17 @@ void deleteNode(struct Node* node, char* key) {
 			if (node->leftChild != NULL) {
 				node->leftChild->parent = node->parent;
 				node->parent->rightChild = node->leftChild;
-				free(node->value);
-				free(node->key);
-				free(node);
+				freeNode(node);
 				return;
 			}
 		}
 		struct Node* help = node->parent;
 		if (strcmp(node->key, help->key) < 0) {
-			free(node->value);
-			free(node->key);
-			free(node);
+			freeNode(node);
 			help->leftChild = NULL;
 		}
 		else {
-			free(node->value);
-			free(node->key);
-			free(node);
+			freeNode(node);
 			help->rightChild = NULL;
 		}
 		help = balance(help);
@@ -325,9 +315,7 @@ void deleteRoot(struct Tree* tree) {
 	if (newRoot != NULL) {
 		newRoot->parent = NULL;
 	}
-	free(tree->root->key);
-	free(tree->root->value);
-	free(tree->root);
+	freeNode(tree->root);
 	tree->root = balance(newRoot);
 	return;
 }
@@ -350,9 +338,7 @@ void deleteChildren(struct Node* node) {
 	}
 	deleteChildren(node->leftChild);
 	deleteChildren(node->rightChild);
-	free(node->key);
-	free(node->value);
-	free(node);
+	freeNode(node);
 }
 
 void deleteTree(struct Tree* tree)
