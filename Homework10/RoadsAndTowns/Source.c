@@ -1,4 +1,5 @@
 #include "List.h"
+#include "Graph.h"
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
@@ -48,17 +49,14 @@ void distributeCities(int** graph, int size, int* capitals, int numberOfCapitals
 		distance[i][capitals[i]] = 0;
 	}
 
-	int* amountOfLeftoverCities = malloc(sizeof(int));
-	*amountOfLeftoverCities = size;
-	int numberOfLeftoverCities = *amountOfLeftoverCities;
-	while ((*amountOfLeftoverCities) > 0)
+	int amountOfLeftoverCities = size;
+	while ((amountOfLeftoverCities) > 0)
 	{
 		for (int i = 0; i < numberOfCapitals; ++i)
 		{
-			useCity(graph, size, capitals[i], distance[i], used, towns[i], amountOfLeftoverCities);
+			useCity(graph, size, capitals[i], distance[i], used, towns[i], &amountOfLeftoverCities);
 		}
 	}
-	free(amountOfLeftoverCities);
 	free(used);
 	for (int i = 0; i < numberOfCapitals; ++i)
 	{
