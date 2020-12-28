@@ -28,9 +28,18 @@ bool isLeaf(struct Node* node) {
 
 struct Node* createNode(char* key, char* value) {
 	struct Node* newNode = calloc(1, sizeof(struct Node));
+	if (!newNode) {
+		return NULL;
+	}
 	char* newKey = calloc(strlen(key) + 1, sizeof(char));
+	if (!newKey) {
+		return NULL;
+	}
 	strcpy(newKey, key);
 	char* newValue = calloc(strlen(value) + 1, sizeof(char));
+	if (!newValue) {
+		return NULL;
+	}
 	strcpy(newValue, value);
 	newNode->key = newKey;
 	newNode->value = newValue;
@@ -54,11 +63,11 @@ void heightUpdate(struct Node* node) {
 	int leftHeight = 0;
 	int rightHeight = 0;
 	if (node->leftChild != NULL) {
-		leftHeight = node->leftChild->height;
+		leftHeight = getHeight(node->leftChild);
 	}
 	
 	if (node->rightChild != NULL) {
-		rightHeight = node->rightChild->height;
+		rightHeight = getHeight(node->rightChild);
 	}
 	
 	node->height = (leftHeight > rightHeight ? leftHeight : rightHeight) + 1;
@@ -173,22 +182,10 @@ struct Node* getNode(struct Node* node, char* key) {
 
 char* getValue(struct Tree* tree, char* key) {
 	struct Node* node = getNode(tree->root, key);
-	return node->value;
-}
-
-bool find(struct Node* node, char* key) {
 	if (node == NULL) {
-		return false;
+		return NULL;
 	}
-	if (strcmp(node->key, key) == 0) {
-		return true;
-	}
-	else if (strcmp(node->key, key) < 0) {
-		return find(node->rightChild, key);
-	}
-	else {
-		return find(node->leftChild, key);
-	}
+	return node->value;
 }
 
 bool contains(struct Tree* tree, char* key) {

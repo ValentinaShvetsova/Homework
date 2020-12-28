@@ -17,20 +17,20 @@ bool functionsWorking() {
 	addValue(tree, "12", "root");
 	addValue(tree, "13", "left");
 
-	if (strcmp(getValue(tree, key2), value2) != 0) {
+	if (strcmp(getValue(tree, "12"), "root") != 0) {
 		deleteTree(tree);
 		return false;
 	}
-	if (!contains(tree, key3) || !contains(tree, key2) || !contains(tree, key1)) {
+	if (!contains(tree, "13") || !contains(tree, "12") || !contains(tree, "11")) {
 		deleteTree(tree);
 		return false;
 	}
-	if (strcmp(getRootValue(tree), value2) != 0) {
+	if (strcmp(getRootValue(tree), "12") != 0) {
 		deleteTree(tree);
 		return false;
 	}
-	deleteValue(tree, key3);
-	if (contains(tree, key3)) {
+	deleteValue(tree, "13");
+	if (contains(tree, "13")) {
 		deleteTree(tree);
 		return false;
 	}
