@@ -84,7 +84,6 @@ int main() {
 		printf("Test failed\n");
 		return 0;
 	}
-
 	int size = 0;
 	printf("Input size of array: ");
 	scanf("%d", &size);
