@@ -27,6 +27,3 @@ int returnValue(struct List* list, int positionNumber);
 
 // This function compares Lists
 bool compareLists(struct List* list1, struct List* list2);
-
-// This function deletes graph
-void deleteGraph(int** graph, int size);

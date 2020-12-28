@@ -56,15 +56,16 @@ void deleteValue(struct List* list, int value) {
 		list->head = temp;
 	}
 	else {
+		if (current->next = NULL) {
+			list->tail = previous;
+		}
 		previous->next = temp;
 	}
 }
 
 void deleteList(struct List* list) {
 	while (!isEmpty(list)) {
-		struct Node* temp = list->head->next;
 		deleteValue(list, list->head->value);
-		list->head = temp;
 	}
 	free(list);
 }

@@ -48,17 +48,17 @@ void distributeCities(int** graph, int size, int* capitals, int numberOfCapitals
 		distance[i][capitals[i]] = 0;
 	}
 
-	int* numberOfLeftoverCities = malloc(sizeof(int));
-	*numberOfLeftoverCities = size;
-	int numberOfLeftoverCities = *numberOfLeftoverCities;
-	while ((*numberOfLeftoverCities) > 0)
+	int* amountOfLeftoverCities = malloc(sizeof(int));
+	*amountOfLeftoverCities = size;
+	int numberOfLeftoverCities = *amountOfLeftoverCities;
+	while ((*amountOfLeftoverCities) > 0)
 	{
 		for (int i = 0; i < numberOfCapitals; ++i)
 		{
-			useCity(graph, size, capitals[i], distance[i], used, towns[i], numberOfLeftoverCities);
+			useCity(graph, size, capitals[i], distance[i], used, towns[i], amountOfLeftoverCities);
 		}
 	}
-	free(numberOfLeftoverCities);
+	free(amountOfLeftoverCities);
 	free(used);
 	for (int i = 0; i < numberOfCapitals; ++i)
 	{
