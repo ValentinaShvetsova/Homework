@@ -82,8 +82,10 @@ int fourthTest() {
 int main() {
 	if (!firstTest() || !secondTest() || !thirdTest() || !fourthTest()) {
 		printf("Test failed\n");
-		return 0;
+		return 1;
 	}
+	return 0;
+
 	int size = 0;
 	printf("Input size of array: ");
 	scanf("%d", &size);

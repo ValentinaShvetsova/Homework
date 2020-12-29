@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 
 int binaryPower(int number, int power) {
 	if (power == 0) {
@@ -37,18 +38,18 @@ int testSlowPower() {
 	return 0;
 }
 
-int main() {
-	int firstTest = testBinaryPower();
-	if (firstTest == 0) {
-		printf("Test failed\n");
-		return 0;
+bool test() {
+	if (!testBinaryPower() || !testSlowPower()) {
+		return false;
 	}
+	return true;
+}
 
-    int secondTest = testSlowPower();
-	if (secondTest == 0) {
-		printf("Test failed\n");
-		return 0;
+int main() {
+	if (!test()) {
+		return 1;
 	}
+	return 0;
 
 	int number = 0;
 	int power = 0;

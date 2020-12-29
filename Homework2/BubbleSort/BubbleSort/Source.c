@@ -67,11 +67,12 @@ int fourthTest() {
 int main() {
 	if (firstTest() == 0 || secondTest() == 0 || thirdTest() == 0 || fourthTest() == 0) {
 		printf("Test failed\n");
-		return 0;
+		return 1;
 	}
-	
-	int size = 100000;
-	int a[100000];
+	return 0;
+
+	int size = 1000;
+	int a[1000];
 	for (int i = 0; i < size; ++i) {
 		a[i] = size - i - 1;
 	}
