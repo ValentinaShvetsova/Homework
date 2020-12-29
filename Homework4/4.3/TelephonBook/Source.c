@@ -120,26 +120,26 @@ int main() {
 			shouldGoOut = true;
 		}
 		else if (command == 1) {
-			addRecord(buffer, &recordsCount);
+			addRecord(records, &recordsCount);
 		}
 		else if (command == 2) {
-			printRecords(buffer, recordsCount);
+			printRecords(records, recordsCount);
 		}
 		else if (command == 3) {
 			char name[30];
 			printf("¬ведите им€: \n");
 			scanf("%s", &name);
-			printf("%s", findNumber(buffer, recordsCount, name));
+			printf("%s", findNumber(records, recordsCount, name));
 			recordsCount++;
 		}
 		else if (command == 4) {
 			char number[30];
 			printf("¬ведите номер: \n");
 			scanf("%s", &number);
-			printf("%s", findName(buffer, recordsCount, number));
+			printf("%s", findName(records, recordsCount, number));
 		}
 		else if (command == 5) {
-			addToFile(buffer, recordsCount, "database.txt");
+			addToFile(records, recordsCount, "database.txt");
 		}
 	}
 	return 0;
