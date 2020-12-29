@@ -1,9 +1,10 @@
 @echo off
-for /r C:\Users\Aser_Pc\Desktop\Си\Homework\Homework2\ %%B in (*.c) do (
+for /r in (*.c) do (
 	cl /EHsc %%B
+	%%~nB
 	echo %%B
 	echo %errorlevel%
-	if not errorlevel 1 (
+	if %errorlevel% EQU 0 (
 		echo test passed
 	) else (
 		echo test failed
