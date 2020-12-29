@@ -77,14 +77,20 @@ bool testFindingName() {
 	int recordsCount = 0;
 	struct Record* records = readFromFile("database.txt", &recordsCount);
 	char number[] = "34567";
-	return strcmp(findName(records, recordsCount, number), "Helga") == 0;
+	char* name = findName(records, recordsCount, number);
+	int answer = strcmp(findName(records, recordsCount, number), "Helga");
+	free(records);
+	return answer == 0;
 }
 
 bool testFindingNumber() {
 	int recordsCount = 0;
 	struct Record* records = readFromFile("database.txt", &recordsCount);
 	const char name[5] = "Oleg";
-	return strcmp(findNumber(records, recordsCount, name), "345678") == 0;
+	char* number = findNumber(records, recordsCount, name);
+	int answer = strcmp(findNumber(records, recordsCount, name), "345678");
+	free(records);
+	return answer == 0;
 }
 
 int main() {
