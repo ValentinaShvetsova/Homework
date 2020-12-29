@@ -84,15 +84,30 @@ bool testFindingNumber() {
 		recordsCount++;
 	}
 	fclose(file);
-	const char name[5] = "Helga";
-	return strcmp(findNumber(buffer, recordsCount, name), "34567");
+	const char name[5] = "Oleg";
+	return strcmp(findNumber(buffer, recordsCount, name), "345678");
+}
+
+bool writingDownTest() {
+	FILE* file = fopen("database.txt", "r");
+	struct Record buffer[100];
+	int recordsCount = 0;
+
+	while (!feof(file)) {
+		fscanf(file, "%s %s", &buffer[recordsCount].name, &buffer[recordsCount].phone);
+		recordsCount++;
+	}
+	fclose(file);
+	const char name[5] = "Oleg";
+	const char number[6] = "345678";
+	return strcmp(findName(buffer, recordsCount, name), name);
 }
 
 int main() {
-	if (!testFindingNumber() || !testFindingName()) {
+	if (!testFindingNumber() || !testFindingName() || !writingDownTest()) {
 		return 1;
 	}
-	char* locale = setlocale(LC_ALL, "");
+	setlocale(LC_ALL, "");
 	FILE* file = fopen("database.txt", "r");
 	if (file == NULL) {
 		printf("Файл не удалось открыть.\n");
@@ -105,6 +120,8 @@ int main() {
 		fscanf(file, "%s %s", &buffer[recordsCount].name, &buffer[recordsCount].phone);
 		recordsCount++;
 	}
+
+	fclose(file);
 
 	printf("\nВыберите команду:\n 0 - выйти\n");
 	printf(" 1 - добавить имя и телефон\n");
@@ -122,7 +139,6 @@ int main() {
 		}
 		if (command == 0) {
 			shouldGoOut = true;
-			return 0;
 		}
 		else if (command == 1) {
 			addRecord(buffer, &recordsCount);
@@ -144,7 +160,6 @@ int main() {
 			printf("%s", findName(buffer, recordsCount, number));
 		}
 		else if (command == 5) {
-			fclose(file);
 			addToFile(buffer, recordsCount, "database.txt");
 		}
 	}
