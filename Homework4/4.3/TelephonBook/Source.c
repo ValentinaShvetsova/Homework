@@ -9,6 +9,17 @@ struct Record {
 	char phone[30];
 };
 
+struct Record* readFromFile(char* fileName, int* recordsCount) {
+	FILE* file = fopen("database.txt", "r");
+	struct Record buffer[100];
+
+	while (!feof(file)) {
+		fscanf(file, "%s %s", &buffer[*recordsCount].name, &buffer[*recordsCount].phone);
+		(*recordsCount)++;
+	}
+	fclose(file);
+}
+
 void addRecord(struct Record records[], int *amountOfRecords) {
 	if (*amountOfRecords < 100) {
 		printf("Введите имя: ");
@@ -61,46 +72,25 @@ void addToFile(struct Record records[], const int amountOfRecords, const char na
 }
 
 bool testFindingName() {
-	FILE* file = fopen("database.txt", "r");
-	struct Record buffer[100];
 	int recordsCount = 0;
-
-	while (!feof(file)) {
-		fscanf(file, "%s %s", &buffer[recordsCount].name, &buffer[recordsCount].phone);
-		recordsCount++;
-	}
-	fclose(file);
+	struct Record* records = readFromFile("database.txt", &recordsCount);
 	char number[] = "34567";
-	return strcmp(findName(buffer, recordsCount, number), "Helga");
+	return strcmp(findName(records, recordsCount, number), "Helga");
 }
 
 bool testFindingNumber() {
-	FILE* file = fopen("database.txt", "r");
-	struct Record buffer[100];
 	int recordsCount = 0;
-
-	while (!feof(file)) {
-		fscanf(file, "%s %s", &buffer[recordsCount].name, &buffer[recordsCount].phone);
-		recordsCount++;
-	}
-	fclose(file);
+	struct Record* records = readFromFile("database.txt", &recordsCount);
 	const char name[5] = "Oleg";
-	return strcmp(findNumber(buffer, recordsCount, name), "345678");
+	return strcmp(findNumber(records, recordsCount, name), "345678");
 }
 
 bool writingDownTest() {
-	FILE* file = fopen("database.txt", "r");
-	struct Record buffer[100];
 	int recordsCount = 0;
-
-	while (!feof(file)) {
-		fscanf(file, "%s %s", &buffer[recordsCount].name, &buffer[recordsCount].phone);
-		recordsCount++;
-	}
-	fclose(file);
+	struct Recors* records = readFromFile("database.txt", &recordsCount);
 	const char name[5] = "Oleg";
 	const char number[6] = "345678";
-	return strcmp(findName(buffer, recordsCount, name), name);
+	return strcmp(findName(records, recordsCount, name), name);
 }
 
 int main() {
@@ -108,20 +98,9 @@ int main() {
 		return 1;
 	}
 	setlocale(LC_ALL, "");
-	FILE* file = fopen("database.txt", "r");
-	if (file == NULL) {
-		printf("Файл не удалось открыть.\n");
-		return 1;
-	}
-	struct Record buffer[100];
+	
 	int recordsCount = 0;
-
-	while (!feof(file)) {
-		fscanf(file, "%s %s", &buffer[recordsCount].name, &buffer[recordsCount].phone);
-		recordsCount++;
-	}
-
-	fclose(file);
+	struct Record* records = readFromFile("database.txt", &recordsCounting);
 
 	printf("\nВыберите команду:\n 0 - выйти\n");
 	printf(" 1 - добавить имя и телефон\n");
