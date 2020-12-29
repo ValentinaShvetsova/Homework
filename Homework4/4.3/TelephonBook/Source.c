@@ -100,7 +100,7 @@ int main() {
 	setlocale(LC_ALL, "");
 	
 	int recordsCount = 0;
-	struct Record* records = readFromFile("database.txt", &recordsCounting);
+	struct Record* records = readFromFile("database.txt", &recordsCount);
 
 	printf("\nВыберите команду:\n 0 - выйти\n");
 	printf(" 1 - добавить имя и телефон\n");
