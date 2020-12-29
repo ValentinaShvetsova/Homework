@@ -18,6 +18,7 @@ struct Record* readFromFile(char* fileName, int* recordsCount) {
 		(*recordsCount)++;
 	}
 	fclose(file);
+	return buffer;
 }
 
 void addRecord(struct Record records[], int *amountOfRecords) {
