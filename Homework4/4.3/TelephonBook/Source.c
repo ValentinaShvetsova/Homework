@@ -3,6 +3,7 @@
 #include <string.h>
 #include <locale.h>
 #include <stdbool.h>
+#include <malloc.h>
 
 struct Record {
 	char name[30];
@@ -11,7 +12,7 @@ struct Record {
 
 struct Record* readFromFile(char* fileName, int* recordsCount) {
 	FILE* file = fopen("database.txt", "r");
-	struct Record buffer[100];
+	struct Record* buffer = calloc(100, sizeof(struct Record));
 
 	while (!feof(file)) {
 		fscanf(file, "%s %s", &buffer[*recordsCount].name, &buffer[*recordsCount].phone);
@@ -135,5 +136,6 @@ int main() {
 			addToFile(records, recordsCount, "database.txt");
 		}
 	}
+	free(records);
 	return 0;
 }
