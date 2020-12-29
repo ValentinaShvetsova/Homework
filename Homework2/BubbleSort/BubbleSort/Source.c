@@ -69,7 +69,7 @@ int main() {
 		printf("Test failed\n");
 		return 0;
 	}
-
+	
 	int size = 100000;
 	int a[100000];
 	for (int i = 0; i < size; ++i) {
