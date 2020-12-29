@@ -87,7 +87,7 @@ bool testFindingNumber() {
 }
 
 int main() {
-	if (!testFindingNumber() || !testFindingName() || !writingDownTest()) {
+	if (!testFindingNumber() || !testFindingName()) {
 		return 1;
 	}
 	setlocale(LC_ALL, "");
