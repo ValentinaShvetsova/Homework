@@ -141,12 +141,14 @@ namespace BWT
             int size = line.Length + 1;
             char[,] transpositionTable = new char[size, size];
             var result = BWT(line, transpositionTable);
+            Console.WriteLine("Resulting string: ");
             for (int i = 0; i < line.Length + 1; ++i)
             {
                 Console.Write(result[i]);
             }
             char[] res2 = ReverseBWT(result, transpositionTable);
             Console.WriteLine();
+            Console.WriteLine("Back to normal: ");
             for (int i = 0; i < line.Length + 1; ++i)
             {
                 Console.Write(res2[i]);
