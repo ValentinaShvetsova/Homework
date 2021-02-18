@@ -5,22 +5,23 @@ namespace BWT
 {
     class Program
     {
-        public static void SwapStrings(char[,] transpositionTable, int size, int i, int j)
+        private static void SwapStrings(char[,] transpositionTable, int i, int j)
         {
-            char temp;
+            int size = transpositionTable.Length;
             for (int t = 0; t < size; ++t)
             {
-                temp = transpositionTable[i, t];
+                char temp = transpositionTable[i, t];
                 transpositionTable[i, t] = transpositionTable[j, t];
                 transpositionTable[j, t] = temp;
             }
         }
 
-        public static int CompareStrings(char[,] transpositionTable, int size, int i, int j)
+        private static int CompareStrings(char[,] transpositionTable, int i, int j)
         {
-            for(int t = 0; t < size; ++t)
+            int size = transpositionTable.Length;
+            for (int t = 0; t < size; ++t)
             {
-                if(transpositionTable[i, t].CompareTo(transpositionTable[j, t]) < 0)
+                if (transpositionTable[i, t].CompareTo(transpositionTable[j, t]) < 0)
                 {
                     return 1;
                 } else if (transpositionTable[i, t].CompareTo(transpositionTable[j, t]) > 0)
@@ -30,26 +31,29 @@ namespace BWT
             }
             return 1;
         }
-        public static void Sort(char[,] transpositionTable, int size)
+
+        private static void Sort(char[,] transpositionTable)
         {
-            for(int i = 0; i < size; i++)
+            int size = transpositionTable.Length;
+            for (int i = 0; i < size; i++)
             {
-                for(int j = size - 1; j > i; j--)
+                for (int j = size - 1; j > i; j--)
                 {
-                    if(CompareStrings(transpositionTable, size, i, j) == -1)
+                    if (CompareStrings(transpositionTable, i, j) == -1)
                     {
-                        SwapStrings(transpositionTable, size, i, j);
+                        SwapStrings(transpositionTable, i, j);
                     }
                 }
             }
         }
+
         public static char[] BWT(string line, char[,] transpositionTable)
         {
             int size = line.Length + 1;
             var result = new char[size];
-            for(int i = 0; i < size - 1; ++i)
+            for (int i = 0; i < size - 1; ++i)
             {
-                transpositionTable[0,i] = line[i];
+                transpositionTable[0, i] = line[i];
             }
             transpositionTable[0, size - 1] = '$';
             for (int i = 1; i < size; i++)
@@ -60,17 +64,16 @@ namespace BWT
                     transpositionTable[i, j] = transpositionTable[i - 1, j - 1];
                 }
             }
-            Sort(transpositionTable, size);
-            for(int i = 0; i < size; ++i)
+            Sort(transpositionTable);
+            for (int i = 0; i < size; ++i)
             {
                 result[i] = transpositionTable[i, size - 1];
             }
             return result;
         }
 
-        public static string GetAlphabetString(char[] line)
+        private static string GetAlphabetString(char[] line)
         {
-            int alphabetSymbols = line.Distinct().Count();
             string result = "";
             for (int i = 0; i < line.Length; i++)
             {
@@ -82,7 +85,7 @@ namespace BWT
             return result;
         }
 
-        public static int[] GetSymbolsCount(char[] line)
+        private static int[] GetSymbolsCount(char[] line)
         {
             string alphabetOfString = GetAlphabetString(line);
             var countOfSymbols = new int[alphabetOfString.Length];
@@ -98,9 +101,9 @@ namespace BWT
             int length = line.Length;
             int[] countOfSymbols = GetSymbolsCount(line);
             int sum = 0;
-            for(int i = 0; i < countOfSymbols.Length; i++)
+            for (int i = 0; i < countOfSymbols.Length; i++)
             {
-                sum = sum + countOfSymbols[i];
+                sum += countOfSymbols[i];
                 countOfSymbols[i] = sum - countOfSymbols[i];
             }
             string alphabetOfString = GetAlphabetString(line);
@@ -119,14 +122,14 @@ namespace BWT
             int numberOfString = 0;
             for (int i = 0; i < line.Length; i++)
             {
-                if(transpositionTable[i, line.Length - 1] == '$')
+                if (transpositionTable[i, line.Length - 1] == '$')
                 {
                     numberOfString = i;
                 }
             }
             int help = temp[numberOfString];
             var answer = new char[line.Length]; 
-            for(int i = 0; i < line.Length; i++)
+            for (int i = 0; i < line.Length; i++)
             {
                 answer[i] = line[help];
                 help = temp[help];
@@ -140,19 +143,14 @@ namespace BWT
             string line = Console.ReadLine();
             int size = line.Length + 1;
             char[,] transpositionTable = new char[size, size];
+
             var result = BWT(line, transpositionTable);
-            Console.WriteLine("Resulting string: ");
-            for (int i = 0; i < line.Length + 1; ++i)
-            {
-                Console.Write(result[i]);
-            }
+            var resultString = new String(result);
+            Console.WriteLine("Resulting string: " + resultString);
+
             char[] res2 = ReverseBWT(result, transpositionTable);
-            Console.WriteLine();
-            Console.WriteLine("Back to normal: ");
-            for (int i = 0; i < line.Length + 1; ++i)
-            {
-                Console.Write(res2[i]);
-            }
+            var resultString2 = new String(res2);
+            Console.WriteLine("Old string: " + resultString2);
         }
     }
 }
