@@ -7,7 +7,7 @@ namespace BWT
     {
         private static void SwapStrings(char[,] transpositionTable, int i, int j)
         {
-            int size = transpositionTable.Length;
+            int size = transpositionTable.GetLength(0);
             for (int t = 0; t < size; ++t)
             {
                 char temp = transpositionTable[i, t];
@@ -18,7 +18,7 @@ namespace BWT
 
         private static int CompareStrings(char[,] transpositionTable, int i, int j)
         {
-            int size = transpositionTable.Length;
+            int size = transpositionTable.GetLength(0);
             for (int t = 0; t < size; ++t)
             {
                 if (transpositionTable[i, t].CompareTo(transpositionTable[j, t]) < 0)
@@ -34,7 +34,7 @@ namespace BWT
 
         private static void Sort(char[,] transpositionTable)
         {
-            int size = transpositionTable.Length;
+            int size = transpositionTable.GetLength(0);
             for (int i = 0; i < size; i++)
             {
                 for (int j = size - 1; j > i; j--)
