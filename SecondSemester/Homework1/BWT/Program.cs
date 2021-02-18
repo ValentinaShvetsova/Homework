@@ -114,8 +114,7 @@ namespace BWT
                 {
                     if (line[i] == alphabetOfString[j])
                     {
-                        temp[countOfSymbols[j]] = i;
-                        countOfSymbols[j]++;
+                        temp[countOfSymbols[j]++] = i;
                     }
                 }
             }
