@@ -4,7 +4,7 @@ namespace BubbleSort
 {
     class Program
     {
-        public static int[] BubbleSort (int[] array)
+        public static void BubbleSort(int[] array)
         {
             for (int i = 0; i < array.Length - 1; ++i)
             {
@@ -18,17 +18,16 @@ namespace BubbleSort
                     }
                 }
             }
-            return array;
         }
 
         public static bool Test1()
         {
             var array = new int[] { 13, 7, 5, 1, 27 };
             var sortedArray = new int[] { 1, 5, 7, 13, 27 };
-            int[] result = BubbleSort(array);
+            BubbleSort(array);
             for (int i = 0; i < array.Length; ++i)
             {
-                if (sortedArray[i] != result[i])
+                if (sortedArray[i] != array[i])
                 {
                     return false;
                 }
@@ -38,19 +37,11 @@ namespace BubbleSort
 
         public static bool Test2()
         {
-            var array = new int[] { 1 };
-            int[] result = BubbleSort(array);
-            return result[0] == 1;
-            return true;
-        }
-
-        public static bool Test3()
-        {
             var array = new int[] { 1, 1, 1, 1, 1, 1 };
-            int[] result = BubbleSort(array);
-            for (int i = 0; i < result.Length; ++i)
+            BubbleSort(array);
+            for (int i = 0; i < array.Length; ++i)
             {
-                if (result[i] != 1)
+                if (array[i] != 1)
                 {
                     return false;
                 }
@@ -60,13 +51,13 @@ namespace BubbleSort
 
         static void Main(string[] args)
         {
-            if (!Test1() || !Test2() || !Test3())
+            if (!Test1() || !Test2())
             {
                 Console.WriteLine("Tests failed ");
                 return;
             }
             var array = new int[] { 1, 3, 5, 7, 9 };
-            int[] sortedArray = BubbleSort(array);
+            BubbleSort(array);
             for(int i = 0; i < array.Length; ++i)
             {
                 Console.WriteLine(array[i]);
