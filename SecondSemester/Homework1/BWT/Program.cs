@@ -114,7 +114,8 @@ namespace BWT
                 {
                     if (line[i] == alphabetOfString[j])
                     {
-                        temp[countOfSymbols[j]++] = i;
+                        temp[i] = countOfSymbols[j];
+                        countOfSymbols[j]++;
                     }
                 }
             }
@@ -126,12 +127,12 @@ namespace BWT
                     numberOfString = i;
                 }
             }
-            int help = temp[numberOfString];
+            
             var answer = new char[line.Length]; 
-            for (int i = 0; i < line.Length; i++)
+            for (int i = line.Length - 1; i > -1; i--)
             {
-                answer[i] = line[help];
-                help = temp[help];
+                answer[i] = line[numberOfString];
+                numberOfString = temp[numberOfString];
             }
             return answer;
         }
