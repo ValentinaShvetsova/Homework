@@ -72,7 +72,7 @@ namespace BWT
             return result;
         }
 
-        private static string GetAlphabetString(char[] line)
+        private static char[] GetAlphabetString(char[] line)
         {
             string result = "";
             for (int i = 0; i < line.Length; i++)
@@ -82,12 +82,14 @@ namespace BWT
                     result += line[i];
                 }
             }
-            return result;
+            char[] alphabetArray = result.ToCharArray();
+            Array.Sort(alphabetArray);
+            return alphabetArray;
         }
 
         private static int[] GetSymbolsCount(char[] line)
         {
-            string alphabetOfString = GetAlphabetString(line);
+            char[] alphabetOfString = GetAlphabetString(line);
             var countOfSymbols = new int[alphabetOfString.Length];
             for (int i = 0; i < countOfSymbols.Length; i++)
             {
@@ -106,7 +108,7 @@ namespace BWT
                 sum += countOfSymbols[i];
                 countOfSymbols[i] = sum - countOfSymbols[i];
             }
-            string alphabetOfString = GetAlphabetString(line);
+            char[] alphabetOfString = GetAlphabetString(line);
             var temp = new int[line.Length];
             for (int i = 0; i < line.Length; i++)
             {
@@ -150,7 +152,7 @@ namespace BWT
 
             char[] res2 = ReverseBWT(result, transpositionTable);
             var resultString2 = new String(res2);
-            Console.WriteLine("Old string: " + resultString2);
+            Console.WriteLine("Old string: " + resultString2.Remove(line.Length));
         }
     }
 }
