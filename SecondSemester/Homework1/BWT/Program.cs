@@ -47,7 +47,7 @@ namespace BWT
             }
         }
 
-        public static char[] BWT(string line, char[,] transpositionTable)
+        public static Tuple<char[], int> BWT(string line, char[,] transpositionTable)
         {
             int size = line.Length + 1;
             var result = new char[size];
@@ -65,11 +65,21 @@ namespace BWT
                 }
             }
             Sort(transpositionTable);
+            
+            int numberOfString = 0;
+            for (int i = 0; i < line.Length; i++)
+            {
+                if (transpositionTable[i, line.Length] == '$')
+                {
+                    numberOfString = i;
+                }
+            }
+
             for (int i = 0; i < size; ++i)
             {
                 result[i] = transpositionTable[i, size - 1];
             }
-            return result;
+            return new Tuple<char[], int>(result, numberOfString);
         }
 
         private static char[] GetAlphabetString(char[] line)
@@ -98,7 +108,7 @@ namespace BWT
             return countOfSymbols;
         }
 
-        public static char[] ReverseBWT(char[] line, char[,] transpositionTable)
+        public static char[] ReverseBWT(char[] line, int numberOfString)
         {
             int length = line.Length;
             int[] countOfSymbols = GetSymbolsCount(line);
@@ -121,14 +131,6 @@ namespace BWT
                     }
                 }
             }
-            int numberOfString = 0;
-            for (int i = 0; i < line.Length; i++)
-            {
-                if (transpositionTable[i, line.Length - 1] == '$')
-                {
-                    numberOfString = i;
-                }
-            }
             
             var answer = new char[line.Length]; 
             for (int i = line.Length - 1; i > -1; i--)
@@ -146,11 +148,13 @@ namespace BWT
             int size = line.Length + 1;
             char[,] transpositionTable = new char[size, size];
 
-            var result = BWT(line, transpositionTable);
+            var result = BWT(line, transpositionTable).Item1;
+            var numberOfString = BWT(line, transpositionTable).Item2;
             var resultString = new String(result);
+
             Console.WriteLine("Resulting string: " + resultString);
 
-            char[] res2 = ReverseBWT(result, transpositionTable);
+            char[] res2 = ReverseBWT(result, numberOfString);
             var resultString2 = new String(res2);
             Console.WriteLine("Old string: " + resultString2.Remove(line.Length));
         }
