@@ -141,8 +141,35 @@ namespace BWT
             return answer;
         }
 
+        public static bool Tests()
+        {
+            string string1 = "banana";
+            int size = string1.Length + 1;
+            char[,] transpositionTable = new char[size, size];
+            var result = new string (BWT(string1, transpositionTable).Item1);
+            var numberOfString = BWT(string1, transpositionTable).Item2;
+
+
+            if (result.CompareTo("annb$aa") != 0)
+            {
+                return false;
+            }
+            char[] array = new char[] { 'a', 'n', 'n', 'b', '$', 'a', 'a' };
+            string oldString1 = new string(ReverseBWT(array, numberOfString));
+
+            if (oldString1.Remove(string1.Length).CompareTo(string1) != 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
         static void Main(string[] args)
         {
+            if (!Tests())
+            {
+                return;
+            }
             Console.WriteLine("Enter the string: ");
             string line = Console.ReadLine();
             int size = line.Length + 1;
