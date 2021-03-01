@@ -50,7 +50,10 @@ namespace LWZ
         }
         static void Main(string[] args)
         {
-            string input = "abacabadabacabae";
+            System.IO.StreamReader file =
+    new System.IO.StreamReader(@"C:\Users\Aser_Pc\Desktop\Си\Homework\SecondSemester\Homework2\LWZ\Text.txt");
+            string input = file.ReadLine();
+            file.Close();
             string squeezedInput = SqueezeString(input);
             Console.WriteLine(squeezedInput);
         }
