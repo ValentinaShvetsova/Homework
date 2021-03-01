@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace LWZ
 {
@@ -48,14 +49,24 @@ namespace LWZ
             }
             return result;
         }
+
+        public static void WriteInFile(string pathToFile, string result)
+        {
+            string resultPath = pathToFile + ".zipped";
+            using FileStream fileOut = File.OpenWrite(resultPath);
+            using (StreamWriter sw = new StreamWriter(resultPath, false, System.Text.Encoding.Default))
+            {
+                sw.WriteLine(result);
+            }
+        }
         static void Main(string[] args)
         {
-            System.IO.StreamReader file =
-    new System.IO.StreamReader(@"C:\Users\Aser_Pc\Desktop\Си\Homework\SecondSemester\Homework2\LWZ\Text.txt");
+            string path = @"C:\Users\Aser_Pc\Desktop\Си\Homework\SecondSemester\Homework2\LWZ\Text.txt";
+            System.IO.StreamReader file = new System.IO.StreamReader(path);
             string input = file.ReadLine();
             file.Close();
             string squeezedInput = SqueezeString(input);
-            Console.WriteLine(squeezedInput);
+            WriteInFile(path, squeezedInput);
         }
     }
 }
