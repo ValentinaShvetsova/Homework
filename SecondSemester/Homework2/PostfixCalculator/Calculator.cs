@@ -4,12 +4,12 @@ using System.Text;
 
 namespace PostfixCalculator
 {
-    class SuperCalculator
+    static class SuperCalculator
     {
         public static (bool, double) Calculate(string postfixExpression, IStack stack)
         {
            string number = string.Empty;
-           foreach(char symbol in postfixExpression)
+           foreach (char symbol in postfixExpression)
             {
                 if (char.IsDigit(symbol))
                 {
@@ -43,9 +43,9 @@ namespace PostfixCalculator
 
                         double topValue = stack.Pop();
 
-                        if (stack.IsEmpty() || (symbol == '/' && topValue.CompareTo(0) == 0))
+                        if (stack.IsEmpty() || (symbol == '/' && Math.Abs(topValue - 0) < 0.00001))
                         {
-                            stack.Delete();
+                            stack.Clear();
                             return (false, 0);
                         }
 
@@ -53,11 +53,11 @@ namespace PostfixCalculator
                         PerformOperation(symbol, stack);
                         break;
                     default:
-                        stack.Delete();
+                        stack.Clear();
                         return (false, 0);
                 }
             }
-           if (stack.IsEmpty())
+            if (stack.IsEmpty())
             {
                 return (false, 0);
             }
@@ -68,7 +68,7 @@ namespace PostfixCalculator
                 return (true, result);
             }
 
-            stack.Delete();
+            stack.Clear();
             return (false, 0);
         }
 
@@ -77,21 +77,20 @@ namespace PostfixCalculator
             var operand2 = stack.Pop();
             var operand1 = stack.Pop();
 
-            if (operation == '+')
+            switch (operation)
             {
-                stack.Push(operand1 + operand2);
-            }
-            else if (operation == '-')
-            {
-                stack.Push(operand1 - operand2);
-            }
-            else if (operation == '*')
-            {
-                stack.Push(operand1 * operand2);
-            }
-            else
-            {
-                stack.Push(operand1 / operand2);
+                case '+':
+                    stack.Push(operand1 + operand2);
+                    break;
+                case '-':
+                    stack.Push(operand1 - operand2);
+                    break;
+                case '*':
+                    stack.Push(operand1 * operand2);
+                    break;
+                default:
+                    stack.Push(operand1 / operand2);
+                    break;
             }
         }
     }

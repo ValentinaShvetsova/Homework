@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace PostfixCalculator
 {
     interface IStack
@@ -12,6 +9,6 @@ namespace PostfixCalculator
 
         double Pop();
 
-        void Delete();
+        void Clear();
     }
 }

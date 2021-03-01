@@ -21,9 +21,7 @@ namespace PostfixCalculator
         }
 
         public bool IsEmpty()
-        {
-            return top == null;
-        }
+             => top == null;
 
         public void Push(double value)
         {
@@ -41,7 +39,7 @@ namespace PostfixCalculator
             return value;
         }
 
-        public void Delete()
+        public void Clear()
         {
             top = null;
         }

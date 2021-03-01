@@ -23,7 +23,7 @@ namespace PostfixCalculator
         {
             if (counter == stackElements.Length)
             {
-                Array.Resize(ref stackElements, stackElements.Length + 10);
+                Array.Resize(ref stackElements, stackElements.Length * 2);
             }
             stackElements[counter] = value;
             counter++;
@@ -37,11 +37,10 @@ namespace PostfixCalculator
             }
             counter--;
             double value = stackElements[counter];
-            stackElements[counter] = 0;
             return value;
         }
 
-        public void Delete()
+        public void Clear()
         {
             stackElements = new double[10];
             counter = 0;
