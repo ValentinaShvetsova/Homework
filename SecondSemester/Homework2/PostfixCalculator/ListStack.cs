@@ -10,13 +10,13 @@ namespace PostfixCalculator
 
         private class StackElement
         {
-            public double Value;
-            public StackElement Next;
+            public double _value;
+            public StackElement _next;
 
             public StackElement(double value, StackElement next)
             {
-                Value = value;
-                Next = next;
+                _value = value;
+                _next = next;
             }
         }
 
@@ -24,18 +24,16 @@ namespace PostfixCalculator
              => top == null;
 
         public void Push(double value)
-        {
-            top = new StackElement(value, top);
-        }
-
+            => top = new StackElement(value, top);
+        
         public double Pop()
         {
             if (IsEmpty())
             {
                 throw new InvalidOperationException();
             }
-            double value = top.Value;
-            top = top.Next;
+            double value = top._value;
+            top = top._next;
             return value;
         }
 

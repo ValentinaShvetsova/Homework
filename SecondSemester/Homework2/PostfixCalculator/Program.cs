@@ -6,7 +6,7 @@ namespace PostfixCalculator
     {
         static void Main(string[] args)
         {
-            if (!Tests.Test1() || !Tests.Test2() || !Tests.Test3())
+            if (!Tests.Test())
             {
                 Console.WriteLine("Tests failed");
                 return;

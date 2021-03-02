@@ -24,7 +24,6 @@ namespace PostfixCalculator
                     continue;
                 }
 
-
                 if (symbol == ' ')
                 {
                     continue;

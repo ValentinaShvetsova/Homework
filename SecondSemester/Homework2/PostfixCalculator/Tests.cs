@@ -6,45 +6,39 @@ namespace PostfixCalculator
 {
     class Tests
     {
-        public static bool Test1()
+        private static bool Test1(IStack stack)
         {
-            IStack stack1 = new ListStack();
-            IStack stack2 = new ListStack();
-
             string expression = "1 2 3 * +";
 
-            var (isCorrect1, result1) = SuperCalculator.Calculate(expression, stack1);
-            var (isCorrect2, result2) = SuperCalculator.Calculate(expression, stack2);
+            var (isCorrect, result) = SuperCalculator.Calculate(expression, stack);
 
-            return (isCorrect1 || isCorrect2 || result1 == 7 || result2 == 7);
+            return (isCorrect || result == 7);
         }
 
-        public static bool Test2()
+        private static bool Test2(IStack stack)
         {
-            IStack stack = new ListStack();
             string expression = "1 2 ";
 
             var (isCorrect, result) = SuperCalculator.Calculate(expression, stack);
 
-            if (isCorrect)
-            {
-                return false;
-            }
-            return true;
+            return !isCorrect;
         }
 
-        public static bool Test3()
+        private static bool Test3(IStack stack)
         {
-            IStack stack = new ArrayStack();
             string expression = "* +";
 
             var (isCorrect, result) = SuperCalculator.Calculate(expression, stack);
 
-            if (isCorrect)
-            {
-                return false;
-            }
-            return true;
+            return !isCorrect;
+        }
+
+        public static bool Test()
+        {
+            IStack stack1 = new ListStack();
+            IStack stack2 = new ArrayStack();
+
+            return (Test1(stack1) && Test1(stack2) && Test2(stack1) && Test2(stack2) && Test3(stack1) && Test3(stack2));
         }
     }
 }
