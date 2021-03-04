@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LWZ
 {
-    class Trie<T>
+    public class Trie<T>
     {
         private Node<T> root;
         public int Count { get; set; }
