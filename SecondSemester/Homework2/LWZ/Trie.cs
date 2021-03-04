@@ -13,6 +13,11 @@ namespace LWZ
             root = new Node<T>('\0', default(T), "");
             Count = 1;
         }
+        /// <summary>
+        /// Adds node in the trie, sets its components
+        /// </summary>
+        /// <param name="key">The node's key</param>
+        /// <param name="data">The node's data</param>
         public void Add(string key, T data)
         {
             AddNode(key, data, root);
@@ -43,6 +48,11 @@ namespace LWZ
                 }
             }
         }
+
+        /// <summary>
+        /// Deletes node from trie by key
+        /// </summary>
+        /// <param name="key">Key of the node to be removed</param>
         public void Remove(string key)
         {
             RemoveNode(key, root);
@@ -66,6 +76,13 @@ namespace LWZ
                 }
             }
         }
+
+        /// <summary>
+        /// Returns true if such node with such key exists.
+        /// </summary>
+        /// <param name="key">Key of node to be found</param>
+        /// <param name="value">Data of node, if such node exists</param>
+        /// <returns></returns>
         public bool TrySearch (string key, out T value)
         {
             return SearchNode(key, root, out value);
