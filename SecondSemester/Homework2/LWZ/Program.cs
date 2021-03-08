@@ -19,6 +19,11 @@ namespace LWZ
             return result;
         }
 
+        /// <summary>
+        /// This function returns squeezed by LWZ algorithm string
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static string SqueezeString(string input)
         {
             var trie = new Trie<int>();
@@ -61,6 +66,12 @@ namespace LWZ
             }
         }
 
+        /// <summary>
+        /// This function returns decompessed by LWZ algorithm string, but requires the alphabet of the old string
+        /// </summary>
+        /// <param name="squeezedStr"></param>
+        /// <param name="alphabet"></param>
+        /// <returns></returns>
         public static string Decompress(string squeezedStr, string alphabet)
         {
             var words =new Dictionary<int, string>();
