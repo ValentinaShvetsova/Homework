@@ -24,8 +24,11 @@ namespace LWZ
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public static string SqueezeString(string input)
+        public static void SqueezeString(string path)
         {
+            System.IO.StreamReader file = new System.IO.StreamReader(path);
+            string input = file.ReadLine();
+            file.Close();
             var trie = new Trie<int>();
             string alphabet = GetAlphabetString(input);
             for (int i = 0; i < alphabet.Length; i++)
@@ -53,10 +56,10 @@ namespace LWZ
                 counter++;
                 index += length - 1;
             }
-            return result;
+            WriteInFile(path, result);
         }
 
-        public static void WriteInFile(string pathToFile, string result)
+        private static void WriteInFile(string pathToFile, string result)
         {
             string resultPath = pathToFile + ".zipped";
             using FileStream fileOut = File.OpenWrite(resultPath);
@@ -72,8 +75,11 @@ namespace LWZ
         /// <param name="squeezedStr"></param>
         /// <param name="alphabet"></param>
         /// <returns></returns>
-        public static string Decompress(string squeezedStr, string alphabet)
+        public static void Decompress(string path, string alphabet)
         {
+            System.IO.StreamReader file = new System.IO.StreamReader(path);
+            string squeezedStr = file.ReadLine();
+            file.Close();
             var words =new Dictionary<int, string>();
             int counter = 0;
             string result = "";
@@ -94,18 +100,43 @@ namespace LWZ
                     counter++;
                 }
             }
-            return result;
+            writeInFileDecompress(path, result);
+        }
+
+        private static void writeInFileDecompress(string path, string oldString)
+        {
+            string resultPath = path.Substring(0, path.Length - 7);
+            using FileStream fileOut = File.OpenWrite(resultPath);
+            using (StreamWriter sw = new StreamWriter(resultPath, false, System.Text.Encoding.Default))
+            {
+                sw.WriteLine(oldString);
+            }
         }
 
         static void Main(string[] args)
         {
-            string path = @"C:\Users\Aser_Pc\Desktop\Си\Homework\SecondSemester\Homework2\LWZ\Text.txt";
-            System.IO.StreamReader file = new System.IO.StreamReader(path);
-            string input = file.ReadLine();
+            string pathToString = @"C:\Users\Aser_Pc\Desktop\Си\Homework\SecondSemester\Homework2\LWZ\Text.txt";
+            string pathToCompressedString = pathToString + ".zipped";
+            System.IO.StreamReader file = new System.IO.StreamReader(pathToString);
+            string str = file.ReadLine();
             file.Close();
-            string squeezedInput = SqueezeString(input);
-            string alphabet = GetAlphabetString(input);
-            string oldString = Decompress(squeezedInput, alphabet);
+            string alphabet = GetAlphabetString(str);
+            Console.WriteLine("Choose: 1 --> compress string in file");
+            Console.WriteLine("Choose: 2 --> decompress string");
+            string chosenOption = Console.ReadLine();
+            int option = Convert.ToInt32(chosenOption);
+            if(option == 1)
+            {
+                SqueezeString(pathToString);
+            }
+            else if (option == 2)
+            {
+                Decompress(pathToCompressedString, alphabet);
+            }
+            else
+            {
+                Console.WriteLine("invalid input");
+            }
         }
     }
 }
