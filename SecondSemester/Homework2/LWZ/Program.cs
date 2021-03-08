@@ -1,9 +1,10 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
 
 namespace LWZ
 {
-    class Program
+    public class Program
     {
         private static string GetAlphabetString(string line)
         {
@@ -59,6 +60,32 @@ namespace LWZ
                 sw.WriteLine(result);
             }
         }
+
+        public static string Decompress(string squeezedStr, string alphabet)
+        {
+            var words =new Dictionary<int, string>();
+            int counter = 0;
+            string result = "";
+            for(int i = 0; i < alphabet.Length; i++)
+            {
+                words.Add(counter, alphabet.Substring(i, 1));
+                counter++;
+            }
+            for(int i = 0; i < squeezedStr.Length; i++)
+            {
+                int key = Int32.Parse(squeezedStr.Substring(i,1));
+                result += words[key];
+                if(i != squeezedStr.Length - 1)
+                {
+                    var nextKey = Int32.Parse(squeezedStr.Substring(i + 1, 1));
+                    var newWord = words[key] + words[nextKey].Substring(0, 1);
+                    words.Add(counter, newWord);
+                    counter++;
+                }
+            }
+            return result;
+        }
+
         static void Main(string[] args)
         {
             string path = @"C:\Users\Aser_Pc\Desktop\Си\Homework\SecondSemester\Homework2\LWZ\Text.txt";
@@ -66,7 +93,8 @@ namespace LWZ
             string input = file.ReadLine();
             file.Close();
             string squeezedInput = SqueezeString(input);
-            WriteInFile(path, squeezedInput);
+            string alphabet = GetAlphabetString(input);
+            string oldString = Decompress(squeezedInput, alphabet);
         }
     }
 }
