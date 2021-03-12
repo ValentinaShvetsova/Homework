@@ -105,7 +105,6 @@ namespace ListTests
             var list = new SuperUniqueList();
             list.AddValue(15, 0);
             list.AddValue(32, 1);
-
             list.SetValue(32, 1);
             Assert.ThrowsException<AddingExistingElementException>(() => list.SetValue(32, 0));
         }
