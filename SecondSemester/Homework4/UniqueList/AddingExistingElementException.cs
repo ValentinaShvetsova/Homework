@@ -8,7 +8,7 @@ namespace UniqueList
     /// Thrown if someone trying to add value, which already exists in list
     /// </summary>
     [Serializable]
-    class AddingExistingElementException : Exception
+    public class AddingExistingElementException : Exception
     {
         public AddingExistingElementException() { }
 

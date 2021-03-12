@@ -40,7 +40,7 @@ namespace UniqueList
         /// <summary>
         /// Adds element in direct position
         /// </summary>
-        public void AddValue(int value, int position)
+        public virtual void AddValue(int value, int position)
         {
             if (position < 0 || position > Size)
             {
@@ -137,7 +137,7 @@ namespace UniqueList
         /// </summary>
         /// <param name="value">Value to set</param>
         /// <param name="position">Position of node, which needs change of value</param>
-        public void SetValue(int value, int position)
+        public virtual void SetValue(int value, int position)
         {
             if (position < 0 || position > Size - 1)
             {

@@ -7,7 +7,7 @@ namespace UniqueList
     /// <summary>
     /// The List that doesn't contain duplicate values
     /// </summary>
-    class SuperUniqueList : List
+    public class SuperUniqueList : List
     {
         /// <summary>
         /// Adds element only if it is not currently on the list
