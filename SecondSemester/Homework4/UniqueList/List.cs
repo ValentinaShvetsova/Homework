@@ -42,6 +42,11 @@ namespace UniqueList
         /// </summary>
         public void AddValue(int value, int position)
         {
+            if (position < 0 || position > Size)
+            {
+                throw new InvalidPositionException();
+            }
+
             Node previous = null;
             var current = head;
             for (var i = 0; i < position; ++i)
@@ -66,6 +71,11 @@ namespace UniqueList
         /// </summary>
         public void DeleteValue(int position)
         {
+            if (position < 0 || position > Size - 1)
+            {
+                throw new InvalidPositionException();
+            }
+
             Node previous = null;
             var current = head;
             for (var i = 0; i < position; ++i)
@@ -109,6 +119,11 @@ namespace UniqueList
         /// </summary>
         public int GetValue(int position)
         {
+            if (position < 0 || position > Size - 1)
+            {
+                throw new InvalidPositionException();
+            }
+
             var current = head;
             for (var i = 0; i < position; ++i)
             {
@@ -124,6 +139,11 @@ namespace UniqueList
         /// <param name="position">Position of node, which needs change of value</param>
         public void SetValue(int value, int position)
         {
+            if (position < 0 || position > Size - 1)
+            {
+                throw new InvalidPositionException();
+            }
+
             var current = head;
             for (var i = 0; i < position; ++i)
             {
