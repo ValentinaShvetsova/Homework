@@ -7,11 +7,11 @@ namespace LWZ
     public class Trie<T>
     {
         private Node<T> root;
-        public int Count { get; set; }
+        public int count { get; set; }
         public Trie()
         {
-            root = new Node<T>('\0', default(T), "");
-            Count = 1;
+            root = new Node<T> ('\0', default(T), "");
+            count = 1;
         }
         /// <summary>
         /// Adds node in the trie, sets its components
@@ -45,34 +45,6 @@ namespace LWZ
                     var newNode = new Node<T>(key[0], data, node.Prefix + key[0]);
                     node.SubNodes.Add(key[0], newNode);
                     AddNode(key.Substring(1), data, newNode);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Deletes node from trie by key
-        /// </summary>
-        /// <param name="key">Key of the node to be removed</param>
-        public void Remove(string key)
-        {
-            RemoveNode(key, root);
-        }
-        
-        private void RemoveNode(string key, Node<T> node)
-        {
-            if (string.IsNullOrEmpty(key))
-            {
-                if (node.IsWord)
-                {
-                    node.IsWord = false;
-                }
-            }
-            else
-            {
-                var subnode = node.TryFind(key[0]);
-                if(subnode != null)
-                {
-                    RemoveNode(key.Substring(1), subnode);
                 }
             }
         }

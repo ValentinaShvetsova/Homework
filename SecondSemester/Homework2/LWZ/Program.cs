@@ -22,11 +22,10 @@ namespace LWZ
         /// <summary>
         /// This function returns squeezed by LWZ algorithm string
         /// </summary>
-        /// <param name="input"></param>
         /// <returns></returns>
-        public static void SqueezeString(string path)
+        public static void CompressString(string path)
         {
-            System.IO.StreamReader file = new System.IO.StreamReader(path);
+            var file = new System.IO.StreamReader(path);
             string input = file.ReadLine();
             file.Close();
             var trie = new Trie<int>();
@@ -62,7 +61,6 @@ namespace LWZ
         private static void WriteInFile(string pathToFile, string result)
         {
             string resultPath = pathToFile + ".zipped";
-            using FileStream fileOut = File.OpenWrite(resultPath);
             using (StreamWriter sw = new StreamWriter(resultPath, false, System.Text.Encoding.Default))
             {
                 sw.WriteLine(result);
@@ -72,27 +70,25 @@ namespace LWZ
         /// <summary>
         /// This function returns decompessed by LWZ algorithm string, but requires the alphabet of the old string
         /// </summary>
-        /// <param name="squeezedStr"></param>
-        /// <param name="alphabet"></param>
         /// <returns></returns>
         public static void Decompress(string path, string alphabet)
         {
-            System.IO.StreamReader file = new System.IO.StreamReader(path);
+            var file = new System.IO.StreamReader(path);
             string squeezedStr = file.ReadLine();
             file.Close();
-            var words =new Dictionary<int, string>();
+            var words = new Dictionary<int, string>();
             int counter = 0;
             string result = "";
-            for(int i = 0; i < alphabet.Length; i++)
+            for (int i = 0; i < alphabet.Length; i++)
             {
                 words.Add(counter, alphabet.Substring(i, 1));
                 counter++;
             }
-            for(int i = 0; i < squeezedStr.Length; i++)
+            for (int i = 0; i < squeezedStr.Length; i++)
             {
                 int key = Int32.Parse(squeezedStr.Substring(i,1));
                 result += words[key];
-                if(i != squeezedStr.Length - 1)
+                if (i != squeezedStr.Length - 1)
                 {
                     var nextKey = Int32.Parse(squeezedStr.Substring(i + 1, 1));
                     var newWord = words[key] + words[nextKey].Substring(0, 1);
@@ -105,8 +101,7 @@ namespace LWZ
 
         private static void writeInFileDecompress(string path, string oldString)
         {
-            string resultPath = path.Substring(0, path.Length - 7);
-            using FileStream fileOut = File.OpenWrite(resultPath);
+            var resultPath = path.Substring(0, path.Length - 7);
             using (StreamWriter sw = new StreamWriter(resultPath, false, System.Text.Encoding.Default))
             {
                 sw.WriteLine(oldString);
@@ -127,7 +122,7 @@ namespace LWZ
             int option = Convert.ToInt32(chosenOption);
             if(option == 1)
             {
-                SqueezeString(pathToString);
+                CompressString(pathToString);
             }
             else if (option == 2)
             {
