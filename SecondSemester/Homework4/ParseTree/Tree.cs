@@ -4,10 +4,17 @@ using System.Text;
 
 namespace ParseTree
 {
+    /// <summary>
+    /// Parse tree
+    /// </summary>
     public class Tree
     {
         private INode root;
 
+        /// <summary>
+        /// Sets new tree
+        /// </summary>
+        /// <param name="input"></param>
         public Tree(string input)
         {
             Build(input);
@@ -48,8 +55,15 @@ namespace ParseTree
             }
         }
 
+        /// <summary>
+        /// Prints tree
+        /// </summary>
         public void Print() => root?.Print();
 
+        /// <summary>
+        /// Calculates expression by tree
+        /// </summary>
+        /// <returns></returns>
         public int Calculate() => root.Calculate();
     }
 }
