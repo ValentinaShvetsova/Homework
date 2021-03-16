@@ -23,11 +23,11 @@ int test() {
 
 int main() {
 	
-	int testing = test();
-	if (testing == 0) {
+	if (!test()) {
 		printf("Test failed\n");
-		return 0;
+		return 1;
 	}
+	return 0;
 
 	int n = 0;
 	printf("Enter the number: ");

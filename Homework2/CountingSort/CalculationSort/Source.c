@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <malloc.h>
-#include <conio.h>
+#include <stdbool.h>
 #include <time.h>
 
 void calculationSort(int size, int a[])
@@ -16,11 +16,7 @@ void calculationSort(int size, int a[])
 		}
 	}
 	
-	int* helpingArray = (int*)malloc((max + 1) * sizeof(int));
-
-	for (int i = 0; i < max - min + 1; ++i) {
-		helpingArray[i] = 0;
-	}
+	int* helpingArray = calloc((max + 1), sizeof(int));
 
 	for (int i = 0; i < size; ++i) {
 		helpingArray[a[i] - min]++;
@@ -36,29 +32,23 @@ void calculationSort(int size, int a[])
 	free(helpingArray);
 }
 
-int sortCheck(int a[], int size) {
-	for (int i = 0; i < size; ++i) {
+bool sortCheck(int a[], int size) {
+	for (int i = 0; i < size - 1; ++i) {
 		if (a[i] > a[i + 1]) {
-			return 0;
+			return false;
 		}
 	}
-	return 1;
+	return true;
 }
 
 int firstTest() {
-	int a[10000];
-	for (int i = 0; i < 10000; ++i) {
-		a[i] = 10000 - i - 1;
+	int a[1000];
+	for (int i = 0; i < 1000; ++i) {
+		a[i] = 1000 - i - 1;
 	}
 
-	calculationSort(10000, a);
-	int check = sortCheck(a, 10000);
-	if (check == 1) {
-		return 1;
-	}
-	else {
-		return 0;
-	}
+	calculationSort(1000, a);
+	return sortCheck(a, 1000);
 }
 
 int secondTest() {
@@ -68,27 +58,14 @@ int secondTest() {
 	}
 
 	calculationSort(10, a);
-	int check = sortCheck(a, 10);
-	
-	if (check == 1) {
-		return 1;
-	}
-	else {
-		return 0;
-	}
+	return sortCheck(a, 10);
 }
 
 int thirdTest() {
 	int a[] = { 7, 8, 3, 4, 1, 2, 6, 5, 2 };
 
 	calculationSort(9, a);
-	int check = sortCheck(a, 9);
-	if (check == 1) {
-		return 1;
-	}
-	else {
-		return 0;
-	}
+	return sortCheck(a, 9);
 }
 
 int fourthTest() {
@@ -96,17 +73,18 @@ int fourthTest() {
 	calculationSort(1, a);
 	for (int i = 0; i < 1; ++i) {
 		if (a[i] != 1) {
-			return 0;
+			return false;
 		}
 	}
-	return 1;
+	return true;
 }
 
 int main() {
-	if (firstTest() == 0) {
+	if (!firstTest() || !secondTest() || !thirdTest() || !fourthTest()) {
 		printf("Test failed\n");
-		return 0;
+		return 1;
 	}
+	return 0;
 
 	int size = 0;
 	printf("Input size of array: ");
