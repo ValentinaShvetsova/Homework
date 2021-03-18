@@ -1,7 +1,7 @@
 image: Visual Studio 2019
 
 before_build:
-    - nuget restore SecondSemester/Homework2/LWZ/LWZ.sln
+    - nuget restore SecondSemester\Homework2\LWZ\LWZ.sln
 
 build:
     project: SecondSemester/Homework2/LWZ/LWZ.sln
