@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PostfixCalculator
 {
-    static class SuperCalculator
+    public static class SuperCalculator
     {
         public static (bool, double) Calculate(string postfixExpression, IStack stack)
         {
