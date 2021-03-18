@@ -110,28 +110,51 @@ namespace LWZ
 
         static void Main(string[] args)
         {
-            string pathToString = "../../Text.txt";
-            string pathToCompressedString = pathToString + ".zipped";
-            System.IO.StreamReader file = new System.IO.StreamReader(pathToString);
-            string str = file.ReadLine();
-            file.Close();
-            string alphabet = GetAlphabetString(str);
-            Console.WriteLine("Choose: 1 --> compress string in file");
-            Console.WriteLine("Choose: 2 --> decompress string");
-            string chosenOption = Console.ReadLine();
-            int option = Convert.ToInt32(chosenOption);
-            if(option == 1)
+            Console.WriteLine("Enter:");
+            Console.WriteLine("-c (space) filepath to compress file");
+            Console.WriteLine("-d (space) filepath to decompress file");
+
+            if (args[0] != "-c" && args[0] != "-d" && args.Length != 2)
             {
-                CompressString(pathToString);
+                Console.WriteLine("Error! Please, try again.");
             }
-            else if (option == 2)
+
+            if (args[0] != "-c" && args[0] != "-d" && args.Length != 2)
             {
-                Decompress(pathToCompressedString, alphabet);
+                Console.WriteLine("Error! Please, try again.");
             }
-            else
+
+            if (args[0] == "-c")
             {
-                Console.WriteLine("invalid input");
+                if (!File.Exists(args[1]))
+                {
+                    Console.WriteLine("Error! File not found.");
+                    return;
+                }
+                else if (File.Exists(args[1] + ".zipped"))
+                {
+                    Console.WriteLine("Error! .zipped file already exists. Please, try again.");
+                    return;
+                }
+
+                Program.CompressString(args[1]);
             }
+
+            else if (args[0] == "-d")
+            {
+                if (!File.Exists(args[1]))
+                {
+                    Console.WriteLine("Error! File not found.");
+                    return;
+                }
+                string path = args[1].Substring(0, args[1].Length - 7);
+                System.IO.StreamReader file = new System.IO.StreamReader(path);
+                string str = file.ReadLine();
+                file.Close();
+                string alphabet = GetAlphabetString(str);
+                Program.Decompress(args[1], alphabet);
+            }
+            
         }
     }
 }
