@@ -110,7 +110,7 @@ namespace LWZ
 
         static void Main(string[] args)
         {
-            string pathToString = @"C:\Users\Aser_Pc\Desktop\Си\Homework\SecondSemester\Homework2\LWZ\Text.txt";
+            string pathToString = "../../Text.txt";
             string pathToCompressedString = pathToString + ".zipped";
             System.IO.StreamReader file = new System.IO.StreamReader(pathToString);
             string str = file.ReadLine();

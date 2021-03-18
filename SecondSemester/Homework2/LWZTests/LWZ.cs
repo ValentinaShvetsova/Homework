@@ -16,15 +16,18 @@ namespace LWZ.Tests
             Assert.IsTrue(trie.TrySearch("red", out int value1));
             Assert.IsTrue(!trie.TrySearch("blow", out int value2));
             Assert.IsTrue(trie.TrySearch("roar", out int value3));
-            trie.Remove("red");
-            Assert.IsTrue(!trie.TrySearch("red", out int value4));
         }
 
         [TestMethod]
         public void AlgorithmTests()
         {
-            string str = "abacabadabacabae";
-            string result;
+            string path = "../../../Text.txt";
+            Program.CompressString(path);
+            string resultPath = path + ".zipped";
+            System.IO.StreamReader file = new System.IO.StreamReader(resultPath);
+            string str = file.ReadLine();
+            string result = "01025039864";
+            Assert.AreEqual(result, str);
         }
     }
 }
