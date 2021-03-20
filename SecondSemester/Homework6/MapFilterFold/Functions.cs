@@ -7,7 +7,7 @@ namespace MapFilterFold
     /// <summary>
     /// Functions for list of integers
     /// </summary>
-    class Functions
+    public class Functions
     {
         /// <summary>
         /// Apply function to each element of the list, creates and returns new list with those values.
