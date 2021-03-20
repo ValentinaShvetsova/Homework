@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using MapFilterFold;
+using Functions;
 using System.Collections.Generic;
 
 namespace Functions.Tests

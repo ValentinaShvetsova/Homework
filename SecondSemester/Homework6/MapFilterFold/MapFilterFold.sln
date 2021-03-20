@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapFilterFold", "MapFilterFold.csproj", "{8C8F3152-B44A-4044-958E-0A928EDB1A2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionsTests", "..\FunctionsTests\FunctionsTests.csproj", "{D82E89D6-1863-4A5E-807F-E98A8285F70C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Functions.Tests", "..\FunctionsTests\Functions.Tests.csproj", "{D82E89D6-1863-4A5E-807F-E98A8285F70C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
