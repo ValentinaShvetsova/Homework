@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapFilterFold", "MapFilterFold.csproj", "{8C8F3152-B44A-4044-958E-0A928EDB1A2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Functions.Tests", "..\FunctionsTests\Functions.Tests.csproj", "{D82E89D6-1863-4A5E-807F-E98A8285F70C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapFilterFold.Tests", "..\MapFilterFold.Tests\MapFilterFold.Tests.csproj", "{AC9F9604-5A0B-4DD2-8D36-0E43C1CFC367}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{8C8F3152-B44A-4044-958E-0A928EDB1A2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C8F3152-B44A-4044-958E-0A928EDB1A2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C8F3152-B44A-4044-958E-0A928EDB1A2D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D82E89D6-1863-4A5E-807F-E98A8285F70C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D82E89D6-1863-4A5E-807F-E98A8285F70C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D82E89D6-1863-4A5E-807F-E98A8285F70C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D82E89D6-1863-4A5E-807F-E98A8285F70C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC9F9604-5A0B-4DD2-8D36-0E43C1CFC367}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC9F9604-5A0B-4DD2-8D36-0E43C1CFC367}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC9F9604-5A0B-4DD2-8D36-0E43C1CFC367}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC9F9604-5A0B-4DD2-8D36-0E43C1CFC367}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
