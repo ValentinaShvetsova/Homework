@@ -28,4 +28,5 @@ namespace MapFilterFold.Tests
             Assert.AreEqual(6, Functions.Fold(list, 1, (acc, elem) => acc * elem));
             Assert.AreEqual(6, Functions.Fold(list, 0, (acc, elem) => acc + elem));
         }
+    }
 }
