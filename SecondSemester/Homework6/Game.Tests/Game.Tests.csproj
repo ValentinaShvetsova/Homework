@@ -7,12 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="MapForGameTests.txt" />
     <None Remove="MapWithoutCharacter.txt" />
     <None Remove="MapWithTwoCharacters.txt" />
     <None Remove="NormalMap.txt" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="MapForGameTests.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="MapWithoutCharacter.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

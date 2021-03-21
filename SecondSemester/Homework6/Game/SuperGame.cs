@@ -47,14 +47,14 @@ namespace Game
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        public void OnLeft(object sender, EventArgs args) => Move(-1, 0);
+        public void OnLeft(object sender, EventArgs args) => Move(1, 0);
 
         /// <summary>
         /// Moves the character right
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        public void OnRight(object sender, EventArgs args) => Move(1, 0);
+        public void OnRight(object sender, EventArgs args) => Move(-1, 0);
 
         /// <summary>
         /// Moves the character up
