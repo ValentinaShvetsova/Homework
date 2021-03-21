@@ -13,6 +13,10 @@ namespace Game
 
         public const char characterSymbol = '@';
 
+        /// <summary>
+        /// Initialize new map from file
+        /// </summary>
+        /// <param name="filename">Name of the file with data</param>
         public Map(string filename)
         {
             walls = new List<List<char>>();
@@ -25,6 +29,10 @@ namespace Game
             }
         }
 
+        /// <summary>
+        /// Sets the position of the character on the map
+        /// </summary>
+        /// <returns></returns>
         public bool SetCharacterPosition(int width, int height)
         {
             if (width < 0 || height < 0 || height >= walls.Count || width >= walls[height].Count)
@@ -74,6 +82,9 @@ namespace Game
             }
         }
 
+        /// <summary>
+        /// Prints the map
+        /// </summary>
         public void Print()
         {
             walls[CharacterPosition.height][CharacterPosition.width] = '@';

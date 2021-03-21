@@ -9,11 +9,17 @@ namespace Game
         public Map GameMap { get; }
         private readonly Action<int, int> setCursor;
 
+        /// <summary>
+        /// Initialize new object of the game class
+        /// </summary>
         public SuperGame(string filename)
             : this(filename, (width, height) => Console.SetCursorPosition(width, height))
         {
         }
 
+        /// <summary>
+        /// Initialize new object of the game class
+        /// </summary>
         public SuperGame(string filename, Action<int, int> setCursor)
         {
             GameMap = new Map(filename);
@@ -36,12 +42,32 @@ namespace Game
             Console.Write(Map.characterSymbol);
         }
 
+        /// <summary>
+        /// Moves the character left
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         public void OnLeft(object sender, EventArgs args) => Move(-1, 0);
 
+        /// <summary>
+        /// Moves the character right
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         public void OnRight(object sender, EventArgs args) => Move(1, 0);
 
+        /// <summary>
+        /// Moves the character up
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         public void Up(object sender, EventArgs args) => Move(0, 1);
 
+        /// <summary>
+        /// Moves the character down
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         public void Down(object sender, EventArgs args) => Move(0, -1);
     }
 }
