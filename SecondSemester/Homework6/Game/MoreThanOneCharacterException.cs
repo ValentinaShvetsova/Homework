@@ -8,7 +8,7 @@ namespace Game
     /// Thrown when there's 2 or more charater symbols on the map
     /// </summary>
     [Serializable]
-    class MoreThanOneCharacterException : Exception
+    public class MoreThanOneCharacterException : Exception
     {
         public MoreThanOneCharacterException() { }
 
