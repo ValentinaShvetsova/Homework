@@ -8,7 +8,7 @@ namespace Calculator
     /// Thrown when there's no operation to perform
     /// </summary>
     [Serializable]
-    class MissingOperationException : Exception
+    public class MissingOperationException : Exception
     {
         public MissingOperationException() { }
 

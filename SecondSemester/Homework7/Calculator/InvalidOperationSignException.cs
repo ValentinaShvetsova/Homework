@@ -8,7 +8,7 @@ namespace Calculator
     /// Thrown when the sign doesn't match operation
     /// </summary>
     [Serializable]
-    class InvalidOperationSignException : Exception
+    public class InvalidOperationSignException : Exception
     {
         public InvalidOperationSignException() { }
 

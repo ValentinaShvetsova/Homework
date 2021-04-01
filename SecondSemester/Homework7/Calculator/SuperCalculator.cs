@@ -19,7 +19,7 @@ namespace Calculator
     /// <summary>
     /// Allows to perform operations on two double type numbers
     /// </summary>
-    class SuperCalculator
+    public class SuperCalculator
     {
         private double? number1;
         private double? number2;
