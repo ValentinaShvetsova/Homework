@@ -1,10 +1,9 @@
 image: Visual Studio 2019
 
 before_build:
-    - nuget restore SecondSemester/Homework5/StackCalculatorModified/StackCalculatorModified.sln
-
+    - nuget restore SecondSemester\Homework7\Calculator\Calculator.sln
 build:
-    project: SecondSemester/Homework5/StackCalculatorModified/StackCalculatorModified.sln
+    project: SecondSemester\Homework7\Calculator\Calculator.sln
 
 test_script:
-    - dotnet test SecondSemester/Homework5/StackCalculatorModified/StackCalculatorModified.sln
+    - dotnet test SecondSemester\Homework7\Calculator\Calculator.sln
