@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Calculator
 {
+    /// <summary>
+    /// All possible operations
+    /// </summary>
     public enum Operation
     {
         None,
@@ -12,12 +15,20 @@ namespace Calculator
         Multiplication,
         Division
     }
+
+    /// <summary>
+    /// Allows to perform operations on two double type numbers
+    /// </summary>
     class SuperCalculator
     {
         private double? number1;
         private double? number2;
         private Operation operation;
 
+        /// <summary>
+        /// Adds number.
+        /// </summary>
+        /// <param name="operation">Operation to add</param>
         public void AddNumber(double number)
         {
             if (number1 == null)
@@ -28,8 +39,15 @@ namespace Calculator
             number2 = number;
         }
 
+        /// <summary>
+        /// Adds or changes an operation
+        /// </summary>
+        /// <param name="operation"></param>
         public void AddOperation(Operation operation) => this.operation = operation;
 
+        /// <summary>
+        /// Clear everything
+        /// </summary>
         public void Clear()
         {
             number1 = null;
@@ -37,6 +55,10 @@ namespace Calculator
             operation = Operation.None;
         }
 
+        /// <summary>
+        /// Calculates 2 double numbers and sets the result in the first number value
+        /// </summary>
+        /// <returns></returns>
         public double Calculate()
         {
             if (number1 == null || number2 == null)
