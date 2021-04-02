@@ -1,10 +1,10 @@
 image: Visual Studio 2019
 
 before_build:
-    - nuget restore SecondSemester\SparceVector\SpaceVector.sln
+    - nuget restore SecondSemester\SparceVector\SparceVector.sln
 
 build:
-    project: SecondSemester\SparceVector\SpaceVector.sln
+    project: SecondSemester\SparceVector\SparceVector.sln
 
 test_script:
-    - dotnet test SecondSemester\SparceVector\SpaceVector.sln
+    - dotnet test SecondSemester\SparceVector\SparceVector.sln
