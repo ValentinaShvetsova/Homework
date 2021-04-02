@@ -1,10 +1,10 @@
 image: Visual Studio 2019
 
 before_build:
-    - nuget restore SecondSemester/Homework5/StackCalculatorModified/StackCalculatorModified.sln
+    - nuget restore SecondSemester\SparceVector\SpaceVector.sln
 
 build:
-    project: SecondSemester/Homework5/StackCalculatorModified/StackCalculatorModified.sln
+    project: SecondSemester\SparceVector\SpaceVector.sln
 
 test_script:
-    - dotnet test SecondSemester/Homework5/StackCalculatorModified/StackCalculatorModified.sln
+    - dotnet test SecondSemester\SparceVector\SpaceVector.sln
