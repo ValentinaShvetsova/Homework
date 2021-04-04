@@ -7,6 +7,11 @@ namespace Routers
 {
     public class FileFunctions
     {
+        /// <summary>
+        /// Returns a adjacency table
+        /// </summary>
+        /// <param name="pathToGraph">Path to file</param>
+        /// <returns></returns>
         public static int[,] CreateGraph(string pathToGraph)
         {
             int countsVertices = GetAmountOfVertices(pathToGraph);
@@ -37,6 +42,11 @@ namespace Routers
             return graph;
         }
 
+        /// <summary>
+        /// Gets amount of graph's vertices
+        /// </summary>
+        /// <param name="pathToGraph">path to file</param>
+        /// <returns></returns>
         public static int GetAmountOfVertices(string pathToGraph)
         {
             var maxVertix = 1;
@@ -64,6 +74,9 @@ namespace Routers
             return maxVertix;
         }
 
+        /// <summary>
+        /// Writes an spanning tree in needed form
+        /// </summary>
         public static void WriteResultInFile(int[,] matrix, string newPath)
         {
             FileInfo fileOut = new FileInfo(newPath);

@@ -45,6 +45,11 @@ namespace Routers
             return false;
         }
 
+        /// <summary>
+        /// Finds and writes in matrix form minimal spanning tree
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
         public static int[,] KruskullsAlgorithm(int[,] matrix)
         {
             IEnumerable<(int firstVertex, int secondVertex, int weight)> weightsArray = SortByWeights(matrix);
@@ -81,17 +86,16 @@ namespace Routers
             {
                 throw new DisconnectedNetworkException("Disconnected network!");
             }
-
             return resultMatrix;
         }
-
         private static IEnumerable<(int firstVertex, int secondVertex, int weight)> SortByWeights(int[,] matrix)
         {
+            var length = matrix.GetLength(0);
             var listToSort = new List<(int firstVertex, int secondVertex, int weight)>();
 
-            for (int i = 0; i < matrix.GetLength(0) - 1; i++)
+            for (int i = 0; i < length - 1; i++)
             {
-                for (int j = i + 1; j < matrix.GetLength(0); j++)
+                for (int j = i + 1; j < length; j++)
                 {
                     if (matrix[i, j] != 0)
                     {

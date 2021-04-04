@@ -22,21 +22,30 @@ namespace Routers
             }
         }
 
-        public int Find(int currentVertex)
+        /// <summary>
+        /// Returns the minimal element in the set
+        /// </summary>
+        /// <param name="currentVertex"></param>
+        /// <returns></returns>
+        public int SearchForMinimum(int currentVertex)
         {
             if (currentVertex == arraySets[currentVertex])
             {
                 return currentVertex;
             }
 
-            return Find(arraySets[currentVertex]);
+            return SearchForMinimum(arraySets[currentVertex]);
         }
 
+        /// <summary>
+        /// Checking if there's only one set
+        /// </summary>
+        /// <returns></returns>
         public bool IsOnlySet()
         {
             for (int i = 0; i < arraySets.Length; i++)
             {
-                if (Find(0) != Find(i))
+                if (SearchForMinimum(0) != SearchForMinimum(i))
                 {
                     return false;
                 }
@@ -45,10 +54,15 @@ namespace Routers
             return true;
         }
 
+        /// <summary>
+        /// Unite sets
+        /// </summary>
+        /// <param name="firstVertex"></param>
+        /// <param name="secondVertex"></param>
         public void Unite(int firstVertex, int secondVertex)
         {
-            int firstElement = Find(firstVertex);
-            int secondElement = Find(secondVertex);
+            int firstElement = SearchForMinimum(firstVertex);
+            int secondElement = SearchForMinimum(secondVertex);
 
             if (firstElement != secondElement)
             {
