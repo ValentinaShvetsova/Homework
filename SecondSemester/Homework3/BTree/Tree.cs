@@ -189,6 +189,67 @@ namespace BTree
                     return;
                 }
             }
+
+            public void InsertValue(string key, string value, int degree)
+            {
+                if (IsLeaf)
+                {
+                    if (currentSize == 0)
+                    {
+                        InsertCell(0, new Data(key, value));
+                        return;
+                    }
+                    for (int i = 0; i < currentSize; i++)
+                    {
+                        if (key.CompareTo(values[i].Key) == 0)
+                        {
+                            values[i].Value = value;
+                            return;
+                        } else if (key.CompareTo(values[i].Key) == -1)
+                        {
+                            InsertCell(i, new Data(key, value));
+                            TrySplit(degree);
+                            return;
+                        }
+                    }
+                    InsertCell(currentSize, new Data(key, value));
+                    TrySplit(degree);
+                    return;
+                }
+                if (key.CompareTo(values[0].Key) == -1)
+                {
+                    children[0].InsertValue(key, value, degree);
+                    return;
+                }
+                if (key.CompareTo(values[0].Key) == -1)
+                {
+                    children[currentSize].InsertValue(key, value, degree);
+                    return;
+                }
+                for (int i = 0; i < currentSize; i++)
+                {
+                    if (key.CompareTo(values[i].Key) == 1 && key.CompareTo(values[i + 1].Key) == -1)
+                    {
+                        children[i + 1].InsertValue(key, value, degree);
+                        return;
+                    }
+                }
+            }
+
+            public (Data, bool) Exists(string key)
+            {
+                try
+                {
+                    FindByKey(key);
+                    return (FindByKey(key), true);
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    return (null, false);
+                }
+            }
+
+
         }
     }
 }
