@@ -190,6 +190,9 @@ namespace BTree
                 }
             }
 
+            /// <summary>
+            /// Inserts new cell in the node or lower
+            /// </summary>
             public void InsertValue(string key, string value, int degree)
             {
                 if (IsLeaf)
@@ -236,6 +239,11 @@ namespace BTree
                 }
             }
 
+            /// <summary>
+            /// Checks whether the key is in the node or lower
+            /// </summary>
+            /// <param name="key"></param>
+            /// <returns></returns>
             public (Data, bool) Exists(string key)
             {
                 try
@@ -249,7 +257,61 @@ namespace BTree
                 }
             }
 
+            /// <summary>
+            /// Deletes value by key
+            /// </summary>
+            public void DeleteValueByKey(string key)
+            {
+                for(int i = 0; i < currentSize; i++)
+                {
+                    if(key.CompareTo(values[i].Key) == 0)
+                    {
+                        if(!IsLeaf && children[i].currentSize >= 1)
+                        {
+                            string keyTmp = values[i].Key;
+                            string valueTmp = values[i].Value;
+                            values[i].Key = children[i].values[children[i].currentSize - 1].Key;
+                            values[i].Value = children[i].values[children[i].currentSize - 1].Value;
+                            children[i].values[children[i].currentSize - 1].Key = keyTmp;
+                            children[i].values[children[i].currentSize - 1].Value = valueTmp;
+                            children[i].DeleteValueByKey(key);
+                        } 
+                        else if (IsLeaf)
+                        {
+                            for (int j = i; j < currentSize - 1; j++)
+                            {
+                                values[j] = values[j + 1];
+                            }
+                            currentSize--;
+                        }
+                        return;
+                    }
+                }
 
+                if (IsLeaf)
+                {
+                    throw new ArgumentOutOfRangeException("Value have not been found");
+                }
+
+                if (key.CompareTo(values[0].Key) == -1)
+                {
+                    children[0].DeleteValueByKey(key);
+                    return;
+                } else if (key.CompareTo(values[currentSize - 1].Key) == 1)
+                {
+                    children[currentSize].DeleteValueByKey(key);
+                    return;
+                }
+
+                for (int i = 0; i < currentSize - 1; i++)
+                {
+                    if (key.CompareTo(values[i].Key) == 1 && key.CompareTo(values[i + 1].Key) == -1)
+                    {
+                        children[i + 1].DeleteValueByKey(key);
+                        return;
+                    }
+                }
+            }
         }
     }
 }
