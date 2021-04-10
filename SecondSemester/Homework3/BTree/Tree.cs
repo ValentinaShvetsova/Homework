@@ -313,5 +313,40 @@ namespace BTree
                 }
             }
         }
+
+        /// <summary>
+        /// Inseerts value in the tree by key
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public void AddValue(string key, string value)
+           => root.InsertValue(key, value, treeDegree);
+
+        /// <summary>
+        /// Finds value by key
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public string FindValue(string key)
+        {
+            (Data data, bool exist) = root.Exists(key);
+            if (exist)
+            {
+                return data.Value;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Deletes value by key
+        /// </summary>
+        /// <param name="key"></param>
+        public void DeleteValue(string key)
+        {
+            root.DeleteValueByKey(key);
+        }
     }
 }
