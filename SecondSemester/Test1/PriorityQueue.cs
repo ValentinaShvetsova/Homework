@@ -43,7 +43,7 @@ namespace Test1
         public void Enqueue(TValue value, int priority)
         {
             size++;
-            if (IsEmpty || head.Priority < priority)
+            if (size == 1 || head.Priority < priority)
             {
                 head = new Node<TValue>(value, priority, head);
                 return;
@@ -55,6 +55,22 @@ namespace Test1
             }
             var newElement = new Node<TValue>(value, priority, currentElement.Next);
             currentElement.Next = newElement;
+        }
+
+        /// <summary>
+        /// Dequeues the first element in queue, returns its value
+        /// </summary>
+        /// <returns></returns>
+        public TValue Dequeue()
+        {
+            if (IsEmpty)
+            {
+                throw new EmtyQueueException();
+            }
+            size--;
+            var firstInQueue = head.Value;
+            head = head.Next;
+            return firstInQueue;
         }
     }
 }
