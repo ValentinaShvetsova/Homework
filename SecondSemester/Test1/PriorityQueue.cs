@@ -49,7 +49,7 @@ namespace Test1
                 return;
             }
             var currentElement = head;
-            while(currentElement.Next != null || currentElement.Next.Priority >= priority)
+            while(currentElement.Next != null && currentElement.Next.Priority >= priority)
             {
                 currentElement = currentElement.Next;
             }
