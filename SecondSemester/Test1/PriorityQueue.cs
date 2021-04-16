@@ -35,6 +35,9 @@ namespace Test1
         public bool IsEmpty
             => size == 0;
 
+        public int Size
+            => size;
+
         /// <summary>
         /// Add new element in the queue based on its priority
         /// </summary>
