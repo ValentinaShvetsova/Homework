@@ -8,7 +8,7 @@ namespace Routers
         {
             try
             {
-                FileFunctions.WriteResultInFile(KruskullAlgorithm.KruskullsAlgorithm(FileFunctions.CreateGraph(args[0])), args[1]);
+                FileFunctions.WriteResultInFile(KruskalAlgorithm.KruskalsAlgorithm(FileFunctions.CreateGraph(args[0])), args[1]);
             }
             catch (DisconnectedNetworkException error)
             {

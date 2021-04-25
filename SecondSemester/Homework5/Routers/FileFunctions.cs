@@ -11,34 +11,27 @@ namespace Routers
         /// Returns a adjacency table
         /// </summary>
         /// <param name="pathToGraph">Path to file</param>
-        /// <returns></returns>
         public static int[,] CreateGraph(string pathToGraph)
         {
             int countsVertices = GetAmountOfVertices(pathToGraph);
             var graph = new int[countsVertices, countsVertices];
 
-            int lines = File.ReadAllLines(pathToGraph).Length;
-            string[] stringsArray = File.ReadAllLines(pathToGraph);
-
-            for (int i = 0; i < stringsArray.Length; i++)
+            using (StreamReader stream = File.OpenText(pathToGraph))
             {
-                stringsArray[i] = stringsArray[i].Replace(',', ' ');
-
-                string[] currentLine = stringsArray[i].Split(" ", StringSplitOptions.RemoveEmptyEntries);
-
-                var currentVertex = Int32.Parse(currentLine[0].Substring(0, currentLine[0].Length - 1)) - 1;
-
-                for (int j = 0; j < currentLine.Length / 2; j++)
+                string readString;
+                var symbols = new char[] { ' ', '(', ')', ':', ',' };
+                while ((readString = stream.ReadLine()) != null)
                 {
-                    var secondVertex = Int32.Parse(currentLine[2 * j + 1]) - 1;
-
-                    var distance = Int32.Parse(currentLine[2 * j + 2].Substring(1, currentLine[2 * j + 2].Length - 2));
-
-                    graph[currentVertex, secondVertex] = distance;
-                    graph[secondVertex, currentVertex] = distance;
+                    var numbers = readString.Split(symbols, StringSplitOptions.RemoveEmptyEntries);
+                    var start = int.Parse(numbers[0]);
+    
+                    for (int i = 2; i < numbers.Length; i += 2)
+                    {
+                        graph[start, i - 1] = i;
+                        graph[i - 1, start] = i;
+                    }
                 }
             }
-
             return graph;
         }
 
@@ -49,29 +42,10 @@ namespace Routers
         /// <returns></returns>
         public static int GetAmountOfVertices(string pathToGraph)
         {
-            var maxVertix = 1;
             string[] stringsArray = File.ReadAllLines(pathToGraph);
             int lines = stringsArray.Length;
 
-            for (int i = 0; i < lines; i++)
-            {
-                stringsArray[i] = stringsArray[i].Replace(',', ' ');
-
-                string[] currentLine = stringsArray[i].Split(" ", StringSplitOptions.RemoveEmptyEntries);
-
-                var currentVertex = Int32.Parse(currentLine[0].Substring(0, currentLine[0].Length - 1));
-
-                maxVertix = Math.Max(currentVertex, maxVertix);
-
-                for (int j = 0; j < currentLine.Length / 2; j++)
-                {
-                    var secondVertex = Int32.Parse(currentLine[2 * j + 1]);
-
-                    maxVertix = Math.Max(secondVertex, maxVertix);
-                }
-            }
-
-            return maxVertix;
+            return lines;
         }
 
         /// <summary>
