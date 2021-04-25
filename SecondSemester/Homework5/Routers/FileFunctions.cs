@@ -14,7 +14,7 @@ namespace Routers
         public static int[,] CreateGraph(string pathToGraph)
         {
             int countsVertices = GetAmountOfVertices(pathToGraph);
-            var graph = new int[countsVertices, countsVertices];
+            var graph = new int[countsVertices + 1, countsVertices + 1];
 
             using (StreamReader stream = File.OpenText(pathToGraph))
             {
@@ -24,11 +24,16 @@ namespace Routers
                 {
                     var numbers = readString.Split(symbols, StringSplitOptions.RemoveEmptyEntries);
                     var start = int.Parse(numbers[0]);
+
+                    int i = 2;
     
-                    for (int i = 2; i < numbers.Length; i += 2)
+                    while ( i < numbers.Length)
                     {
-                        graph[start, i - 1] = i;
-                        graph[i - 1, start] = i;
+                        int length = Int32.Parse(numbers[i]);
+                        int secondVertex = Int32.Parse(numbers[i - 1]);
+                        graph[start, secondVertex] = length;
+                        graph[secondVertex, start] = length;
+                        i += 2;
                     }
                 }
             }
@@ -45,7 +50,31 @@ namespace Routers
             string[] stringsArray = File.ReadAllLines(pathToGraph);
             int lines = stringsArray.Length;
 
-            return lines;
+            int maxVertice = 0;
+            var symbols = new char[] { ' ', '(', ')', ':', ',' };
+            for(int i = 0; i < lines; i++)
+            {
+                var numbers = stringsArray[i].Split(symbols, StringSplitOptions.RemoveEmptyEntries);
+                var intNumbers = new int[numbers.Length];
+                for(int j = 0; j < numbers.Length; j++)
+                {
+                    var number =  Int32.Parse(numbers[j]);
+                    intNumbers[j] = number;
+                }
+                if (intNumbers[0] > maxVertice)
+                {
+                    maxVertice = intNumbers[0];
+                }
+                for (int j = 1; j < intNumbers.Length; j += 2)
+                {
+                    if(intNumbers[j] > maxVertice)
+                    {
+                        maxVertice = intNumbers[j];
+                    }
+                }
+            }
+
+            return maxVertice;
         }
 
         /// <summary>

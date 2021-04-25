@@ -17,7 +17,7 @@ namespace Routers
             used[vertex] = true;
             for (int i = 0; i < used.Length; i++)
             {
-                if (graph[vertex, i] == 1)
+                if (graph[vertex, i] != 0)
                 {
                     DepthFirstWalk(i, graph, ref used);
                 }
@@ -26,7 +26,7 @@ namespace Routers
 
         public static bool CheckConnection(int[,] graph)
         {
-            int countOfVertices = graph.Length;
+            int countOfVertices = graph.GetLength(0);
             var used = new bool[countOfVertices];
             DepthFirstWalk(0, graph, ref used);
 

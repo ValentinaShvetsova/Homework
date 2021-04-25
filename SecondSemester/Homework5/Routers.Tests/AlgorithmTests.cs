@@ -25,7 +25,7 @@ namespace Routers.Tests
             string[] stringsArray1 = File.ReadAllLines(resultPath);
             string[] stringsArray2 = File.ReadAllLines(corretAnswerPath);
             File.Delete(resultPath);
-            Assert.AreEqual(stringsArray1, stringsArray2);
+            Assert.AreEqual(stringsArray2, stringsArray1);
         }
     }
 }
