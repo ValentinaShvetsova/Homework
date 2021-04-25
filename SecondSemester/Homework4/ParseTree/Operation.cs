@@ -16,7 +16,6 @@ namespace ParseTree
         /// <summary>
         /// Calculates the subtree
         /// </summary>
-        /// <returns></returns>
         public abstract int Calculate();
 
         /// <summary>

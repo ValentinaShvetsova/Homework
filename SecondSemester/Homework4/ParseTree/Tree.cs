@@ -14,7 +14,6 @@ namespace ParseTree
         /// <summary>
         /// Sets new tree
         /// </summary>
-        /// <param name="input"></param>
         public Tree(string input)
         {
             Build(input);
@@ -38,13 +37,16 @@ namespace ParseTree
                 if (symbols[position] == "+")
                 {
                     newNode = new Addition();
-                } else if(symbols[position] == "-")
+                } 
+                else if(symbols[position] == "-")
                 {
                     newNode = new Subtraction();
-                } else if(symbols[position] == "*")
+                } 
+                else if(symbols[position] == "*")
                 {
                     newNode = new Multiplication();
-                } else if(symbols[position] == "/")
+                } 
+                else if(symbols[position] == "/")
                 {
                     newNode = new Division();
                 }
@@ -63,7 +65,6 @@ namespace ParseTree
         /// <summary>
         /// Calculates expression by tree
         /// </summary>
-        /// <returns></returns>
         public int Calculate() => root.Calculate();
     }
 }

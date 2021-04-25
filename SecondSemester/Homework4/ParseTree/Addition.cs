@@ -12,7 +12,6 @@ namespace ParseTree
         /// <summary>
         /// Calculates subtree
         /// </summary>
-        /// <returns></returns>
         public override int Calculate() => LeftChild.Calculate() + RightChild.Calculate();
 
         /// <summary>

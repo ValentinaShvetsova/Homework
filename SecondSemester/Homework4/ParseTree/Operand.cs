@@ -14,7 +14,6 @@ namespace ParseTree
         /// <summary>
         /// Calculates operand
         /// </summary>
-        /// <returns></returns>
         public int Calculate() => Value;
 
         /// <summary>
