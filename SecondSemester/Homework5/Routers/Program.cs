@@ -13,6 +13,7 @@ namespace Routers
             catch (DisconnectedNetworkException error)
             {
                 Console.Error.WriteLine(error.Message);
+                Environment.Exit(-1);
             }
         }
     }

@@ -38,23 +38,6 @@ namespace Routers
         }
 
         /// <summary>
-        /// Checking if there's only one set
-        /// </summary>
-        /// <returns></returns>
-        public bool IsOnlySet()
-        {
-            for (int i = 0; i < arraySets.Length; i++)
-            {
-                if (SearchForMinimum(0) != SearchForMinimum(i))
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        /// <summary>
         /// Unite sets
         /// </summary>
         /// <param name="firstVertex"></param>
