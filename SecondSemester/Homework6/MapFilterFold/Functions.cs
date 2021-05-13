@@ -14,14 +14,15 @@ namespace MapFilterFold
         /// </summary>
         /// <param name="list">Input list</param>
         /// <param name="func">Function that changes values in list</param>
-        /// <returns></returns>
         public static List<int> Map(List<int> list, Func<int, int> func)
         {
             var newList = new List<int>();
+
             foreach(var element in list)
             {
                 newList.Add(func(element));
             }
+
             return newList;
         }
 
@@ -30,10 +31,10 @@ namespace MapFilterFold
         /// </summary>
         /// <param name="list">Input list</param>
         /// <param name="func">Function that checks each value in the list</param>
-        /// <returns></returns>
         public static List<int> Filter(List<int> list, Func<int, bool> func)
         {
             var newList = new List<int>();
+
             foreach (var element in list)
             {
                 if (func(element))
@@ -41,6 +42,7 @@ namespace MapFilterFold
                     newList.Add(element);
                 }
             }
+
             return newList;
         }
 
@@ -50,14 +52,15 @@ namespace MapFilterFold
         /// <param name="list">Input list</param>
         /// <param name="initial">Start value</param>
         /// <param name="func">Function that returns the next accumulated value for the current value and element</param>
-        /// <returns></returns>
         public static int Fold(List<int> list, int initial, Func<int, int, int> func)
         {
             var accumulated = initial;
+
             foreach (var elem in list)
             {
                 accumulated = func(accumulated, elem);
             }
+
             return accumulated;
         }
     }
