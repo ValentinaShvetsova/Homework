@@ -126,7 +126,7 @@ namespace Clock
             return new PointF(newX, newY);
         }
 
-            private void timer1_Tick(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)
         {
             Text = DateTime.Now.ToString("HH:mm:ss");
 
@@ -135,12 +135,11 @@ namespace Clock
             graphics.TranslateTransform(radius, radius);
             graphics.ScaleTransform(1, -1);
 
-            var ms = DateTime.Now.Millisecond;
             var sec = DateTime.Now.Second;
             var min = DateTime.Now.Minute;
             var hour = DateTime.Now.Hour;
 
-            DrawHand(secondHand, 360 / 60 * (sec + 1.0 / 1000 * ms));
+            DrawHand(secondHand, 360 / 60 * sec);
             DrawHand(minuteHand, 360 / 60 * (min + 1.0 / 60 * sec));
             DrawHand(hourHand, 360 / 12 * (hour + 1.0 / 60 * min));
 

@@ -38,7 +38,7 @@ namespace Clock
             // timer1
             // 
             this.timer1.Enabled = true;
-            this.timer1.Interval = 1;
+            this.timer1.Interval = 60;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // pictureBox1
@@ -46,7 +46,7 @@ namespace Clock
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(382, 346);
+            this.pictureBox1.Size = new System.Drawing.Size(440, 440);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -55,7 +55,7 @@ namespace Clock
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(382, 346);
+            this.ClientSize = new System.Drawing.Size(420, 420);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
