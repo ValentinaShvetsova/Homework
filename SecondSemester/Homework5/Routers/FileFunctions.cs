@@ -113,6 +113,7 @@ namespace Routers
             }
 
             writer.Close();
+
             if (fileOut.Exists)
             {
                 fileOut.MoveTo(newPath);
