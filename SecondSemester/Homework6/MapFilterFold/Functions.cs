@@ -18,7 +18,7 @@ namespace MapFilterFold
         {
             var newList = new List<int>();
 
-            foreach(var element in list)
+            foreach (var element in list)
             {
                 newList.Add(func(element));
             }
