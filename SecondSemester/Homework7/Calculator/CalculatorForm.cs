@@ -149,8 +149,8 @@ namespace Calculator
             {
                 "+" => Operation.Addition,
                 "-" => Operation.Subtraction,
-                "×" => Operation.Multiplication,
-                "÷" => Operation.Division,
+                "*" => Operation.Multiplication,
+                "/" => Operation.Division,
                 _ => throw new InvalidOperationSignException()
             };
 
