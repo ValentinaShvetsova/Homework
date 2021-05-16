@@ -6,7 +6,7 @@ namespace Routers.Tests
     public class Tests
     {
         [Test]
-        public void FirstAlforthmTest()
+        public void FirstAlgorithmTest()
         {
             var matrix = new int[3, 3] { { 0, 10, 5 }, { 10, 0, 1 }, { 5, 1, 0 } };
             var result = new int[3, 3] { { 0, 10, 5 }, { 10, 0, 0 }, { 5, 0, 0 } };
