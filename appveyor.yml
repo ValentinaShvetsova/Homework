@@ -1,10 +1,10 @@
 image: Visual Studio 2019
 
 before_build:
-    - nuget restore SecondSemester\Homework6\Game\Game.sln
+    - nuget restore SecondSemester\Homework6\MapFilterFold\MapFilterFold.sln
 
 build:
-    project: SecondSemester\Homework6\Game\Game.sln
+    project: SecondSemester\Homework6\MapFilterFold\MapFilterFold.sln
 
 test_script:
-    - dotnet test SecondSemester\Homework6\Game\Game.sln
+    - dotnet test SecondSemester\Homework6\MapFilterFold\MapFilterFold.sln
