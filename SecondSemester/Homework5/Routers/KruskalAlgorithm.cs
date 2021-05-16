@@ -5,7 +5,10 @@ using System.Text;
 
 namespace Routers
 {
-    public class KruskalAlgorithm
+    /// <summary>
+    /// Realisation of Kruskal algorithm, which builds minimal graph without cycles
+    /// </summary>
+    public static class KruskalAlgorithm
     {
         private static void DepthFirstWalk(int vertex, int[,] graph, ref bool[] used)
         {
@@ -39,7 +42,8 @@ namespace Routers
             }
             return true;
         }
-        private static bool UtilitySycleCheck(int currentVertex, bool[] visited, int parent, List<int>[] adjacencyList)
+
+        private static bool UtilityCycleCheck(int currentVertex, bool[] visited, int parent, List<int>[] adjacencyList)
         {
             visited[currentVertex] = true;
 
@@ -47,7 +51,7 @@ namespace Routers
             {
                 if (!visited[nextVertex])
                 {
-                    if (UtilitySycleCheck(nextVertex, visited, currentVertex, adjacencyList))
+                    if (UtilityCycleCheck(nextVertex, visited, currentVertex, adjacencyList))
                     {
                         return true;
                     }
@@ -62,13 +66,13 @@ namespace Routers
 
         private static bool CycleCheck(int size, List<int>[] adjacencyList)
         {
-            bool[] visited = new bool[size];
+            var visited = new bool[size];
 
             for (int currentVertex = 0; currentVertex < size; currentVertex++)
             {
                 if (!visited[currentVertex])
                 {
-                    if (UtilitySycleCheck(currentVertex, visited, -1, adjacencyList))
+                    if (UtilityCycleCheck(currentVertex, visited, -1, adjacencyList))
                     {
                         return true;
                     }
@@ -80,8 +84,6 @@ namespace Routers
         /// <summary>
         /// Finds and writes in matrix form minimal spanning tree
         /// </summary>
-        /// <param name="matrix"></param>
-        /// <returns></returns>
         public static int[,] KruskalsAlgorithm(int[,] matrix)
         {
             if (!CheckConnection(matrix))

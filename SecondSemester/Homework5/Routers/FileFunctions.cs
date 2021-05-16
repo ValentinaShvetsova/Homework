@@ -5,7 +5,10 @@ using System.Text;
 
 namespace Routers
 {
-    public class FileFunctions
+    /// <summary>
+    /// Functions that reading from file, writing in file, creating a graph from file
+    /// </summary>
+    public static class FileFunctions
     {
         /// <summary>
         /// Returns a adjacency table
@@ -27,7 +30,7 @@ namespace Routers
 
                     int i = 2;
     
-                    while ( i < numbers.Length)
+                    while (i < numbers.Length)
                     {
                         int length = Int32.Parse(numbers[i]);
                         int secondVertex = Int32.Parse(numbers[i - 1]);
@@ -44,7 +47,6 @@ namespace Routers
         /// Gets amount of graph's vertices
         /// </summary>
         /// <param name="pathToGraph">path to file</param>
-        /// <returns></returns>
         public static int GetAmountOfVertices(string pathToGraph)
         {
             string[] stringsArray = File.ReadAllLines(pathToGraph);
@@ -52,11 +54,11 @@ namespace Routers
 
             int maxVertice = 0;
             var symbols = new char[] { ' ', '(', ')', ':', ',' };
-            for(int i = 0; i < lines; i++)
+            for (int i = 0; i < lines; i++)
             {
                 var numbers = stringsArray[i].Split(symbols, StringSplitOptions.RemoveEmptyEntries);
                 var intNumbers = new int[numbers.Length];
-                for(int j = 0; j < numbers.Length; j++)
+                for (int j = 0; j < numbers.Length; j++)
                 {
                     var number =  Int32.Parse(numbers[j]);
                     intNumbers[j] = number;
@@ -67,7 +69,7 @@ namespace Routers
                 }
                 for (int j = 1; j < intNumbers.Length; j += 2)
                 {
-                    if(intNumbers[j] > maxVertice)
+                    if (intNumbers[j] > maxVertice)
                     {
                         maxVertice = intNumbers[j];
                     }
@@ -82,15 +84,15 @@ namespace Routers
         /// </summary>
         public static void WriteResultInFile(int[,] matrix, string newPath)
         {
-            FileInfo fileOut = new FileInfo(newPath);
+            var fileOut = new FileInfo(newPath);
 
             if (fileOut.Exists)
             {
                 fileOut.Delete();
             }
 
-            FileStream currentFile = new FileStream(newPath, FileMode.Create);
-            StreamWriter writer = new StreamWriter(currentFile);
+            using var currentFile = new FileStream(newPath, FileMode.Create);
+            using var writer = new StreamWriter(currentFile);
 
             for (int i = 0; i < matrix.GetLength(0) - 1; i++)
             {
