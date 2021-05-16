@@ -17,6 +17,7 @@ namespace MapFilterFold
         public static List<int> Map(List<int> list, Func<int, int> func)
         {
             var newList = new List<int>();
+
             foreach (var element in list)
             {
                 newList.Add(func(element));
@@ -33,6 +34,7 @@ namespace MapFilterFold
         public static List<int> Filter(List<int> list, Func<int, bool> func)
         {
             var newList = new List<int>();
+
             foreach (var element in list)
             {
                 if (func(element))
