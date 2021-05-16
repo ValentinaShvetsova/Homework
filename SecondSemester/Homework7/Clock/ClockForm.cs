@@ -9,8 +9,8 @@ namespace Clock
         public ClockForm()
         {
             InitializeComponent();
-            Width = diameter + 23;
-            Height = diameter + 57;
+            Width = diameter + 50;
+            Height = diameter + 70;
         }
 
         private class Hand
