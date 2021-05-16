@@ -80,7 +80,6 @@ namespace Clock
         private void DrawClockFace()
         {
             graphics.DrawEllipse(new Pen(Color.Black, 2), 0, 0, diameter, diameter);
-
             graphics.DrawEllipse(new Pen(Color.Black, 8), radius - 3, radius - 3, 6, 6);
 
             graphics.DrawString("12", new Font("Arial", 12), Brushes.Black, radius - 18, 5);
