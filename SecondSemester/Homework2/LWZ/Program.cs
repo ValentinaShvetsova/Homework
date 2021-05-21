@@ -1,11 +1,13 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Text;
 
 namespace LWZ
 {
     public class Program
     {
+        static Encoding enc8 = Encoding.UTF8;
         private static string GetAlphabetString(string line)
         {
             string result = "";
@@ -25,7 +27,7 @@ namespace LWZ
         public static void CompressString(string path)
         {
             byte[] inp = File.ReadAllBytes(path);
-            string input = BitConverter.ToString(inp);
+            string input = enc8.GetString(inp);
             
             var trie = new Trie<int>();
             string alphabet = GetAlphabetString(input);

@@ -19,7 +19,7 @@ namespace LWZ.Tests
         }
 
         [TestMethod]
-        public void AlgorithmTests()
+        public void CompressTest()
         {
             string path = "../../../Text.txt";
             Program.CompressString(path);
@@ -27,6 +27,18 @@ namespace LWZ.Tests
             System.IO.StreamReader file = new System.IO.StreamReader(resultPath);
             string str = file.ReadLine();
             string result = "01025039864";
+            Assert.AreEqual(result, str);
+        }
+
+        [TestMethod]
+        public void DecompressTest()
+        {
+            string path = "../../../Text.txt.zipped";
+            Program.Decompress(path, "abcde");
+            string resultPath = "../../../Text.txt";
+            System.IO.StreamReader file = new System.IO.StreamReader(resultPath);
+            string str = file.ReadLine();
+            string result = "abacabadabacabae";
             Assert.AreEqual(result, str);
         }
     }
