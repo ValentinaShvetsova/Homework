@@ -64,7 +64,7 @@ namespace LWZ
             string resultPath = pathToFile + ".zipped";
             using (StreamWriter sw = new StreamWriter(resultPath, false, System.Text.Encoding.Default))
             {
-                sw.WriteLine(result);
+                sw.Write(result);
             }
         }
 
@@ -104,7 +104,7 @@ namespace LWZ
             var resultPath = path.Substring(0, path.Length - 7);
             using (StreamWriter sw = new StreamWriter(resultPath, false, System.Text.Encoding.Default))
             {
-                sw.WriteLine(oldString);
+                sw.Write(oldString);
             }
         }
 
