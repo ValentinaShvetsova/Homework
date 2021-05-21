@@ -54,7 +54,6 @@ namespace LWZ
         /// </summary>
         /// <param name="key">Key of node to be found</param>
         /// <param name="value">Data of node, if such node exists</param>
-        /// <returns></returns>
         public bool TrySearch (string key, out T value)
         {
             return SearchNode(key, root, out value);

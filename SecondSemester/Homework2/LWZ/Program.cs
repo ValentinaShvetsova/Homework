@@ -22,12 +22,11 @@ namespace LWZ
         /// <summary>
         /// This function returns squeezed by LWZ algorithm string
         /// </summary>
-        /// <returns></returns>
         public static void CompressString(string path)
         {
-            var file = new System.IO.StreamReader(path);
-            string input = file.ReadLine();
-            file.Close();
+            byte[] inp = File.ReadAllBytes(path);
+            string input = BitConverter.ToString(inp);
+            
             var trie = new Trie<int>();
             string alphabet = GetAlphabetString(input);
             for (int i = 0; i < alphabet.Length; i++)
@@ -70,7 +69,6 @@ namespace LWZ
         /// <summary>
         /// This function returns decompessed by LWZ algorithm string, but requires the alphabet of the old string
         /// </summary>
-        /// <returns></returns>
         public static void Decompress(string path, string alphabet)
         {
             var file = new System.IO.StreamReader(path);
