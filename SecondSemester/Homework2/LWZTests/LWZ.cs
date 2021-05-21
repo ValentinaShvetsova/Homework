@@ -26,6 +26,7 @@ namespace LWZ.Tests
             string resultPath = path + ".zipped";
             System.IO.StreamReader file = new System.IO.StreamReader(resultPath);
             string str = file.ReadLine();
+            file.Close();
             string result = "01025039864";
             Assert.AreEqual(result, str);
         }
@@ -38,6 +39,7 @@ namespace LWZ.Tests
             string resultPath = "../../../Text.txt";
             System.IO.StreamReader file = new System.IO.StreamReader(resultPath);
             string str = file.ReadLine();
+            file.Close();
             string result = "abacabadabacabae";
             Assert.AreEqual(result, str);
         }
