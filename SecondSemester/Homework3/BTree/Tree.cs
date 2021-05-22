@@ -48,11 +48,12 @@ namespace BTree
 
         private class Node
         {
-            private int currentSize;
-            private Data[] values;
             private Node[] children;
             private bool isLeaf;
             private Node parent;
+
+            public int currentSize { get; set; }
+            public Data[] values { get; set; }
 
             /// <summary>
             /// Initializes new Node in tree
@@ -229,7 +230,7 @@ namespace BTree
                     children[0].InsertValue(key, value, degree);
                     return;
                 }
-                if (key.CompareTo(values[0].Key) == -1)
+                if (key.CompareTo(values[currentSize - 1].Key) == -1)
                 {
                     children[currentSize].InsertValue(key, value, degree);
                     return;
@@ -329,14 +330,8 @@ namespace BTree
         public string FindValue(string key)
         {
             (Data data, bool exist) = root.Exists(key);
-            if (exist)
-            {
-                return data.Value;
-            }
-            else
-            {
-                return null;
-            }
+            string answer = exist ? data.Value : null;
+            return answer;
         }
 
         /// <summary>
