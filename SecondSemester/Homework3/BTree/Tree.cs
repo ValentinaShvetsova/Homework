@@ -80,7 +80,7 @@ namespace BTree
                             return values[i];
                         }
                     }
-                    throw new ArgumentOutOfRangeException("Value have not been found");
+                    return null;
                 }
 
                 for (int i = 0; i < currentSize; i++)
@@ -98,7 +98,7 @@ namespace BTree
                 {
                     return children[currentSize].FindByKey(key);
                 }
-                throw new ArgumentOutOfRangeException("Value have not been found");
+                return null;
             }
 
             private void InsertCell(int index, Data data)
@@ -250,11 +250,12 @@ namespace BTree
             /// </summary>
             public (Data, bool) Exists(string key)
             {
-                try
+                Data answer = FindByKey(key);
+                if(answer != null)
                 {
                     return (FindByKey(key), true);
                 }
-                catch (ArgumentOutOfRangeException)
+                else
                 {
                     return (null, false);
                 }
@@ -269,23 +270,26 @@ namespace BTree
                 {
                     if(key.CompareTo(values[i].Key) == 0)
                     {
-                        if(!isLeaf && children[i].currentSize >= 1)
-                        {
-                            string keyTmp = values[i].Key;
-                            string valueTmp = values[i].Value;
-                            values[i].Key = children[i].values[children[i].currentSize - 1].Key;
-                            values[i].Value = children[i].values[children[i].currentSize - 1].Value;
-                            children[i].values[children[i].currentSize - 1].Key = keyTmp;
-                            children[i].values[children[i].currentSize - 1].Value = valueTmp;
-                            children[i].DeleteValueByKey(key);
-                        } 
-                        else if (isLeaf)
+                        if (isLeaf)
                         {
                             for (int j = i; j < currentSize - 1; j++)
                             {
                                 values[j] = values[j + 1];
                             }
                             currentSize--;
+                        }
+                        else
+                        {
+                            if (children[i].currentSize >= 1)
+                            {
+                                string keyTmp = values[i].Key;
+                                string valueTmp = values[i].Value;
+                                values[i].Key = children[i].values[children[i].currentSize - 1].Key;
+                                values[i].Value = children[i].values[children[i].currentSize - 1].Value;
+                                children[i].values[children[i].currentSize - 1].Key = keyTmp;
+                                children[i].values[children[i].currentSize - 1].Value = valueTmp;
+                                children[i].DeleteValueByKey(key);
+                            }
                         }
                         return;
                     }
