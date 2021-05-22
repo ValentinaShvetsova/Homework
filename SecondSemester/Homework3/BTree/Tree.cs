@@ -4,6 +4,9 @@ using System.Text;
 
 namespace BTree
 {
+    /// <summary>
+    /// Realisation of b-tree structure with nodes and maximum degree
+    /// </summary>
     public class Tree
     {
         private readonly int treeDegree;
@@ -42,12 +45,13 @@ namespace BTree
                 return new Data(Key, Value);
             }
         }
+
         private class Node
         {
             private int currentSize;
             private Data[] values;
             private Node[] children;
-            private bool IsLeaf;
+            private bool isLeaf;
             private Node parent;
 
             /// <summary>
@@ -60,15 +64,15 @@ namespace BTree
                 values = new Data[2 * treeDegree - 1];
                 children = new Node[2 * treeDegree];
                 currentSize = 0;
-                IsLeaf = true;
+                isLeaf = true;
                 this.parent = parent;
             }
 
             private Data FindByKey(string key)
             {
-                if (IsLeaf)
+                if (isLeaf)
                 {
-                    for(int i = 0; i < currentSize; ++i)
+                    for (int i = 0; i < currentSize; ++i)
                     {
                         if (key.CompareTo(values[i].Key) == 0)
                         {
@@ -113,7 +117,7 @@ namespace BTree
                 if (currentSize == 2 * treeDegree - 1)
                 {
                     var left = new Node(treeDegree, this);
-                    for(int i = 0; i < treeDegree; i++)
+                    for (int i = 0; i < treeDegree; i++)
                     {
                         if (i != treeDegree - 1)
                         {
@@ -122,14 +126,14 @@ namespace BTree
                         if (children[i] != null)
                         {
                             children[i].parent = left;
-                            left.IsLeaf = false;
+                            left.isLeaf = false;
                         }
                         left.children[i] = children[i];
                     }
                     left.currentSize = treeDegree - 1;
 
                     var right = new Node(treeDegree, this);
-                    for(int i = 0; i < treeDegree; i++)
+                    for (int i = 0; i < treeDegree; i++)
                     {
                         if (i != treeDegree - 1)
                         {
@@ -138,7 +142,7 @@ namespace BTree
                         if (children[treeDegree + i] != null)
                         {
                             children[treeDegree + i].parent = right;
-                            right.IsLeaf = false;
+                            right.isLeaf = false;
                         }
                         right.children[i] = children[treeDegree + i];
                     }
@@ -155,7 +159,7 @@ namespace BTree
                         children[1] = right;
                         return;
                     }
-                    IsLeaf = false;
+                    isLeaf = false;
                     left.parent = parent;
                     right.parent = parent;
 
@@ -195,7 +199,7 @@ namespace BTree
             /// </summary>
             public void InsertValue(string key, string value, int degree)
             {
-                if (IsLeaf)
+                if (isLeaf)
                 {
                     if (currentSize == 0)
                     {
@@ -208,7 +212,8 @@ namespace BTree
                         {
                             values[i].Value = value;
                             return;
-                        } else if (key.CompareTo(values[i].Key) == -1)
+                        }
+                        else if (key.CompareTo(values[i].Key) == -1)
                         {
                             InsertCell(i, new Data(key, value));
                             TrySplit(degree);
@@ -242,13 +247,10 @@ namespace BTree
             /// <summary>
             /// Checks whether the key is in the node or lower
             /// </summary>
-            /// <param name="key"></param>
-            /// <returns></returns>
             public (Data, bool) Exists(string key)
             {
                 try
                 {
-                    FindByKey(key);
                     return (FindByKey(key), true);
                 }
                 catch (ArgumentOutOfRangeException)
@@ -266,7 +268,7 @@ namespace BTree
                 {
                     if(key.CompareTo(values[i].Key) == 0)
                     {
-                        if(!IsLeaf && children[i].currentSize >= 1)
+                        if(!isLeaf && children[i].currentSize >= 1)
                         {
                             string keyTmp = values[i].Key;
                             string valueTmp = values[i].Value;
@@ -276,7 +278,7 @@ namespace BTree
                             children[i].values[children[i].currentSize - 1].Value = valueTmp;
                             children[i].DeleteValueByKey(key);
                         } 
-                        else if (IsLeaf)
+                        else if (isLeaf)
                         {
                             for (int j = i; j < currentSize - 1; j++)
                             {
@@ -288,7 +290,7 @@ namespace BTree
                     }
                 }
 
-                if (IsLeaf)
+                if (isLeaf)
                 {
                     throw new ArgumentOutOfRangeException("Value have not been found");
                 }
@@ -297,7 +299,8 @@ namespace BTree
                 {
                     children[0].DeleteValueByKey(key);
                     return;
-                } else if (key.CompareTo(values[currentSize - 1].Key) == 1)
+                } 
+                else if (key.CompareTo(values[currentSize - 1].Key) == 1)
                 {
                     children[currentSize].DeleteValueByKey(key);
                     return;
@@ -317,16 +320,12 @@ namespace BTree
         /// <summary>
         /// Inseerts value in the tree by key
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
         public void AddValue(string key, string value)
            => root.InsertValue(key, value, treeDegree);
 
         /// <summary>
         /// Finds value by key
         /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
         public string FindValue(string key)
         {
             (Data data, bool exist) = root.Exists(key);
@@ -343,7 +342,6 @@ namespace BTree
         /// <summary>
         /// Deletes value by key
         /// </summary>
-        /// <param name="key"></param>
         public void DeleteValue(string key)
         {
             root.DeleteValueByKey(key);
