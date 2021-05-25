@@ -142,9 +142,17 @@ namespace BTree
             version++;
         }
 
+        /// <summary>
+        /// Checks whether tree contains value by this key or not
+        /// </summary>
         public bool ContainsKey(string key)
             => root.Exists(key).Item2;
 
+        /// <summary>
+        /// Checks whether tree contains value by this key or not
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public bool Contains(KeyValuePair<string, string> item)
         {
             try
