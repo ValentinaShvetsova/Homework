@@ -18,14 +18,16 @@ namespace BTree.Tests
         [Test]
         public void AdditionTest()
         {
-            tree.AddValue("1", "sun");
-            tree.AddValue("2", "moon");
-            tree.AddValue("3", "back");
-            tree.AddValue("3", "Jupiter");
-            tree.AddValue("4", "Venus");
-            tree.AddValue("5", "Mercury");
-            Assert.AreEqual("Mercury", tree.FindValue("5"));
-            Assert.AreEqual("Jupiter", tree.FindValue("3"));
+            tree.AddValue("1", "a");
+            tree.AddValue("2", "b");
+            tree.AddValue("3", "c");
+
+            tree.AddValue("9", "d");
+            tree.AddValue("10", "e");
+            tree.AddValue("20", "f");
+
+            Assert.AreEqual("b", tree.FindValue("2"));
+            Assert.AreEqual("f", tree.FindValue("20"));
         }
     }
 }
