@@ -18,16 +18,16 @@ namespace BTree.Tests
         [Test]
         public void AdditionTest()
         {
-            tree.AddValue("1", "a");
-            tree.AddValue("2", "b");
-            tree.AddValue("3", "c");
+            tree.Add("1", "a");
+            tree.Add("2", "b");
+            tree.Add("3", "c");
 
-            tree.AddValue("9", "d");
-            tree.AddValue("10", "e");
-            tree.AddValue("20", "f");
+            tree.Add("9", "d");
+            tree.Add("10", "e");
+            tree.Add("20", "f");
 
-            Assert.AreEqual("b", tree.FindValue("2"));
-            Assert.AreEqual("f", tree.FindValue("20"));
+            Assert.AreEqual("b", tree["2"]);
+            Assert.AreEqual("f", tree["20"]);
         }
     }
 }
