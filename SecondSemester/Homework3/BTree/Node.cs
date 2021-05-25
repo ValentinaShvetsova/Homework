@@ -76,6 +76,7 @@ namespace BTree
         {
             if (currentSize == 2 * treeDegree - 1)
             {
+                isLeaf = false;
                 var left = new Node(treeDegree, this);
                 for (int i = 0; i < treeDegree; i++)
                 {
@@ -119,7 +120,7 @@ namespace BTree
                     children[1] = right;
                     return;
                 }
-                isLeaf = false;
+                
                 left.parent = parent;
                 right.parent = parent;
 
@@ -189,7 +190,7 @@ namespace BTree
                 children[0].InsertValue(key, value, degree);
                 return;
             }
-            if (key.CompareTo(values[currentSize - 1].Key) == -1)
+            if (key.CompareTo(values[currentSize - 1].Key) == 1)
             {
                 children[currentSize].InsertValue(key, value, degree);
                 return;
